@@ -13,25 +13,24 @@ export class AppComponent implements AfterViewInit{
 
   userInput: string;
 
-  constructor(private ingredientService: IngredientService) {
-    console.log('constructor fired')
-    this.ingredients = this.ingredientService.getAllIngredients();
-  }
+  constructor(private ingredientService: IngredientService) {}
 
   handleUserInput() {
-
     this.ingredientService.addIngredient(this.userInput);
-
+    this.ingredients = this.ingredientService.getAllIngredients();
     this.userInput = "";
   }
 
   deleteIngredient(ingredient: string) {
     this.ingredientService.deleteIngredient(ingredient);
-    this.ingredientService.getAllIngredients();
+    this.ingredients = this.ingredientService.getAllIngredients();
+  }
+
+  removeAllIngredients() {
+    this.ingredients = this.ingredientService.deleteAllIngredients();
   }
 
   ngAfterViewInit(): void {
-      this.ingredientElementRef.nativeElement.focus();
-      console.log(this.ingredientElementRef);
+    this.ingredientElementRef.nativeElement.focus();
   }
 }

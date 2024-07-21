@@ -3,12 +3,31 @@
 
   <div class="mb-3">
     <label for="exampleFormControlInput1" class="form-label">Add ingredient</label>
-    <input #ingredientRef (keydown.enter)="handleUserInput()" [(ngModel)]="userInput" type="email" class="form-control" id="exampleFormControlInput1" placeholder="Enter ingredient">
+    <input
+      #ingredientRef
+      (keydown.enter)="handleUserInput()"
+      [(ngModel)]="userInput"
+      type="text"
+      class="form-control"
+      id="exampleFormControlInput1"
+      placeholder="Enter ingredient"
+    >
   </div>
 
   <ng-container *ngFor="let ingredient of ingredients">
-    <button (click)="deleteIngredient(ingredient)" type="button" class="btn btn-success mx-2">{{ingredient}}</button>
+    <button
+      (click)="deleteIngredient(ingredient)"
+      type="button"
+      class="btn btn-success mx-2">{{ingredient}}
+    </button>
   </ng-container>
+
+  <button
+    class="btn btn-danger"
+    (click)="removeAllIngredients()"
+  >
+  Remove All
+</button>
 </div>
 
 

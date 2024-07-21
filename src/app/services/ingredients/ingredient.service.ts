@@ -19,4 +19,9 @@ export class IngredientService {
   deleteIngredient(ingredient: string) {
     this.ingredients = this.ingredients.filter(i => i !== ingredient);
   }
+
+  deleteAllIngredients() {
+    this.ingredients = [];
+    return this.ingredients;
+  }
 }
