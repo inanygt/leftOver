@@ -11,6 +11,7 @@ export class AppComponent implements AfterViewInit{
   title = 'leftOver';
   ingredients: string[] = [];
   recipes: any[] = [];
+  preparedIngredients: any;
   @ViewChild('ingredientRef', {static: false}) ingredientElementRef: ElementRef;
 
   userInput: string;
@@ -24,10 +25,28 @@ export class AppComponent implements AfterViewInit{
     this.ingredientService.addIngredient(this.userInput);
     this.ingredients = this.ingredientService.getAllIngredients();
     this.userInput = "";
-    this.spoonApi.searchRecipe(this.ingredients).subscribe(res => {
+
+    const preparedIngredients = this.prepareForApi(this.ingredients);
+    console.log(preparedIngredients);
+
+
+    this.spoonApi.searchRecipe(preparedIngredients).subscribe(res => {
       this.recipes = res;
+      console.log(this.recipes);
     })
   }
+
+  prepareForApi(ingredients: string[]): string {
+    if (ingredients.length === 0) return "";
+
+    let preparedIngredients = ingredients[0];
+    for (let i = 1; i < ingredients.length; i++) {
+      preparedIngredients += `,+${ingredients[i]}`;
+    }
+    return preparedIngredients;
+  }
+
+
 
   deleteIngredient(ingredient: string) {
     this.ingredientService.deleteIngredient(ingredient);
