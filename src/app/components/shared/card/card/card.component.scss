@@ -1,4 +1,70 @@
 .card {
   margin-block: 2rem;
+  position: relative
 }
 
+.img-container {
+  cursor: pointer;
+  display: relative;
+}
+
+.img-container:hover .more-info {
+  background-color: black;
+  color: white;
+  opacity: 1;
+}
+
+.likes-container {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+}
+
+.ingredients-count {
+  display: inline-block;
+}
+
+.subtitle {
+  display: inline-block;
+}
+
+// button
+
+.btn {
+  border-radius: 30px;
+  border: 1px solid black;
+  transition: .5s ease;
+  background-color: white;
+  color: black
+
+}
+
+.btn:hover {
+  background-color: black;
+  color: white;
+}
+
+.fa-solid.fa-x {
+  font-size: 13px;
+  padding-left: .3rem;
+}
+
+.ingredient-btn:hover::after {
+  content: "\f00d";
+  font-family: "Font Awesome 5 Free";
+  padding-left: .2rem;
+   display: inline-block;
+   vertical-align: middle;
+   font-weight: 900;
+}
+
+.more-info {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  transition: .5s ease;
+  text-align: center;
+  padding-block: 1rem;
+}

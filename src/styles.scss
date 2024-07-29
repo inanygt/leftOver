@@ -15,9 +15,11 @@ body {
 .root-container {
   margin-inline: 2rem;
   margin-top: 3rem;
+  max-width: 600px;
+  margin-inline: auto;
 }
 
-.btn {
+.ingredient-btn {
   border-radius: 30px;
   border: 1px solid black;
     transition: .5s ease;
@@ -36,7 +38,7 @@ body {
   padding-left: .3rem;
 }
 
-.btn:hover::after {
+.ingredient-btn:hover::after {
   content: "\f00d";
   font-family: "Font Awesome 5 Free";
   padding-left: .2rem;
@@ -45,36 +47,12 @@ body {
    font-weight: 900;
 }
 
-.card {
-  position: relative;
-}
-
-.likes-container {
-  position: absolute;
-  right: 16px;
-  bottom: 16px;
-}
-
-.card img:hover {
-  cursor: pointer;
-
-  opacity: 0.3;
-
-}
-
-.sticky-ingredients {
+.sticky-container {
   position: sticky;
   background-color: white;
   top: 0px;
   z-index: 5;
-  padding-block: 1rem 1rem;
-  padding-inline-start: 1rem;
+  padding-block: 1rem;
 }
 
-.ingredients-count {
-  display: inline-block;
-}
 
-.subtitle {
-  display: inline-block;
-}

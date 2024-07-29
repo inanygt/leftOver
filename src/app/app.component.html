@@ -1,25 +1,28 @@
-<div class="root-container container-sm">
+<div class="root-container">
 
 
   <ng-container *ngTemplateOutlet="companyLogoTemplate"></ng-container>
 
-    <app-input-ingredients (recipesChanged)="handleRecipesChanged($event)"></app-input-ingredients> <!-- Updated -->
+       <div class="sticky-container">
 
+    <app-input-ingredients
+      (recipesChanged)="handleRecipesChanged($event)"
+      (ingredientsChanged)="handleIngredientsChanges($event)"
+      >
+    </app-input-ingredients>
 
       <ng-container *ngFor="let ingredient of ingredients">
             <button
               (click)="deleteIngredient(ingredient)"
               type="button"
-              class="btn mx-2">{{ ingredient }}
+              class="btn ingredient-btn mx-2">{{ ingredient }}
             </button>
       </ng-container>
-
-
 
       <button
         *ngIf="ingredients.length; else noIngredients"
         #buttonHover
-        class="btn"
+        class="btn ingredient-btn"
         (click)="removeAllIngredients()"
       >
       Remove All
@@ -32,6 +35,7 @@
       </div>
 
 
+
       <!-- Searched ingredients -->
       <ng-container *ngIf="recipes.length !== 0">
           <ng-container *ngFor="let recipe of recipes">
@@ -41,5 +45,6 @@
       </ng-container>
 
 <ng-template #companyLogoTemplate><h1>LeftOvers</h1></ng-template>
+      </div>
 
 

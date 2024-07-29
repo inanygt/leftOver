@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { CardComponent } from './components/shared/card/card/card.component';
 import { InnerCardComponent } from './components/shared/inner-card/inner-card/inner-card.component';
 import { InputIngredientsComponent } from './components/ingredients/input-ingredients/input-ingredients.component';
+import { CardIngredientModalComponent } from './components/ingredients/card-ingredient-modal/card-ingredient-modal.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { InputIngredientsComponent } from './components/ingredients/input-ingred
     HomeComponent,
     CardComponent,
     InnerCardComponent,
-    InputIngredientsComponent
+    InputIngredientsComponent,
+    CardIngredientModalComponent
   ],
   imports: [
     BrowserModule,

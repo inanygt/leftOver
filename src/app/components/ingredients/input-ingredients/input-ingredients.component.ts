@@ -5,7 +5,6 @@ import { SpoonApiService } from '../../../services/spoon-api.service';
 @Component({
   selector: 'app-input-ingredients',
   template: `
-       <div class="sticky-ingredients">
         <div class="mb-3 mt-5">
               <label for="ingredientInput" class="form-label">What's in my fridge?</label>
               <input #ingredientRef (keydown.enter)="handleUserInput()" [(ngModel)]="userInput" type="text"
@@ -21,6 +20,7 @@ export class InputIngredientsComponent implements AfterViewInit {
   recipes: any[] = [];
 
   @Output() recipesChanged = new EventEmitter<any[]>();
+  @Output() ingredientsChanged = new EventEmitter<any[]>();
 
 
   @ViewChild('ingredientRef', {static: false}) ingredientElementRef: ElementRef;
@@ -33,13 +33,13 @@ export class InputIngredientsComponent implements AfterViewInit {
   handleUserInput() {
     this.ingredientService.addIngredient(this.userInput);
     this.ingredients = this.ingredientService.getAllIngredients();
+    this.ingredientsChanged.emit(this.ingredients);
     this.userInput = "";
 
     const preparedIngredients = this.prepareForApi(this.ingredients);
 
     this.spoonApi.searchRecipe(preparedIngredients).subscribe(res => {
       this.recipes = res;
-      console.log(this.recipes);
       this.recipesChanged.emit(this.recipes); // Emit the recipes to the parent component
     })
   }

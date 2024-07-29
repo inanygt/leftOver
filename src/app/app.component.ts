@@ -12,7 +12,11 @@ export class AppComponent {
   recipes: any[] = [];
 
   handleRecipesChanged(recipes: any[]) {
-    this.recipes = recipes; // Update the recipes in the parent component
+    this.recipes = recipes;
+  }
+
+  handleIngredientsChanges(ingredients: any[]) {
+    this.ingredients = ingredients;
   }
 
   constructor(
