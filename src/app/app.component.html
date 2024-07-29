@@ -1,47 +1,45 @@
-<div class="root-container">
-  <h1>LeftOver</h1>
+<div class="root-container container-sm">
 
-  <div class="mb-3">
-    <label for="exampleFormControlInput1" class="form-label">Add ingredient</label>
-    <input
-      #ingredientRef
-      (keydown.enter)="handleUserInput()"
-      [(ngModel)]="userInput"
-      type="text"
-      class="form-control"
-      id="exampleFormControlInput1"
-      placeholder="Enter ingredient"
-    >
-  </div>
 
-  <ng-container *ngFor="let ingredient of ingredients">
-    <button
-      (click)="deleteIngredient(ingredient)"
-      type="button"
-      class="btn btn-success mx-2">{{ingredient}}
-    </button>
-  </ng-container>
+  <ng-container *ngTemplateOutlet="companyLogoTemplate"></ng-container>
 
-  <button
-    class="btn btn-danger"
-    (click)="removeAllIngredients()"
-  >
-  Remove All
-</button>
+    <app-input-ingredients (recipesChanged)="handleRecipesChanged($event)"></app-input-ingredients> <!-- Updated -->
 
-<!-- Searched ingredients -->
-<ng-container *ngIf="recipes.length !== 0">
-  <div *ngFor="let recipe of recipes" class="card" style="width: 18rem;">
-    {{ recipe.title }}
-    <img src="{{ recipe.image }}" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title"></h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
-    </div>
-  </div>
-</ng-container>
 
-</div>
+      <ng-container *ngFor="let ingredient of ingredients">
+            <button
+              (click)="deleteIngredient(ingredient)"
+              type="button"
+              class="btn mx-2">{{ ingredient }}
+            </button>
+      </ng-container>
+
+
+
+      <button
+        *ngIf="ingredients.length; else noIngredients"
+        #buttonHover
+        class="btn"
+        (click)="removeAllIngredients()"
+      >
+      Remove All
+      </button>
+
+      <ng-template #noIngredients>
+        please add some ingredients
+      </ng-template>
+
+      </div>
+
+
+      <!-- Searched ingredients -->
+      <ng-container *ngIf="recipes.length !== 0">
+          <ng-container *ngFor="let recipe of recipes">
+              <app-card [recipe]="recipe">
+              </app-card>
+        </ng-container>
+      </ng-container>
+
+<ng-template #companyLogoTemplate><h1>LeftOvers</h1></ng-template>
 
 

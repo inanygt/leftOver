@@ -3,6 +3,15 @@
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';
 
+body {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 .root-container {
   margin-inline: 2rem;
   margin-top: 3rem;
@@ -10,8 +19,62 @@
 
 .btn {
   border-radius: 30px;
+  border: 1px solid black;
+    transition: .5s ease;
+    background-color: white;
+    color: black
+
 }
 
-// .btn:hover {
-//   background-color: black;
-// }
+.btn:hover {
+  background-color: black;
+  color: white;
+}
+
+.fa-solid.fa-x {
+  font-size: 13px;
+  padding-left: .3rem;
+}
+
+.btn:hover::after {
+  content: "\f00d";
+  font-family: "Font Awesome 5 Free";
+  padding-left: .2rem;
+   display: inline-block;
+   vertical-align: middle;
+   font-weight: 900;
+}
+
+.card {
+  position: relative;
+}
+
+.likes-container {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+}
+
+.card img:hover {
+  cursor: pointer;
+
+  opacity: 0.3;
+
+}
+
+.sticky-ingredients {
+  position: sticky;
+  background-color: white;
+  top: 0px;
+  z-index: 5;
+  padding-block: 1rem 1rem;
+  padding-inline-start: 1rem;
+}
+
+.ingredients-count {
+  display: inline-block;
+}
+
+.subtitle {
+  display: inline-block;
+}
