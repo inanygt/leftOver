@@ -33,4 +33,7 @@ export class AppComponent {
     this.ingredients = this.ingredientService.deleteAllIngredients();
   }
 
+
+
+
 }

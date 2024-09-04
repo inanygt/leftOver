@@ -11,7 +11,7 @@ describe('CardIngredientModalComponent', () => {
       declarations: [CardIngredientModalComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(CardIngredientModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

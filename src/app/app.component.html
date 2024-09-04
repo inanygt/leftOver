@@ -1,50 +1,40 @@
 <div class="root-container">
-
-
-  <ng-container *ngTemplateOutlet="companyLogoTemplate"></ng-container>
-
-       <div class="sticky-container">
-
-    <app-input-ingredients
-      (recipesChanged)="handleRecipesChanged($event)"
-      (ingredientsChanged)="handleIngredientsChanges($event)"
+   <ng-container *ngTemplateOutlet="companyLogoTemplate"></ng-container>
+   <div class="sticky-container">
+      <app-input-ingredients
+         (recipesChanged)="handleRecipesChanged($event)"
+         (ingredientsChanged)="handleIngredientsChanges($event)"
       >
-    </app-input-ingredients>
+      </app-input-ingredients>
 
       <ng-container *ngFor="let ingredient of ingredients">
-            <button
-              (click)="deleteIngredient(ingredient)"
-              type="button"
-              class="btn ingredient-btn mx-2">{{ ingredient }}
-            </button>
+         <button
+            (click)="deleteIngredient(ingredient)"
+            type="button"
+            class="btn ingredient-btn mx-2"
+         >
+            {{ ingredient }}
+         </button>
       </ng-container>
 
       <button
-        *ngIf="ingredients.length; else noIngredients"
-        #buttonHover
-        class="btn ingredient-btn"
-        (click)="removeAllIngredients()"
+         *ngIf="ingredients.length; else noIngredients"
+         #buttonHover
+         class="btn ingredient-btn"
+         (click)="removeAllIngredients()"
       >
-      Remove All
+         Remove All
       </button>
 
-      <ng-template #noIngredients>
-        please add some ingredients
-      </ng-template>
+      <ng-template #noIngredients> please add some ingredients </ng-template>
+   </div>
 
-      </div>
-
-
-
-      <!-- Searched ingredients -->
-      <ng-container *ngIf="recipes.length !== 0">
-          <ng-container *ngFor="let recipe of recipes">
-              <app-card [recipe]="recipe">
-              </app-card>
-        </ng-container>
+   <!-- Searched ingredients -->
+   <ng-container *ngIf="recipes.length !== 0">
+      <ng-container *ngFor="let recipe of recipes">
+         <app-card [recipe]="recipe"> </app-card>
       </ng-container>
+   </ng-container>
 
-<ng-template #companyLogoTemplate><h1>LeftOvers</h1></ng-template>
-      </div>
-
-
+   <ng-template #companyLogoTemplate><h1>LeftOvers</h1></ng-template>
+</div>
