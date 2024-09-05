@@ -1,32 +1,18 @@
 <div class="root-container">
    <ng-container *ngTemplateOutlet="companyLogoTemplate"></ng-container>
+
    <div class="sticky-container">
-      <app-input-ingredients
+      <div>hi Chris!</div>
+      <h5>Got a tasty dish in mind? <mat-icon>waving_hand</mat-icon></h5>
+
+      <app-search-recipe
          (recipesChanged)="handleRecipesChanged($event)"
          (ingredientsChanged)="handleIngredientsChanges($event)"
-      >
-      </app-input-ingredients>
+      ></app-search-recipe>
 
-      <ng-container *ngFor="let ingredient of ingredients">
-         <button
-            (click)="deleteIngredient(ingredient)"
-            type="button"
-            class="btn ingredient-btn mx-2"
-         >
-            {{ ingredient }}
-         </button>
-      </ng-container>
-
-      <button
-         *ngIf="ingredients.length; else noIngredients"
-         #buttonHover
-         class="btn ingredient-btn"
-         (click)="removeAllIngredients()"
-      >
-         Remove All
-      </button>
-
-      <ng-template #noIngredients> please add some ingredients </ng-template>
+      <app-added-ingredients
+         [ingredients]="ingredients"
+      ></app-added-ingredients>
    </div>
 
    <!-- Searched ingredients -->

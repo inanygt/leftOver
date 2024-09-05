@@ -1,0 +1,23 @@
+<div class="added-ingredients-container">
+   <ng-container *ngFor="let ingredient of ingredients">
+      <button
+         mat-stroked-button
+         extended
+         (click)="deleteIngredient(ingredient)"
+         type="button"
+         class="btn ingredient-btn"
+      >
+         {{ ingredient }}
+         <mat-icon>close</mat-icon>
+      </button>
+   </ng-container>
+</div>
+
+<button
+   *ngIf="ingredients.length"
+   #buttonHover
+   class="btn ingredient-btn"
+   (click)="removeAllIngredients()"
+>
+   Remove All
+</button>

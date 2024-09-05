@@ -9,26 +9,50 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CardComponent } from './components/shared/card/card/card.component';
 import { InnerCardComponent } from './components/shared/inner-card/inner-card/inner-card.component';
-import { InputIngredientsComponent } from './components/ingredients/input-ingredients/input-ingredients.component';
 import { CardIngredientModalComponent } from './components/ingredients/card-ingredient-modal/card-ingredient-modal.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule } from '@angular/material/icon';
+import { SearchRecipeComponent } from './features/search-recipe/components/search-recipe/search-recipe.component';
+import { PreferencesModalComponent } from './features/search-recipe/components/preferences-modal/preferences-modal.component';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
+import { AddedIngredientsComponent } from './features/search-recipe/components/added-ingredients/added-ingredients.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    CardComponent,
-    InnerCardComponent,
-    InputIngredientsComponent,
-    CardIngredientModalComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    NgbModule,
-    HttpClientModule,
-    FormsModule,
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+   declarations: [
+      AppComponent,
+      HomeComponent,
+      CardComponent,
+      InnerCardComponent,
+      CardIngredientModalComponent,
+      SearchRecipeComponent,
+      PreferencesModalComponent,
+      AddedIngredientsComponent,
+   ],
+   imports: [
+      BrowserModule,
+      BrowserAnimationsModule,
+      AppRoutingModule,
+      NgbModule,
+      HttpClientModule,
+      FormsModule,
+      MatFormFieldModule,
+      MatInputModule,
+      MatIconModule,
+      MatDividerModule,
+      MatButtonModule,
+      MatDialogModule,
+      MatSelectModule
+   ],
+   providers: [
+      provideAnimationsAsync()
+   ],
+   bootstrap: [AppComponent]
 })
 export class AppModule { }
