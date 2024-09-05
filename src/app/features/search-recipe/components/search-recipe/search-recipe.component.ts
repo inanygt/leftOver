@@ -1,6 +1,8 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 import { IngredientService } from '../../../../services/ingredients/ingredient.service';
 import { SpoonApiService } from '../../../../services/spoon-api.service';
+import { MatDialog } from '@angular/material/dialog';
+import { PreferencesModalComponent } from '../preferences-modal/preferences-modal.component';
 
 @Component({
    selector: 'app-search-recipe',
@@ -19,7 +21,8 @@ export class SearchRecipeComponent implements AfterViewInit {
 
    constructor(
       private ingredientService: IngredientService,
-      private spoonApi: SpoonApiService
+      private spoonApi: SpoonApiService,
+      private dialog: MatDialog
    ) { }
 
    handleUserInput() {
@@ -43,6 +46,13 @@ export class SearchRecipeComponent implements AfterViewInit {
          preparedIngredients += `,+${ingredients[i]}`;
       }
       return preparedIngredients;
+   }
+
+   openPreferences(): void {
+      this.dialog.open(PreferencesModalComponent, {
+         width: '400px', // Adjust the width of the modal
+         disableClose: true // Optional: prevent closing by clicking outside the modal
+      });
    }
 
    ngAfterViewInit(): void {

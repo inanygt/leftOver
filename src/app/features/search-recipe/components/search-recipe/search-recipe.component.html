@@ -1,20 +1,31 @@
-<form class="example-form">
-   <mat-form-field class="example-full-width">
-      <mat-label>Search any recipes</mat-label>
-      <input
-         matInput
-         name="ingredient"
-         maxlength="256"
-         placeholder="Ingredient"
-         #ingredientRef
-         (keydown.enter)="handleUserInput()"
-         [(ngModel)]="userInput"
-      />
-      <mat-icon matPrefix>search</mat-icon>
+<div class="search-recipe-container">
+   <form class="example-form">
+      <mat-form-field class="example-full-width">
+         <mat-label>Search any recipes</mat-label>
+         <input
+            matInput
+            name="ingredient"
+            maxlength="256"
+            placeholder="Ingredient"
+            #ingredientRef
+            (keydown.enter)="handleUserInput()"
+            [(ngModel)]="userInput"
+         />
+         <mat-icon matPrefix>search</mat-icon>
 
-      <mat-hint align="start"
-         ><strong>Press Enter after every ingredient</strong>
-      </mat-hint>
-      <mat-hint align="end">{{ ingredientRef.value.length }} / 256</mat-hint>
-   </mat-form-field>
-</form>
+         <mat-hint align="start"
+            ><strong>Press Enter after every ingredient</strong>
+         </mat-hint>
+         <mat-hint align="end">{{ ingredientRef.value.length }} / 256</mat-hint>
+      </mat-form-field>
+   </form>
+
+   <button
+      mat-mini-fab
+      aria-label="preferences button"
+      class="btn preferences-btn"
+      (click)="openPreferences()"
+   >
+      <mat-icon>tune</mat-icon>
+   </button>
+</div>
