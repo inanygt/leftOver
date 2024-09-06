@@ -13,7 +13,8 @@ mat-button-toggle-group {
 }
 
 button[mat-button-toggle] {
-   padding-right: 1rem;
+   padding-right: 0.5rem;
+   font-size: 12px;
 }
 
 .mat-button-toggle-button {
@@ -22,7 +23,8 @@ button[mat-button-toggle] {
 
 .mat-btn {
    border-radius: 2rem;
-   margin-right: 1rem;
+   margin-right: 0.5rem;
+   font-size: 0.875rem;
 }
 
 .mat-button-toggle-checked {
