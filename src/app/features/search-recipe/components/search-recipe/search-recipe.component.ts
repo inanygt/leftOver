@@ -48,6 +48,8 @@ export class SearchRecipeComponent implements AfterViewInit {
       return preparedIngredients;
    }
 
+   selectedPreferences: any;
+
    openPreferences(): void {
       const dialogRef = this.dialog.open(PreferencesModalComponent, {
          width: '100vw',
@@ -58,9 +60,8 @@ export class SearchRecipeComponent implements AfterViewInit {
 
       dialogRef.afterClosed().subscribe(result => {
          console.log('The dialog was closed');
-         if (result !== undefined) {
-            // this.animal.set(result);
-         }
+         console.log('Selected Meal Type:', result);
+
       });
    }
 

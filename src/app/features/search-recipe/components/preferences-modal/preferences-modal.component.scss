@@ -7,3 +7,36 @@
 button[mat-icon-button] {
    margin-right: 1rem;
 }
+
+mat-button-toggle-group {
+   border: none;
+}
+
+button[mat-button-toggle] {
+   padding-right: 1rem;
+}
+
+.mat-button-toggle-button {
+   background: green;
+}
+
+.mat-btn {
+   border-radius: 2rem;
+   margin-right: 1rem;
+}
+
+.mat-button-toggle-checked {
+   background-color: green;
+}
+
+.mat-unchecked {
+   background-color: red;
+}
+
+.active-toggle {
+   color: green;
+}
+
+.btn-close {
+   display: block;
+}

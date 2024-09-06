@@ -5,29 +5,52 @@
    </button>
 </div>
 <mat-dialog-content>
-   <form [formGroup]="preferencesForm" (ngSubmit)="onSubmitPreferences()">
-      <h2>Cooking Time</h2>
-      <p>under 15 min, under 30min, under 60min</p>
-
+   <form [formGroup]="preferencesForm" (ngSubmit)="onSubmit()">
+      <h2>Meal Time</h2>
       <mat-button-toggle-group
-         #group="matButtonToggleGroup"
-         formControlName="mealType"
-         appearance="standard"
-         multiple="true"
+         multiple="false"
+         formControlName="mealTime"
+         [hideSingleSelectionIndicator]="true"
       >
-         <mat-button-toggle value="breakfast">Breakfast</mat-button-toggle>
-         <mat-button-toggle value="lunch">Lunch</mat-button-toggle>
-         <mat-button-toggle value="dinner">Dinner</mat-button-toggle>
-         <mat-button-toggle value="dessert">Dessert</mat-button-toggle>
+         <mat-button-toggle class="mat-btn" value="under_15"
+            >Under 15 min</mat-button-toggle
+         >
+         <mat-button-toggle class="mat-btn" value="under_30"
+            >Under 30 min</mat-button-toggle
+         >
+         <mat-button-toggle class="mat-btn" value="under_60"
+            >under 60 min</mat-button-toggle
+         >
       </mat-button-toggle-group>
 
-      <h2>Dietary restrictions</h2>
-      <p>
-         Vegetarian Vegan Gluten-free Dairy-free Nut-free Paleo Keto
-         Halal/Kosher
-      </p>
+      <h2>Meal Type</h2>
+      <mat-button-toggle-group
+         multiple="false"
+         formControlName="mealType"
+         [hideSingleSelectionIndicator]="true"
+      >
+         <mat-button-toggle class="mat-btn" value="breakfast"
+            >Breakfast</mat-button-toggle
+         >
+         <mat-button-toggle class="mat-btn" value="lunch"
+            >Lunch</mat-button-toggle
+         >
+         <mat-button-toggle class="mat-btn" value="dinner"
+            >Dinner</mat-button-toggle
+         >
+         <mat-button-toggle class="mat-btn" value="dessert"
+            >Dessert</mat-button-toggle
+         >
+      </mat-button-toggle-group>
+
+      <button
+         type="submit"
+         mat-button
+         mat-dialog-close
+         color="primary"
+         class="btn-close"
+      >
+         Save
+      </button>
    </form>
 </mat-dialog-content>
-<!-- <mat-dialog-actions align="end"> -->
-<button mat-button color="primary">Save Preferences</button>
-<!-- </mat-dialog-actions> -->

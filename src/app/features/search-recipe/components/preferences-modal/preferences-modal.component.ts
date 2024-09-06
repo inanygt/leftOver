@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
    selector: 'app-preferences-modal',
@@ -7,16 +8,16 @@ import { FormBuilder } from '@angular/forms';
    styleUrl: './preferences-modal.component.scss'
 })
 export class PreferencesModalComponent {
-   constructor(private fb: FormBuilder) { }
+   preferencesForm: FormGroup
+   constructor() {
+      this.preferencesForm = new FormGroup({
+         mealType: new FormControl(''),
+         mealTime: new FormControl('')
 
-   preferencesForm = this.fb.group({
-      dishType: ''
-   })
+      })
+   }
+   onSubmit() {
+      console.log(this.preferencesForm.value);
 
-   preferences: any;
-   selected = 'option2';
-
-   onSubmitPreferences() {
-      console.log(this.preferencesForm.value)
    }
 }
