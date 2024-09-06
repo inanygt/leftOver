@@ -1,0 +1,9 @@
+.head-container {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+button[mat-icon-button] {
+   margin-right: 1rem;
+}

@@ -1,65 +1,33 @@
-<h2 mat-dialog-title>Preferences</h2>
+<div class="head-container">
+   <h2 mat-dialog-title>Recipe Preferences</h2>
+   <button mat-icon-button mat-dialog-close>
+      <mat-icon>close</mat-icon>
+   </button>
+</div>
 <mat-dialog-content>
-   <p>Set your preferences here:</p>
-   <!-- Your form elements for preferences -->
+   <form [formGroup]="preferencesForm" (ngSubmit)="onSubmitPreferences()">
+      <h2>Cooking Time</h2>
+      <p>under 15 min, under 30min, under 60min</p>
 
-   1. Dietary restrictions Vegetarian Vegan Gluten-free Dairy-free Nut-free
-   Paleo Keto Halal/Kosher 2. Favorite Cuisines
+      <mat-button-toggle-group
+         #group="matButtonToggleGroup"
+         formControlName="mealType"
+         appearance="standard"
+         multiple="true"
+      >
+         <mat-button-toggle value="breakfast">Breakfast</mat-button-toggle>
+         <mat-button-toggle value="lunch">Lunch</mat-button-toggle>
+         <mat-button-toggle value="dinner">Dinner</mat-button-toggle>
+         <mat-button-toggle value="dessert">Dessert</mat-button-toggle>
+      </mat-button-toggle-group>
 
-   <label
-      ><input type="checkbox" [(ngModel)]="preferences.vegan" /> Vegan</label
-   >
-   <label
-      ><input type="checkbox" [(ngModel)]="preferences.glutenFree" />
-      Gluten-free</label
-   >
-
-   <!-- <mat-form-field>
-      <mat-label>Favorite Cuisines</mat-label>
-      <mat-select [(ngModel)]="preferences.cuisines" multiple>
-         <mat-option value="italian">Italian</mat-option>
-         <mat-option value="mexican">Mexican</mat-option>
-         <mat-option value="indian">Indian</mat-option>
-         <mat-option value="chinese">Chinese</mat-option>
-      </mat-select>
-   </mat-form-field> -->
-
-   <mat-form-field>
-      <mat-label>Select an option</mat-label>
-      <mat-select [(value)]="selected">
-         <mat-option>None</mat-option>
-         <mat-option value="option1">Option 1</mat-option>
-         <mat-option value="option2">Option 2</mat-option>
-         <mat-option value="option3">Option 3</mat-option>
-      </mat-select>
-   </mat-form-field>
-
-   <p>You selected: {{ selected }}</p>
-
-   <mat-form-field>
-      <mat-label>Ingredients to Avoid</mat-label>
-      <input
-         matInput
-         placeholder="Enter ingredients"
-         [(ngModel)]="preferences.ingredientsToAvoid"
-      />
-   </mat-form-field>
-
-   <label
-      ><input type="checkbox" [(ngModel)]="preferences.mealTypes.breakfast" />
-      Breakfast</label
-   >
-   <label
-      ><input type="checkbox" [(ngModel)]="preferences.mealTypes.dinner" />
-      Dinner</label
-   >
-
-   <mat-form-field>
-      <mat-label>Maximum Cooking Time (minutes)</mat-label>
-      <input type="number" [(ngModel)]="preferences.maxCookingTime" />
-   </mat-form-field>
+      <h2>Dietary restrictions</h2>
+      <p>
+         Vegetarian Vegan Gluten-free Dairy-free Nut-free Paleo Keto
+         Halal/Kosher
+      </p>
+   </form>
 </mat-dialog-content>
-<mat-dialog-actions align="end">
-   <button mat-button mat-dialog-close>Close</button>
-   <button mat-button color="primary">Save</button>
-</mat-dialog-actions>
+<!-- <mat-dialog-actions align="end"> -->
+<button mat-button color="primary">Save Preferences</button>
+<!-- </mat-dialog-actions> -->

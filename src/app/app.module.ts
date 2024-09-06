@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CardComponent } from './components/shared/card/card/card.component';
 import { InnerCardComponent } from './components/shared/inner-card/inner-card/inner-card.component';
 import { CardIngredientModalComponent } from './components/ingredients/card-ingredient-modal/card-ingredient-modal.component';
@@ -23,6 +23,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { AddedIngredientsComponent } from './features/search-recipe/components/added-ingredients/added-ingredients.component';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+
 
 @NgModule({
    declarations: [
@@ -48,7 +50,9 @@ import { AddedIngredientsComponent } from './features/search-recipe/components/a
       MatDividerModule,
       MatButtonModule,
       MatDialogModule,
-      MatSelectModule
+      MatSelectModule,
+      MatButtonToggleModule,
+      ReactiveFormsModule
    ],
    providers: [
       provideAnimationsAsync()

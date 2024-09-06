@@ -49,9 +49,18 @@ export class SearchRecipeComponent implements AfterViewInit {
    }
 
    openPreferences(): void {
-      this.dialog.open(PreferencesModalComponent, {
-         width: '400px', // Adjust the width of the modal
-         disableClose: true // Optional: prevent closing by clicking outside the modal
+      const dialogRef = this.dialog.open(PreferencesModalComponent, {
+         width: '100vw',
+         height: '100vh',
+         maxWidth: '100vw',
+         maxHeight: '100vh'
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+         console.log('The dialog was closed');
+         if (result !== undefined) {
+            // this.animal.set(result);
+         }
       });
    }
 
