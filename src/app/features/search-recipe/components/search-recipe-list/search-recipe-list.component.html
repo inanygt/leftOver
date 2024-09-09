@@ -1,0 +1,5 @@
+<div class="recipe-list-container" *ngIf="recipes.length !== 0">
+   <ng-container *ngFor="let recipe of recipes">
+      <app-search-recipe-card [recipe]="recipe"></app-search-recipe-card>
+   </ng-container>
+</div>
