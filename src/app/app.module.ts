@@ -7,8 +7,6 @@ import { HomeComponent } from './components/home/home.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CardComponent } from './components/shared/card/card/card.component';
-import { InnerCardComponent } from './components/shared/inner-card/inner-card/inner-card.component';
 import { CardIngredientModalComponent } from './components/ingredients/card-ingredient-modal/card-ingredient-modal.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
@@ -24,18 +22,23 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { AddedIngredientsComponent } from './features/search-recipe/components/added-ingredients/added-ingredients.component';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { SearchRecipeCardComponent } from './features/search-recipe/components/search-recipe-card/search-recipe-card.component';
+import { MatCardModule } from '@angular/material/card';
+import { SearchRecipeListComponent } from './features/search-recipe/components/search-recipe-list/search-recipe-list.component';
+import { MatChipsModule } from '@angular/material/chips';
+
 
 
 @NgModule({
    declarations: [
       AppComponent,
       HomeComponent,
-      CardComponent,
-      InnerCardComponent,
       CardIngredientModalComponent,
       SearchRecipeComponent,
       PreferencesModalComponent,
       AddedIngredientsComponent,
+      SearchRecipeCardComponent,
+      SearchRecipeListComponent,
    ],
    imports: [
       BrowserModule,
@@ -52,7 +55,9 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
       MatDialogModule,
       MatSelectModule,
       MatButtonToggleModule,
-      ReactiveFormsModule
+      ReactiveFormsModule,
+      MatCardModule,
+      MatChipsModule
    ],
    providers: [
       provideAnimationsAsync()

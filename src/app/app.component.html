@@ -13,12 +13,7 @@
       ></app-added-ingredients>
    </div>
 
-   <!-- Searched ingredients -->
-   <ng-container *ngIf="recipes.length !== 0">
-      <ng-container *ngFor="let recipe of recipes">
-         <app-card [recipe]="recipe"> </app-card>
-      </ng-container>
-   </ng-container>
+   <app-search-recipe-list [recipes]="recipes"></app-search-recipe-list>
 
    <ng-template #companyLogoTemplate><h1>LeftOvers</h1></ng-template>
 </div>
