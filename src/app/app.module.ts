@@ -3,11 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './components/home/home.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CardIngredientModalComponent } from './components/ingredients/card-ingredient-modal/card-ingredient-modal.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 import { MatInputModule } from '@angular/material/input';
@@ -26,19 +24,28 @@ import { SearchRecipeCardComponent } from './features/search-recipe/components/s
 import { MatCardModule } from '@angular/material/card';
 import { SearchRecipeListComponent } from './features/search-recipe/components/search-recipe-list/search-recipe-list.component';
 import { MatChipsModule } from '@angular/material/chips';
+import { RecipeDetailsComponent } from './features/search-recipe/recipe-details/recipe-details.component';
+import { RouterOutlet } from '@angular/router';
+import { SearchComponent } from './features/search-recipe/components/search/search.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
+import { HeaderComponent } from './core/header/header.component';
+
+
 
 
 
 @NgModule({
    declarations: [
       AppComponent,
-      HomeComponent,
-      CardIngredientModalComponent,
       SearchRecipeComponent,
       PreferencesModalComponent,
       AddedIngredientsComponent,
       SearchRecipeCardComponent,
       SearchRecipeListComponent,
+      RecipeDetailsComponent,
+      SearchComponent,
+      HeaderComponent,
    ],
    imports: [
       BrowserModule,
@@ -57,7 +64,10 @@ import { MatChipsModule } from '@angular/material/chips';
       MatButtonToggleModule,
       ReactiveFormsModule,
       MatCardModule,
-      MatChipsModule
+      MatChipsModule,
+      RouterOutlet,
+      MatToolbarModule,
+      MatMenuModule
    ],
    providers: [
       provideAnimationsAsync()

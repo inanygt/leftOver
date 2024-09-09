@@ -10,12 +10,5 @@ export class AppComponent {
    ingredients: string[] = [];
    recipes: any[] = [];
 
-   handleRecipesChanged(recipes: any[]) {
-      this.recipes = recipes;
-      console.log(this.recipes)
-   }
 
-   handleIngredientsChanges(ingredients: any[]) {
-      this.ingredients = ingredients;
-   }
 }

@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
    selector: 'app-search-recipe-card',
@@ -7,4 +8,11 @@ import { Component, Input } from '@angular/core';
 })
 export class SearchRecipeCardComponent {
    @Input() recipe: any;
+
+   constructor(private router: Router) { }
+
+   goToDetails() {
+      // Navigate to the individual recipe page, using recipe.id
+      this.router.navigate(['/recipe', this.recipe.id]);
+   }
 }

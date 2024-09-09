@@ -13,7 +13,7 @@ export class SpoonApiService {
 
    baseApi: string = "https://api.spoonacular.com/recipes/";
 
-   getRecipeById(id: number): Observable<any> {
+   getRecipeById(id: string): Observable<any> {
       return this.http.get(`${this.baseApi}${id}/information?apiKey=f7b667c5b33b40dcbb0f44cd03ab8b67`)
    }
 

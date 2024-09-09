@@ -1,0 +1,17 @@
+<div class="root-container">
+   <!-- <ng-container *ngTemplateOutlet="companyLogoTemplate"></ng-container> -->
+   <div>hi Chris!</div>
+   <h2>Got a tasty dish in mind?</h2>
+   <div class="sticky-container">
+      <app-search-recipe
+         (recipesChanged)="handleRecipesChanged($event)"
+         (ingredientsChanged)="handleIngredientsChanges($event)"
+      ></app-search-recipe>
+
+      <app-added-ingredients
+         [ingredients]="ingredients"
+      ></app-added-ingredients>
+   </div>
+
+   <app-search-recipe-list [recipes]="recipes"></app-search-recipe-list>
+</div>
