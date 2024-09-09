@@ -3,6 +3,7 @@
 html,
 body {
    height: 100%;
+   height: auto;
 }
 
 * {
@@ -13,23 +14,9 @@ body {
    font-size: 4rem;
 }
 
-.root-container {
-   max-width: 600px;
-   width: calc(100% - 2rem);
-   margin: 2rem auto;
-}
-
 .fa-solid.fa-x {
    font-size: 13px;
    padding-left: 0.3rem;
-}
-
-.sticky-container {
-   position: sticky;
-   background-color: white;
-   top: 0px;
-   z-index: 5;
-   padding-block: 1rem;
 }
 
 mat-stroked-button {

@@ -1,17 +1,20 @@
-<div class="root-container">
-   <!-- <ng-container *ngTemplateOutlet="companyLogoTemplate"></ng-container> -->
-   <div>hi Chris!</div>
-   <h2>Got a tasty dish in mind?</h2>
-   <div class="sticky-container">
-      <app-search-recipe
-         (recipesChanged)="handleRecipesChanged($event)"
-         (ingredientsChanged)="handleIngredientsChanges($event)"
-      ></app-search-recipe>
+<div class="search-outer-container">
+   <div class="search-inner-container">
+      <div>hi Chris!</div>
+      <h2>Got a tasty dish in mind?</h2>
+      <div class="sticky-container">
+         <app-search-recipe
+            (recipesChanged)="handleRecipesChanged($event)"
+            (ingredientsChanged)="handleIngredientsChanges($event)"
+         ></app-search-recipe>
 
-      <app-added-ingredients
-         [ingredients]="ingredients"
-      ></app-added-ingredients>
+         <app-added-ingredients
+            [ingredients]="ingredients"
+         ></app-added-ingredients>
+      </div>
    </div>
+</div>
 
+<div class="root-container">
    <app-search-recipe-list [recipes]="recipes"></app-search-recipe-list>
 </div>
