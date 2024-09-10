@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 // import { Recipe } from 'src/app/models/recipe.model'; // Import Recipe model
-import { SpoonApiService } from '../../../services/spoon-api.service';
+import { SpoonApiService } from '../../../../services/spoon-api.service';
 
 @Component({
    selector: 'app-recipe-details',

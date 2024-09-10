@@ -24,16 +24,15 @@ import { SearchRecipeCardComponent } from './features/search-recipe/components/s
 import { MatCardModule } from '@angular/material/card';
 import { SearchRecipeListComponent } from './features/search-recipe/components/search-recipe-list/search-recipe-list.component';
 import { MatChipsModule } from '@angular/material/chips';
-import { RecipeDetailsComponent } from './features/search-recipe/recipe-details/recipe-details.component';
-import { RouterOutlet } from '@angular/router';
+import { RecipeDetailsComponent } from './features/search-recipe/components/recipe-details/recipe-details.component';
+import { RouterLinkActive, RouterOutlet } from '@angular/router';
 import { SearchComponent } from './features/search-recipe/components/search/search.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { HeaderComponent } from './core/header/header.component';
-
-
-
-
+import { PostComponent } from './features/post-recipe/components/post/post.component';
+import { FavoriteRecipeComponent } from './features/favorite-recipe/favorite-recipe.component';
+import { ProfileComponent } from './features/profile/profile.component';
 
 @NgModule({
    declarations: [
@@ -46,6 +45,9 @@ import { HeaderComponent } from './core/header/header.component';
       RecipeDetailsComponent,
       SearchComponent,
       HeaderComponent,
+      PostComponent,
+      FavoriteRecipeComponent,
+      ProfileComponent,
    ],
    imports: [
       BrowserModule,
@@ -67,7 +69,8 @@ import { HeaderComponent } from './core/header/header.component';
       MatChipsModule,
       RouterOutlet,
       MatToolbarModule,
-      MatMenuModule
+      MatMenuModule,
+      RouterLinkActive
    ],
    providers: [
       provideAnimationsAsync()
