@@ -1,4 +1,8 @@
-<mat-card class="recipe-card" (click)="goToDetails()" appearance="outlined">
+<mat-card
+   class="recipe-card"
+   [routerLink]="['/recipes', recipe.id]"
+   appearance="outlined"
+>
    <img mat-card-image src="{{ recipe.image }}" alt="Photo of a Shiba Inu" />
    <mat-card-header>
       <mat-card-title class="mat-card-title">{{ recipe.title }}</mat-card-title>

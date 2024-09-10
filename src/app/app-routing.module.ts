@@ -9,7 +9,7 @@ import { ProfileComponent } from './features/profile/profile.component';
 
 const routes: Routes = [
    { path: 'search', component: SearchComponent }, // Default route (home page)
-   { path: 'recipe/:id', component: RecipeDetailsComponent }, // Dynamic route for recipe details
+   { path: 'recipes/:recipeId', component: RecipeDetailsComponent }, // Dynamic route for recipe details
    { path: 'post', component: PostComponent },
    { path: 'favorite', component: FavoriteRecipeComponent },
    { path: 'profile', component: ProfileComponent },

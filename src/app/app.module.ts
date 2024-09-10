@@ -29,10 +29,11 @@ import { RouterLinkActive, RouterOutlet } from '@angular/router';
 import { SearchComponent } from './features/search-recipe/components/search/search.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
-import { HeaderComponent } from './core/header/header.component';
+import { HeaderComponent } from './core/components/header/header.component';
 import { PostComponent } from './features/post-recipe/components/post/post.component';
 import { FavoriteRecipeComponent } from './features/favorite-recipe/favorite-recipe.component';
 import { ProfileComponent } from './features/profile/profile.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
    declarations: [
@@ -70,7 +71,8 @@ import { ProfileComponent } from './features/profile/profile.component';
       RouterOutlet,
       MatToolbarModule,
       MatMenuModule,
-      RouterLinkActive
+      RouterLinkActive,
+      MatExpansionModule
    ],
    providers: [
       provideAnimationsAsync()

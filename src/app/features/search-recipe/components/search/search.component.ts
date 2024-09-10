@@ -12,7 +12,6 @@ export class SearchComponent {
 
    handleRecipesChanged(recipes: any[]) {
       this.recipes = recipes;
-      console.log(this.recipes)
    }
 
    handleIngredientsChanges(ingredients: any[]) {
