@@ -1,0 +1,42 @@
+.recipe-details-container {
+   margin: auto;
+   max-width: 600px;
+   width: calc(100% - 2rem);
+}
+
+.go-back-container {
+   padding-block: 0.6rem;
+}
+
+.img-container {
+   background-size: cover;
+}
+
+.recipe-summary {
+   // display: -webkit-box;
+   // -webkit-box-orient: vertical;
+   // overflow: hidden;
+   // -webkit-line-clamp: 2; /* Show only 2 lines */
+   // line-clamp: 2; /* Standard syntax, though not supported everywhere yet */
+   // text-overflow: ellipsis;
+
+   margin-bottom: 1rem;
+}
+
+.recipe-preparation-details-container {
+   margin-block: 2rem;
+   display: flex;
+   justify-content: space-around;
+
+   .servings,
+   .preparation,
+   .cook {
+      text-align: center;
+   }
+}
+
+img {
+   border-radius: 2rem;
+   width: 100%;
+   padding-bottom: 1rem;
+}

@@ -8,7 +8,7 @@ import { FavoriteRecipeComponent } from './features/favorite-recipe/favorite-rec
 import { ProfileComponent } from './features/profile/profile.component';
 
 const routes: Routes = [
-   { path: 'search', component: SearchComponent }, // Default route (home page)
+   { path: '', component: SearchComponent }, // Default route (home page)
    { path: 'recipes/:recipeId', component: RecipeDetailsComponent }, // Dynamic route for recipe details
    { path: 'post', component: PostComponent },
    { path: 'favorite', component: FavoriteRecipeComponent },
