@@ -3,5 +3,9 @@
 }
 
 .selected {
-   color: green;
+   color: green !important;
+}
+
+button[mat-button] {
+   font-size: 1.2rem;
 }
