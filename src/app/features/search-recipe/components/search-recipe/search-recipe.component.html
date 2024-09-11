@@ -9,14 +9,9 @@
             placeholder="Enter Ingredient"
             #ingredientRef
             (keydown.enter)="handleUserInput()"
-            [(ngModel)]="userInput"
+            [(ngModel)]="ingredientInput"
          />
          <mat-icon matPrefix>search</mat-icon>
-
-         <!-- <mat-hint align="start"
-            ><strong>Press Enter after every ingredient</strong>
-         </mat-hint>
-         <mat-hint align="end">{{ ingredientRef.value.length }} / 256</mat-hint> -->
       </mat-form-field>
    </form>
 

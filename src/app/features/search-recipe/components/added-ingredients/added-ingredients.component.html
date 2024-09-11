@@ -1,20 +1,19 @@
 <div class="added-ingredients-container">
-   <ng-container *ngFor="let ingredient of ingredients">
+   <ng-container *ngFor="let ingredient of ingredients$ | async">
       <button
          mat-stroked-button
          extended
-         (click)="deleteIngredient(ingredient)"
          type="button"
          class="btn ingredient-btn"
       >
-         {{ ingredient }}
+         {{ ingredient.text }}
          <mat-icon>close</mat-icon>
       </button>
    </ng-container>
 </div>
 
 <button
-   *ngIf="ingredients.length"
+   *ngIf="(ingredients$ | async)?.length"
    #buttonHover
    class="btn ingredient-btn"
    (click)="removeAllIngredients()"

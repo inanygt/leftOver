@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { IngredientService } from '../../../../services/ingredients/ingredient.service';
+import { IngredientsService } from '../../services/ingredients.service';
+import { Observable } from 'rxjs';
+import { IngredientInterface } from '../../../../core/types/ingredient.interface';
 
 @Component({
    selector: 'app-added-ingredients',
@@ -7,22 +9,24 @@ import { IngredientService } from '../../../../services/ingredients/ingredient.s
    styleUrl: './added-ingredients.component.scss'
 })
 export class AddedIngredientsComponent {
-   // ingredients: string[] = [];
 
-   @Input() ingredients: any[];
-
+   // @Input() ingredients: any[];
+   ingredients$: Observable<IngredientInterface[]>;
 
    constructor(
-      private ingredientService: IngredientService,
-   ) { }
-
-
-   deleteIngredient(ingredient: string) {
-      this.ingredientService.deleteIngredient(ingredient);
-      this.ingredients = this.ingredientService.getAllIngredients();
+      private ingredientsService: IngredientsService
+   ) {
+      this.ingredients$ = this.ingredientsService.ingredients$;
+      console.log(this.ingredients$)
    }
 
+
+   // deleteIngredient(ingredient: string) {
+   //    this.ingredientsService.deleteIngredient(ingredient);
+   //    // this.ingredients = this.ingredientsService.getAllIngredients();
+   // }
+
    removeAllIngredients() {
-      this.ingredients = this.ingredientService.deleteAllIngredients();
+      // this.ingredients = this.ingredientsService.deleteAllIngredients();
    }
 }

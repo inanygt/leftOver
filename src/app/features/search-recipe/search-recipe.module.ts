@@ -9,6 +9,7 @@ import { SearchRecipeListComponent } from "./components/search-recipe-list/searc
 import { MaterialModule } from "../../shared/material.module";
 import { SharedModule } from "../../shared/shared.module";
 import { RouterModule, Routes } from "@angular/router";
+import { IngredientsService } from "./services/ingredients.service";
 
 const routes: Routes = [
    { path: '', component: SearchComponent },
@@ -30,6 +31,7 @@ const routes: Routes = [
       SharedModule,
       RouterModule.forChild(routes)
    ],
+   providers: [IngredientsService]
 })
 
 export class SearchRecipeModule { }

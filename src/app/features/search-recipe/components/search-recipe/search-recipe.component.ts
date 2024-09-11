@@ -1,8 +1,9 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
-import { IngredientService } from '../../../../services/ingredients/ingredient.service';
 import { SpoonApiService } from '../../../../services/spoon-api.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PreferencesModalComponent } from '../preferences-modal/preferences-modal.component';
+import { IngredientsService } from '../../services/ingredients.service';
+import { IngredientInterface } from '../../../../core/types/ingredient.interface';
 
 @Component({
    selector: 'app-search-recipe',
@@ -10,8 +11,8 @@ import { PreferencesModalComponent } from '../preferences-modal/preferences-moda
    styleUrl: './search-recipe.component.scss'
 })
 export class SearchRecipeComponent implements AfterViewInit {
-   ingredients: string[] = [];
-   userInput: string;
+   ingredients: IngredientInterface[] = [];
+   ingredientInput: string;
    recipes: any[] = [];
 
    @Output() recipesChanged = new EventEmitter<any[]>();
@@ -20,23 +21,25 @@ export class SearchRecipeComponent implements AfterViewInit {
    @ViewChild('ingredientRef', { static: false }) ingredientElementRef: ElementRef;
 
    constructor(
-      private ingredientService: IngredientService,
+      private ingredientsService: IngredientsService,
       private spoonApi: SpoonApiService,
       private dialog: MatDialog
-   ) { }
+   ) {
+
+   }
 
    handleUserInput() {
-      this.ingredientService.addIngredient(this.userInput);
-      this.ingredients = this.ingredientService.getAllIngredients();
+      this.ingredientsService.addIngredient(this.ingredientInput);
+      this.ingredients = this.ingredientsService.getAllIngredients();
       this.ingredientsChanged.emit(this.ingredients);
-      this.userInput = "";
+      this.ingredientInput = "";
 
-      const preparedIngredients = this.prepareForApi(this.ingredients);
+      // const preparedIngredients = this.prepareForApi(this.ingredients);
 
-      this.spoonApi.searchRecipe(preparedIngredients).subscribe(res => {
-         this.recipes = res;
-         this.recipesChanged.emit(this.recipes);
-      })
+      // this.spoonApi.searchRecipe(preparedIngredients).subscribe(res => {
+      //    this.recipes = res;
+      //    this.recipesChanged.emit(this.recipes);
+      // })
    }
 
    prepareForApi(ingredients: string[]): string {
