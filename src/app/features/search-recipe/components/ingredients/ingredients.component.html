@@ -11,13 +11,12 @@
          <mat-icon>close</mat-icon>
       </button>
    </ng-container>
+   <button
+      *ngIf="(ingredients$ | async)?.length"
+      class="remove-all-btn"
+      (click)="removeAllIngredients()"
+      mat-stroked-button
+   >
+      Remove All
+   </button>
 </div>
-
-<button
-   *ngIf="(ingredients$ | async)?.length"
-   #buttonHover
-   class="btn ingredient-btn"
-   (click)="removeAllIngredients()"
->
-   Remove All
-</button>

@@ -1,14 +1,14 @@
+<div class="search-header">
+   <div>hi Chris!</div>
+   <h2>Got a tasty dish in mind?</h2>
+</div>
 <div class="search-outer-container">
    <div class="search-inner-container">
-      <div>hi Chris!</div>
-      <h2>Got a tasty dish in mind?</h2>
-      <div class="sticky-container">
-         <app-search-recipe
-            (recipesChanged)="handleRecipesChanged($event)"
-         ></app-search-recipe>
+      <app-search-recipe
+         (recipesChanged)="handleRecipesChanged($event)"
+      ></app-search-recipe>
 
-         <app-ingredients></app-ingredients>
-      </div>
+      <app-ingredients></app-ingredients>
    </div>
 </div>
 

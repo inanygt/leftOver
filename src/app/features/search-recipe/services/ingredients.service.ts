@@ -16,11 +16,12 @@ export class IngredientsService {
       this.ingredients$.next(updatedIngredients);
    }
 
-   getAllIngredients(): IngredientInterface[] {
-      return [];
+   deleteIngredient(ingredientId: string) {
+      const updatedIngredients = this.ingredients$.getValue().filter(ingredient => ingredient.id !== ingredientId);
+      this.ingredients$.next(updatedIngredients);
    }
 
-   deleteIngredient(ingredient: string) { }
-
-   deleteAllIngredients() { }
+   deleteAllIngredients() {
+      this.ingredients$.next([]);
+   }
 }

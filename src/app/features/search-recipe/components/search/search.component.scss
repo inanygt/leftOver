@@ -4,6 +4,11 @@
    margin: 2rem auto;
 }
 
+.search-header {
+   margin-inline: 1rem;
+   margin-top: 1rem;
+}
+
 .search-inner-container {
    width: calc(100% - 2rem);
    margin: auto;
@@ -16,8 +21,5 @@
    top: 0;
    z-index: 99;
    padding-block: 1rem;
-   // box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
-   //    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-
    border-bottom: 2px solid lightgray;
 }

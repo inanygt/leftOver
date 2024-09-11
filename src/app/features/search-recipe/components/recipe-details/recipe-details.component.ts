@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, signal, DestroyRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-// import { Recipe } from 'src/app/models/recipe.model'; // Import Recipe model
 import { SpoonApiService } from '../../../../services/spoon-api.service';
 import { Location } from '@angular/common';
 

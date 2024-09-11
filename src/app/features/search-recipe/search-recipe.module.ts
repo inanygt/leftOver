@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { AddedIngredientsComponent } from "./components/added-ingredients/added-ingredients.component";
+import { IngredientsComponent } from "./components/ingredients/ingredients.component";
 import { PreferencesModalComponent } from "./components/preferences-modal/preferences-modal.component";
 import { RecipeDetailsComponent } from "./components/recipe-details/recipe-details.component";
 import { SearchComponent } from "./components/search/search.component";
@@ -10,21 +10,23 @@ import { MaterialModule } from "../../shared/material.module";
 import { SharedModule } from "../../shared/shared.module";
 import { RouterModule, Routes } from "@angular/router";
 import { IngredientsService } from "./services/ingredients.service";
+import { PreferencesButtonComponent } from './components/preferences-button/preferences-button.component';
 
 const routes: Routes = [
    { path: '', component: SearchComponent },
-   { path: 'recipes/:recipeId', component: RecipeDetailsComponent },
+   // { path: 'recipes/:recipeId', component: RecipeDetailsComponent },
 ]
 
 @NgModule({
    declarations: [
-      AddedIngredientsComponent,
+      IngredientsComponent,
       PreferencesModalComponent,
       RecipeDetailsComponent,
       SearchComponent,
       SearchRecipeComponent,
       SearchRecipeCardComponent,
-      SearchRecipeListComponent
+      SearchRecipeListComponent,
+      PreferencesButtonComponent
    ],
    imports: [
       MaterialModule,
