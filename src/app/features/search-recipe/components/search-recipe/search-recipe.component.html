@@ -3,6 +3,7 @@
       <mat-form-field class="example-full-width">
          <mat-label>Search any recipes</mat-label>
          <input
+            autoFocus
             matInput
             name="ingredient"
             maxlength="256"
@@ -14,13 +15,5 @@
          <mat-icon matPrefix>search</mat-icon>
       </mat-form-field>
    </form>
-
-   <button
-      mat-mini-fab
-      aria-label="preferences button"
-      class="btn preferences-btn"
-      (click)="openPreferences()"
-   >
-      <mat-icon>tune</mat-icon>
-   </button>
+   <app-preferences-button></app-preferences-button>
 </div>

@@ -1,10 +1,11 @@
-<div class="added-ingredients-container">
+<div class="ingredients-container">
    <ng-container *ngFor="let ingredient of ingredients$ | async">
       <button
          mat-stroked-button
          extended
          type="button"
          class="btn ingredient-btn"
+         (click)="deleteIngredient(ingredient.id)"
       >
          {{ ingredient.text }}
          <mat-icon>close</mat-icon>
