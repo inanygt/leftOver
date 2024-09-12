@@ -1,0 +1,9 @@
+<h3>
+   overflow: auto; <br />+ hidden scrollbar<br />(works only on chrome and
+   safari)
+</h3>
+<div class="scroll-container hide-scrollbar">
+   <div *ngFor="let recipe of recipes$ | async">
+      {{ recipe }}
+   </div>
+</div>

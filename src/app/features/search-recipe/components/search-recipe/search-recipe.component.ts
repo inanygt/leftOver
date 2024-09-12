@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SpoonApiService } from '../../../../services/spoon-api.service';
+import { RecipesService } from '../../../../core/services/recipes.service';
 import { IngredientsService } from '../../services/ingredients.service';
 import { Observable } from 'rxjs';
 import { IngredientInterface } from '../../../../core/types/ingredient.interface';
@@ -15,7 +15,7 @@ export class SearchRecipeComponent {
 
    constructor(
       private ingredientsService: IngredientsService,
-      private spoonApi: SpoonApiService,
+      private recipesService: RecipesService,
    ) {
       this.ingredients$ = this.ingredientsService.ingredients$;
    }
@@ -27,8 +27,8 @@ export class SearchRecipeComponent {
       this.ingredients$.subscribe(ingredients => {
          const preparedIngredients = this.ingredientsService.prepareIngredientsForQuery(ingredients.map(ingredient => ingredient.text));
 
-         this.spoonApi.searchRecipe(preparedIngredients).subscribe((recipes) => {
-            this.spoonApi.recipes$.next(recipes)
+         this.recipesService.searchRecipe(preparedIngredients).subscribe((recipes) => {
+            this.recipesService.recipes$.next(recipes)
          })
       });
    }

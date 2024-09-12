@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SpoonApiService } from '../../../../services/spoon-api.service';
+import { RecipesService } from '../../../../core/services/recipes.service';
 
 @Component({
    selector: 'app-search-recipe-list',
@@ -10,12 +10,12 @@ export class SearchRecipeListComponent implements OnInit {
    recipes: any[] = [];
 
    constructor(
-      private spoonApi: SpoonApiService
+      private recipesService: RecipesService
    ) {
    }
 
    ngOnInit(): void {
-      this.spoonApi.recipes$.subscribe((recipes) => {
+      this.recipesService.recipes$.subscribe((recipes) => {
          this.recipes = recipes;
       })
    }

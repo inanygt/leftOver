@@ -1,6 +1,6 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { SpoonApiService } from '../../../../services/spoon-api.service';
+import { RecipesService } from '../../../../core/services/recipes.service';
 import { Location } from '@angular/common';
 
 
@@ -16,15 +16,21 @@ export class RecipeDetailsComponent implements OnInit {
 
    constructor(
       private route: ActivatedRoute,
-      private spoonApi: SpoonApiService,
+      private recipeService: RecipesService,
       private location: Location,
    ) { }
 
    ngOnInit(): void {
       const recipeId = this.route.snapshot.paramMap.get('recipeId');
+      console.log(recipeId);
+      this.recipeService.recipeId$.next(recipeId);
+      this.recipeService.getSimilarRecipes(recipeId).subscribe((recipes) => {
+         this.recipeService.similarRecipes$.next(recipes)
+      })
+
 
       if (recipeId) {
-         this.recipe = this.spoonApi.getRecipeById(recipeId).subscribe({
+         this.recipe = this.recipeService.getRecipeById(recipeId).subscribe({
             next: (res) => {
                this.recipe = res;
             },
