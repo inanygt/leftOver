@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, signal, DestroyRef } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SpoonApiService } from '../../../../services/spoon-api.service';
 import { Location } from '@angular/common';
@@ -18,7 +18,6 @@ export class RecipeDetailsComponent implements OnInit {
       private route: ActivatedRoute,
       private spoonApi: SpoonApiService,
       private location: Location,
-      private destroyRef: DestroyRef
    ) { }
 
    ngOnInit(): void {
@@ -28,7 +27,6 @@ export class RecipeDetailsComponent implements OnInit {
          this.recipe = this.spoonApi.getRecipeById(recipeId).subscribe({
             next: (res) => {
                this.recipe = res;
-               console.log(this.recipe)
             },
             error: (error) => {
                console.log(error);
@@ -38,8 +36,6 @@ export class RecipeDetailsComponent implements OnInit {
             }
          });
       }
-
-      // this.destroyRef.onDestroy(() => this.recipe.unsubscribe())
    }
 
    goBack() {

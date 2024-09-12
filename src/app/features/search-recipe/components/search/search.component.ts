@@ -8,14 +8,4 @@ import { IngredientInterface } from '../../../../core/types/ingredient.interface
 })
 export class SearchComponent {
    title = 'leftOver';
-   ingredients: string[] = [];
-   recipes$: any[] = [];
-
-   handleRecipesChanged(recipes: any[]) {
-      this.recipes$ = recipes;
-   }
-
-   handleIngredientsChanges(ingredients: any[]) {
-      this.ingredients = ingredients;
-   }
 }

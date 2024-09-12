@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { SpoonApiService } from '../../../../services/spoon-api.service';
 import { IngredientsService } from '../../services/ingredients.service';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { IngredientInterface } from '../../../../core/types/ingredient.interface';
 
 @Component({
@@ -12,10 +12,6 @@ import { IngredientInterface } from '../../../../core/types/ingredient.interface
 export class SearchRecipeComponent {
    ingredientInput: string;
    ingredients$: Observable<IngredientInterface[]>;
-   // recipes$: Observable<any>;
-
-
-   // @Output() recipesChanged = new EventEmitter<any[]>();
 
    constructor(
       private ingredientsService: IngredientsService,
@@ -33,7 +29,6 @@ export class SearchRecipeComponent {
 
          this.spoonApi.searchRecipe(preparedIngredients).subscribe((recipes) => {
             this.spoonApi.recipes$.next(recipes)
-            // this.recipesChanged.emit(recipes);
          })
       });
    }
