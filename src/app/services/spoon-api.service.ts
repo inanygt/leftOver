@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
    providedIn: 'root'
 })
 export class SpoonApiService {
+   recipes$ = new BehaviorSubject<any[]>([]);
 
-   constructor(private http: HttpClient) { }
+   constructor(private http: HttpClient) {
+   }
 
    apiUrl = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=f7b667c5b33b40dcbb0f44cd03ab8b67&ingredients=";
 

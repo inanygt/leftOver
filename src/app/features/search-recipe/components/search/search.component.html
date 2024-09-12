@@ -4,14 +4,12 @@
 </div>
 <div class="search-outer-container">
    <div class="search-inner-container">
-      <app-search-recipe
-         (recipesChanged)="handleRecipesChanged($event)"
-      ></app-search-recipe>
+      <app-search-recipe></app-search-recipe>
 
       <app-ingredients></app-ingredients>
    </div>
 </div>
 
 <div class="root-container">
-   <app-search-recipe-list [recipes]="recipes"></app-search-recipe-list>
+   <app-search-recipe-list></app-search-recipe-list>
 </div>

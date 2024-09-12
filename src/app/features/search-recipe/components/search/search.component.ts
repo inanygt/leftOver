@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { IngredientInterface } from '../../../../core/types/ingredient.interface';
 
 @Component({
    selector: 'app-search',
@@ -8,10 +9,10 @@ import { Component } from '@angular/core';
 export class SearchComponent {
    title = 'leftOver';
    ingredients: string[] = [];
-   recipes: any[] = [];
+   recipes$: any[] = [];
 
    handleRecipesChanged(recipes: any[]) {
-      this.recipes = recipes;
+      this.recipes$ = recipes;
    }
 
    handleIngredientsChanges(ingredients: any[]) {

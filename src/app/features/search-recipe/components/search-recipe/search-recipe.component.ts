@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { SpoonApiService } from '../../../../services/spoon-api.service';
 import { IngredientsService } from '../../services/ingredients.service';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { IngredientInterface } from '../../../../core/types/ingredient.interface';
 
 @Component({
@@ -12,10 +12,10 @@ import { IngredientInterface } from '../../../../core/types/ingredient.interface
 export class SearchRecipeComponent {
    ingredientInput: string;
    ingredients$: Observable<IngredientInterface[]>;
-   recipes: any[] = [];
+   // recipes$: Observable<any>;
 
 
-   @Output() recipesChanged = new EventEmitter<any[]>();
+   // @Output() recipesChanged = new EventEmitter<any[]>();
 
    constructor(
       private ingredientsService: IngredientsService,
@@ -29,21 +29,12 @@ export class SearchRecipeComponent {
       this.ingredientInput = "";
 
       this.ingredients$.subscribe(ingredients => {
-         const preparedIngredients = this.prepareForApi(ingredients.map(ingredient => ingredient.text));
+         const preparedIngredients = this.ingredientsService.prepareIngredientsForQuery(ingredients.map(ingredient => ingredient.text));
 
-         this.spoonApi.searchRecipe(preparedIngredients).subscribe(res => {
-            this.recipes = res;
-            this.recipesChanged.emit(this.recipes);
-         });
+         this.spoonApi.searchRecipe(preparedIngredients).subscribe((recipes) => {
+            this.spoonApi.recipes$.next(recipes)
+            // this.recipesChanged.emit(recipes);
+         })
       });
-   }
-
-   prepareForApi(ingredients: string[]): string {
-      // if (ingredients.length === 0) return "";
-      let preparedIngredients = ingredients[0];
-      for (let i = 1; i < ingredients.length; i++) {
-         preparedIngredients += `,+${ingredients[i]}`;
-      }
-      return preparedIngredients;
    }
 }

@@ -24,4 +24,12 @@ export class IngredientsService {
    deleteAllIngredients() {
       this.ingredients$.next([]);
    }
+
+   prepareIngredientsForQuery(ingredients: string[]): string {
+      let preparedIngredients = ingredients[0];
+      for (let i = 1; i < ingredients.length; i++) {
+         preparedIngredients += `,+${ingredients[i]}`;
+      }
+      return preparedIngredients;
+   }
 }

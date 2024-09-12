@@ -18,6 +18,5 @@ export class PreferencesModalComponent {
    }
    onSubmit() {
       console.log(this.preferencesForm.value);
-
    }
 }
