@@ -15,7 +15,13 @@
    <button routerLink="/post" routerLinkActive="selected" mat-icon-button>
       <mat-icon>add_circle</mat-icon>
    </button>
-   <button routerLink="/profile" routerLinkActive="selected" mat-icon-button>
+   <button [matMenuTriggerFor]="afterMenu" mat-icon-button>
       <mat-icon>account_circle</mat-icon>
    </button>
+
+   <mat-menu #afterMenu="matMenu" xPosition="after">
+      <button mat-menu-item routerLink="/login">Login</button>
+      <button mat-menu-item routerLink="register">Register</button>
+      <!-- <button mat-menu-item>Logout</button> -->
+   </mat-menu>
 </mat-toolbar>

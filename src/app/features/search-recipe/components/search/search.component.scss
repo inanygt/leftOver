@@ -5,7 +5,9 @@
 }
 
 .search-header {
-   margin-inline: 1rem;
+   width: calc(100% - 2rem);
+   max-width: 600px;
+   margin: auto;
    margin-top: 1rem;
 }
 

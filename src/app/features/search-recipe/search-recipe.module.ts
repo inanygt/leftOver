@@ -11,6 +11,7 @@ import { SharedModule } from "../../shared/shared.module";
 import { RouterModule, Routes } from "@angular/router";
 import { IngredientsService } from "./services/ingredients.service";
 import { PreferencesButtonComponent } from './components/preferences-button/preferences-button.component';
+import { SimilarRecipesComponent } from './components/similar-recipes/similar-recipes.component';
 
 const routes: Routes = [
    { path: '', component: SearchComponent },
@@ -26,7 +27,8 @@ const routes: Routes = [
       SearchRecipeComponent,
       SearchRecipeCardComponent,
       SearchRecipeListComponent,
-      PreferencesButtonComponent
+      PreferencesButtonComponent,
+      SimilarRecipesComponent
    ],
    imports: [
       MaterialModule,
