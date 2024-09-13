@@ -13,6 +13,7 @@ import { MatButtonToggle, MatButtonToggleModule } from '@angular/material/button
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
       MatCardModule,
       MatChipsModule,
       MatToolbarModule,
+      MatSnackBarModule
    ],
    exports: [
       MatMenuModule,
@@ -48,6 +50,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
       MatCardModule,
       MatChipsModule,
       MatToolbarModule,
+      MatSnackBarModule
    ],
 })
 

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { importProvidersFrom, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +11,10 @@ import { SharedModule } from './shared/shared.module';
 import { MaterialModule } from './shared/material.module';
 import { SearchRecipeModule } from './features/search-recipe/search-recipe.module';
 import { PostRecipeModule } from './features/post-recipe/post-recipe.module';
+import { environment } from './environment/environment';
+
+import { AngularFireModule } from "@angular/fire/compat";
+import { AngularFireAuthModule } from "@angular/fire/compat/auth";
 
 @NgModule({
    declarations: [
@@ -25,10 +29,12 @@ import { PostRecipeModule } from './features/post-recipe/post-recipe.module';
       CoreModule,
       MaterialModule,
       SearchRecipeModule,
-      PostRecipeModule
+      PostRecipeModule,
+      AngularFireModule.initializeApp(environment.firebaseConfig),
+      AngularFireAuthModule
    ],
    providers: [
-      provideAnimationsAsync()
+      provideAnimationsAsync(),
    ],
    bootstrap: [AppComponent]
 })

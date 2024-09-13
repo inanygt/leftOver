@@ -1,0 +1,23 @@
+.login-container {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 100vh;
+   // background-color: lightgoldenrodyellow;
+}
+
+.example-form {
+   min-width: 150px;
+   max-width: 500px;
+   width: 100%;
+}
+
+.example-full-width {
+   width: 100%;
+}
+
+.right-upper-corner {
+   position: fixed;
+   top: 10px;
+   right: 10px;
+}

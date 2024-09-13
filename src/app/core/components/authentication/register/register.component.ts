@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from '../service/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
    selector: 'app-register',
@@ -8,7 +10,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class RegisterComponent {
    constructor(
-      private fb: FormBuilder
+      private fb: FormBuilder,
+      private auth: AuthService,
+      private router: Router
    ) { }
 
    form = this.fb.nonNullable.group({
@@ -16,7 +20,17 @@ export class RegisterComponent {
       password: ['', Validators.required]
    })
 
+   errorMessage: string | null = null;
+
    onSubmit(): void {
-      console.log('register')
+      this.auth.register(this.form.value.email, this.form.value.email).subscribe({
+         next: () => {
+            this.router.navigate(['login']);
+         },
+         error: (error) => {
+            this.errorMessage = error.message;
+         }
+      }
+      )
    }
 }

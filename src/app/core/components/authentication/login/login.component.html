@@ -1,18 +1,59 @@
-<h1>login</h1>
+<div class="login-container">
+   <div class="login-inner-container">
+      <h1>Find your next favorite dish</h1>
 
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-   <div>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+         <mat-form-field class="example-full-width">
+            <mat-label>Email</mat-label>
+            <input
+               type="email"
+               matInput
+               formControlName="email"
+               placeholder="Ex. pat@example.com"
+            />
+            @if (emailFormControl.hasError('email') &&
+            !emailFormControl.hasError('required')) {
+            <mat-error>Please enter a valid email address</mat-error>
+            } @if (emailFormControl.hasError('required')) {
+            <mat-error>Email is <strong>required</strong></mat-error>
+            }
+         </mat-form-field>
+
+         <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input type="password" matInput formControlName="password" />
+            @if (emailFormControl.hasError('email') &&
+            !emailFormControl.hasError('required')) {
+            <mat-error>Please enter a valid email address</mat-error>
+            } @if (emailFormControl.hasError('required')) {
+            <mat-error>Email is <strong>required</strong></mat-error>
+            }
+         </mat-form-field>
+
+         <!-- <div>
       <input type="text" placeholder="email" formControlName="email" />
-   </div>
+   </div> -->
 
-   <div>
+         <!-- <div>
       <input
          type="password"
          placeholder="password"
          formControlName="password"
       />
-   </div>
-   <button type="submit">Login</button>
-</form>
+   </div> -->
+         <button type="submit">Login</button>
+      </form>
 
-<!-- <div (click)="logout()">Logout</div> -->
+      <div (click)="logout()">Logout</div>
+      <div (click)="recoverPassword()">recover password</div>
+   </div>
+</div>
+
+<button
+   class="right-upper-corner"
+   mat-icon-button
+   aria-label="Example icon button with a vertical three dot icon"
+   routerLink="/"
+>
+   <mat-icon>close</mat-icon>
+</button>

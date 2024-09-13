@@ -1,9 +1,7 @@
 <h1>Register</h1>
 
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-   <div>
-      <input type="text" placeholder="username" formControlName="username" />
-   </div>
+   <div>{{ errorMessage }}</div>
    <div>
       <input type="text" placeholder="email" formControlName="email" />
    </div>
