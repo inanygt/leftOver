@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 export class RecipesService {
    recipes$ = new BehaviorSubject<any[]>([]);
    recipeId$ = new BehaviorSubject<string>(null);
-   similarRecipes$ = new BehaviorSubject<any[]>(null);
+   similarRecipes$ = new BehaviorSubject<any[]>([]);
 
    constructor(private http: HttpClient) {
    }
