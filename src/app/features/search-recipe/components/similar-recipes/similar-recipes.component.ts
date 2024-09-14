@@ -17,6 +17,5 @@ export class SimilarRecipesComponent implements OnInit {
    }
 
    ngOnInit(): void {
-      console.log(this.recipes$)
    }
 }

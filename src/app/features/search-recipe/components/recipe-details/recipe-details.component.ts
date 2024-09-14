@@ -22,7 +22,6 @@ export class RecipeDetailsComponent implements OnInit {
 
    ngOnInit(): void {
       const recipeId = this.route.snapshot.paramMap.get('recipeId');
-      console.log(recipeId);
       this.recipeService.recipeId$.next(recipeId);
       this.recipeService.getSimilarRecipes(recipeId).subscribe((recipes) => {
          this.recipeService.similarRecipes$.next(recipes)

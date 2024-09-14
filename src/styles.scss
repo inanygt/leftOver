@@ -11,7 +11,12 @@ body {
 }
 
 .h1 {
-   padding-block: 1rem;
+   // padding-block: 1rem;
+}
+
+h1 {
+   padding-top: 2rem;
+   padding-bottom: -1rem;
 }
 
 .h5 {

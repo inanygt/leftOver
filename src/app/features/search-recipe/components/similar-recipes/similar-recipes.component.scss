@@ -1,7 +1,7 @@
 .scroll-container {
-   border: 2px solid silver;
+   // border: 2px solid silver;
    display: flex;
-   align-items: center;
+   align-items: flex-start;
    overflow: hidden;
 
    &.hide-scrollbar {
@@ -10,20 +10,9 @@
          display: none;
       }
    }
+}
 
-   &.show-scroll {
-      overflow: auto;
-   }
-
-   div {
-      white-space: nowrap;
-      background: #efefef;
-      border: 1px solid #efefef;
-      margin: 0.1rem;
-      padding: 0.2rem 0.7rem;
-      &:hover {
-         cursor: pointer;
-         border-color: #ccc;
-      }
-   }
+.example-card {
+   width: 25vw;
+   margin-right: 1rem;
 }
