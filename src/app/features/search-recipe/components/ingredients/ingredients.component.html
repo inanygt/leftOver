@@ -7,8 +7,8 @@
          class="btn ingredient-btn"
          (click)="deleteIngredient(ingredient.id)"
       >
-         {{ ingredient.text }}
-         <mat-icon>close</mat-icon>
+         {{ ingredient.text | titlecase }}
+         <!-- <mat-icon>close</mat-icon> -->
       </button>
    </ng-container>
    <button

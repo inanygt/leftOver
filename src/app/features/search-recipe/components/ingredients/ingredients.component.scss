@@ -1,11 +1,16 @@
 .ingredients-container {
-   margin-block: 0.5rem;
+   margin-bottom: 1rem;
+   margin-top: -1rem;
    display: flex;
    flex-wrap: wrap;
    gap: 0.5rem;
 }
 
+button[mat-stroked-button] {
+   font-size: 0.7rem;
+}
+
 .remove-all-btn {
    color: white;
-   background-color: green;
+   background-color: black;
 }

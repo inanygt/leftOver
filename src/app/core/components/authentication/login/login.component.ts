@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -11,17 +11,23 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class LoginComponent {
 
+   // loginDisabled: boolean;
+
+   form: FormGroup;
+
    constructor(
       private fb: FormBuilder,
       private authService: AuthService,
       private router: Router,
       private snackBar: MatSnackBar
-   ) { }
+   ) {
+      this.form = this.fb.nonNullable.group({
+         email: ['', Validators.required, Validators.email],
+         password: ['', Validators.required]
+      })
+   }
 
-   form = this.fb.nonNullable.group({
-      email: ['', Validators.required, Validators.email],
-      password: ['', Validators.required]
-   })
+
 
    get emailFormControl() {
       return this.form.get('email');

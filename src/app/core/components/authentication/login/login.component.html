@@ -19,10 +19,10 @@
             }
          </mat-form-field>
 
-         <mat-form-field>
+         <mat-form-field class="example-full-width">
             <mat-label>Password</mat-label>
             <input type="password" matInput formControlName="password" />
-            @if (emailFormControl.hasError('email') &&
+            @if (emailFormControl.hasError('password') &&
             !emailFormControl.hasError('required')) {
             <mat-error>Please enter a valid email address</mat-error>
             } @if (emailFormControl.hasError('required')) {
@@ -30,22 +30,19 @@
             }
          </mat-form-field>
 
-         <!-- <div>
-      <input type="text" placeholder="email" formControlName="email" />
-   </div> -->
-
-         <!-- <div>
-      <input
-         type="password"
-         placeholder="password"
-         formControlName="password"
-      />
-   </div> -->
-         <button type="submit">Login</button>
+         <button [disabled]="form.invalid" mat-stroked-button type="submit">
+            Login
+         </button>
       </form>
 
-      <div (click)="logout()">Logout</div>
-      <div (click)="recoverPassword()">recover password</div>
+      <!-- <div (click)="logout()">Logout</div> -->
+      <button
+         [disabled]="emailFormControl.invalid"
+         mat-stroked-button
+         (click)="recoverPassword()"
+      >
+         Recover password
+      </button>
    </div>
 </div>
 

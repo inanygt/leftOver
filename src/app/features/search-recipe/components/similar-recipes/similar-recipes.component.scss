@@ -1,7 +1,6 @@
 .scroll-container {
-   // border: 2px solid silver;
    display: flex;
-   align-items: flex-start;
+   // align-items: flex-start;
    overflow: hidden;
 
    &.hide-scrollbar {
@@ -13,6 +12,17 @@
 }
 
 .example-card {
-   width: 25vw;
+   width: 50vw;
    margin-right: 1rem;
+}
+
+mat-card-header {
+   height: 80px;
+
+   mat-card-title {
+      -webkit-line-clamp: 2;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+   }
 }
