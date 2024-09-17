@@ -25,12 +25,26 @@
       />
    </mat-form-field>
 
-   <button mat-button [matMenuTriggerFor]="menu">Diet</button>
-   <mat-menu #menu="matMenu">
-      <button mat-menu-item>All</button>
-      <button mat-menu-item>Vegetarian</button>
-      <button mat-menu-item>Vegan</button>
-      <button mat-menu-item>Paleo</button>
-      <button mat-menu-item>Ketogenic</button>
-   </mat-menu>
+   <div class="preferences-container">
+      <button mat-stroked-button [matMenuTriggerFor]="menu">
+         Diet <mat-icon iconPositionEnd>keyboard_arrow_down</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+         <button mat-menu-item (click)="selectDietType(DietType.ALL)">
+            All
+         </button>
+         <button mat-menu-item (click)="selectDietType(DietType.VEGETARIAN)">
+            Vegetarian
+         </button>
+         <button mat-menu-item (click)="selectDietType(DietType.VEGAN)">
+            Vegan
+         </button>
+         <button mat-menu-item (click)="selectDietType(DietType.PALEO)">
+            Paleo
+         </button>
+         <button mat-menu-item (click)="selectDietType(DietType.KETOGENIC)">
+            Ketogenic
+         </button>
+      </mat-menu>
+   </div>
 </section>
