@@ -18,6 +18,7 @@ export class SearchRecipeComponent {
 
    selectedDietType: DietType = DietType.ALL;
    DietType = DietType;
+   dietOutput: string = DietType.DIET;
 
    constructor(
       private ingredientsService: IngredientsService,
@@ -49,8 +50,27 @@ export class SearchRecipeComponent {
 
    selectDietType(dietType: DietType) {
       this.selectedDietType = dietType;
+      this.selectDietOutput(dietType);
       this.handleUserInput();
    }
+
+   selectDietOutput(dietType: DietType) {
+      switch (dietType) {
+         case DietType.ALL:
+            this.dietOutput = DietType.DIET;
+            break;
+         case DietType.VEGETARIAN:
+            this.dietOutput = DietType.VEGETARIAN;
+            break;
+         case DietType.VEGAN:
+            this.dietOutput = DietType.VEGAN;
+            break;
+         case DietType.PALEO:
+            this.dietOutput = DietType.PALEO;
+            break;
+         case DietType.KETOGENIC:
+            this.dietOutput = DietType.KETOGENIC;
+            break;
+      }
+   }
 }
-
-

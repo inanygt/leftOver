@@ -25,25 +25,26 @@
       />
    </mat-form-field>
 
-   <div class="preferences-container">
+   <div class="preferences-container" *ngIf="(ingredients$ | async).length">
       <button mat-stroked-button [matMenuTriggerFor]="menu">
-         Diet <mat-icon iconPositionEnd>keyboard_arrow_down</mat-icon>
+         {{ dietOutput | titlecase }}
+         <mat-icon iconPositionEnd>keyboard_arrow_down</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
          <button mat-menu-item (click)="selectDietType(DietType.ALL)">
-            All
+            {{ DietType.ALL | titlecase }}
          </button>
          <button mat-menu-item (click)="selectDietType(DietType.VEGETARIAN)">
-            Vegetarian
+            {{ DietType.VEGETARIAN | titlecase }}
          </button>
          <button mat-menu-item (click)="selectDietType(DietType.VEGAN)">
-            Vegan
+            {{ DietType.VEGAN | titlecase }}
          </button>
          <button mat-menu-item (click)="selectDietType(DietType.PALEO)">
-            Paleo
+            {{ DietType.PALEO | titlecase }}
          </button>
          <button mat-menu-item (click)="selectDietType(DietType.KETOGENIC)">
-            Ketogenic
+            {{ DietType.KETOGENIC | titlecase }}
          </button>
       </mat-menu>
    </div>
