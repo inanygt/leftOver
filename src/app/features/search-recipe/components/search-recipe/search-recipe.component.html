@@ -24,4 +24,13 @@
          [(ngModel)]="ingredientInput"
       />
    </mat-form-field>
+
+   <button mat-button [matMenuTriggerFor]="menu">Diet</button>
+   <mat-menu #menu="matMenu">
+      <button mat-menu-item>All</button>
+      <button mat-menu-item>Vegetarian</button>
+      <button mat-menu-item>Vegan</button>
+      <button mat-menu-item>Paleo</button>
+      <button mat-menu-item>Ketogenic</button>
+   </mat-menu>
 </section>

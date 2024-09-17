@@ -30,7 +30,7 @@ export class SearchRecipeComponent {
          const preparedIngredients = this.ingredientsService.prepareIngredientsForQuery(ingredients.map(ingredient => ingredient.text));
 
          this.recipesService.searchRecipe(preparedIngredients).subscribe((recipes) => {
-            this.recipesService.recipes$.next(recipes)
+            this.recipesService.recipes$.next(recipes.results)
          })
       });
    }
