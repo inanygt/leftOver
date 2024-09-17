@@ -21,10 +21,6 @@ export class IngredientsService {
       this.ingredients$.next(updatedIngredients);
    }
 
-   deleteAllIngredients() {
-      this.ingredients$.next([]);
-   }
-
    prepareIngredientsForQuery(ingredients: string[]): string {
       let preparedIngredients = ingredients[0];
       for (let i = 1; i < ingredients.length; i++) {

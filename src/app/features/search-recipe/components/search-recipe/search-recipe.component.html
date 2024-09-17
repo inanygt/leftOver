@@ -1,19 +1,27 @@
-<div class="search-recipe-container">
-   <form class="example-form">
-      <mat-form-field class="example-full-width">
-         <mat-label>Search any recipes</mat-label>
-         <input
-            autoFocus
-            matInput
-            name="ingredient"
-            maxlength="256"
-            placeholder="Enter Ingredient"
-            #ingredientRef
-            (keydown.enter)="handleUserInput()"
-            [(ngModel)]="ingredientInput"
-         />
-         <mat-icon matPrefix>search</mat-icon>
-      </mat-form-field>
-   </form>
-   <app-preferences-button></app-preferences-button>
-</div>
+<section>
+   <!-- <h4>Chips inside of a Reactive form</h4> -->
+   <mat-form-field class="example-form-field">
+      <mat-label>Recipe ingredients</mat-label>
+      <mat-chip-grid
+         #reactiveChipGrid
+         aria-label="Enter reactive form keywords"
+         [formControl]="formControl"
+      >
+         @for (ingredient of ingredients$ | async; track ingredient) {
+         <mat-chip-row (removed)="deleteIngredient(ingredient.id)">
+            {{ ingredient.text | titlecase }}
+            <button matChipRemove aria-label="'remove reactive form' + keyword">
+               <mat-icon>cancel</mat-icon>
+            </button>
+         </mat-chip-row>
+         }
+      </mat-chip-grid>
+      <input
+         autoFocus
+         placeholder="New ingredient..."
+         [matChipInputFor]="reactiveChipGrid"
+         (matChipInputTokenEnd)="handleUserInput()"
+         [(ngModel)]="ingredientInput"
+      />
+   </mat-form-field>
+</section>

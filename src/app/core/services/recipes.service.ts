@@ -14,7 +14,7 @@ export class RecipesService {
    }
 
    apiKey = 'apiKey=f7b667c5b33b40dcbb0f44cd03ab8b67';
-   apiUrl = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=f7b667c5b33b40dcbb0f44cd03ab8b67&ingredients=";
+   apiUrl = "https://api.spoonacular.com/recipes/complexSearch?apiKey=f7b667c5b33b40dcbb0f44cd03ab8b67&ingredients=";
 
    baseApi: string = "https://api.spoonacular.com/recipes/";
 

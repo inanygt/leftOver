@@ -1,5 +1,4 @@
 import { NgModule } from "@angular/core";
-import { IngredientsComponent } from "./components/ingredients/ingredients.component";
 import { PreferencesModalComponent } from "./components/preferences-modal/preferences-modal.component";
 import { RecipeDetailsComponent } from "./components/recipe-details/recipe-details.component";
 import { SearchComponent } from "./components/search/search.component";
@@ -20,7 +19,6 @@ const routes: Routes = [
 
 @NgModule({
    declarations: [
-      IngredientsComponent,
       PreferencesModalComponent,
       RecipeDetailsComponent,
       SearchComponent,
