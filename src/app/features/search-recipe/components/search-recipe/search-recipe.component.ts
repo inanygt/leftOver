@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { IngredientInterface } from '../../../../core/types/ingredient.interface';
 import { FormControl } from '@angular/forms';
 import { DietType } from '../../../../core/types/dietType.enum';
+import { MatDialog } from '@angular/material/dialog';
+import { PreferencesModalComponent } from '../preferences-modal/preferences-modal.component';
 
 @Component({
    selector: 'app-search-recipe',
@@ -16,25 +18,22 @@ export class SearchRecipeComponent {
    ingredientInput: string;
    ingredients$: Observable<IngredientInterface[]>;
 
-   selectedDietType: DietType = DietType.ALL;
-   DietType = DietType;
-   dietOutput: string = DietType.DIET;
+   TODO // add selected diet type;
+   selectedDietType: DietType;
 
    constructor(
       private ingredientsService: IngredientsService,
       private recipesService: RecipesService,
+      private dialog: MatDialog
    ) {
       this.ingredients$ = this.ingredientsService.ingredients$;
    }
 
    handleUserInput() {
-
       if (this.ingredientInput.length !== 0) {
          this.ingredientsService.addIngredient(this.ingredientInput);
       }
-
       this.ingredientInput = "";
-
       this.ingredients$.subscribe(ingredients => {
          const preparedIngredients = this.ingredientsService.prepareIngredientsForQuery(ingredients.map(ingredient => ingredient.text));
 
@@ -48,29 +47,17 @@ export class SearchRecipeComponent {
       this.ingredientsService.deleteIngredient(ingredient);
    }
 
-   selectDietType(dietType: DietType) {
-      this.selectedDietType = dietType;
-      this.selectDietOutput(dietType);
-      this.handleUserInput();
+   openDialog() {
+      const dialogRef = this.dialog.open(PreferencesModalComponent, {
+         height: '100vh',
+         width: '100vw',
+         maxHeight: '100vh',
+         maxWidth: '100vw'
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+         console.log(`Dialog result: ${result}`);
+      });
    }
 
-   selectDietOutput(dietType: DietType) {
-      switch (dietType) {
-         case DietType.ALL:
-            this.dietOutput = DietType.DIET;
-            break;
-         case DietType.VEGETARIAN:
-            this.dietOutput = DietType.VEGETARIAN;
-            break;
-         case DietType.VEGAN:
-            this.dietOutput = DietType.VEGAN;
-            break;
-         case DietType.PALEO:
-            this.dietOutput = DietType.PALEO;
-            break;
-         case DietType.KETOGENIC:
-            this.dietOutput = DietType.KETOGENIC;
-            break;
-      }
-   }
 }

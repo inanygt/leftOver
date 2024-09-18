@@ -6,46 +6,39 @@
 </div>
 <mat-dialog-content>
    <form [formGroup]="preferencesForm" (ngSubmit)="onSubmit()">
-      <h2>Meal Time</h2>
-      <mat-button-toggle-group
-         multiple="false"
-         formControlName="mealTime"
-         [hideSingleSelectionIndicator]="true"
+      <label for="intolerances">Intolerances</label>
+      <ng-select
+         appearance="outline"
+         [multiple]="true"
+         formControlName="intoleranceType"
+         [items]="intolerances"
+         bindLabel="name"
+         bindValue="id"
+         placeholder="Select intolerance(s)"
+         labelForId="intolerances"
+         [closeOnSelect]="false"
+         [searchable]="false"
       >
-         <mat-button-toggle class="mat-btn" value="under_15"
-            >Under 15 min</mat-button-toggle
-         >
-         <mat-button-toggle class="mat-btn" value="under_30"
-            >Under 30 min</mat-button-toggle
-         >
-         <mat-button-toggle class="mat-btn" value="under_60"
-            >under 60 min</mat-button-toggle
-         >
-      </mat-button-toggle-group>
+      </ng-select>
 
-      <h2>Meal Type</h2>
-      <mat-button-toggle-group
-         multiple="false"
-         formControlName="mealType"
-         [hideSingleSelectionIndicator]="true"
+      <label for="diet">Diet</label>
+      <ng-select
+         appearance="outline"
+         [multiple]="true"
+         formControlName="dietType"
+         [items]="diets"
+         bindLabel="name"
+         bindValue="id"
+         placeholder="Select Diet(s)"
+         labelForId="diet"
+         [closeOnSelect]="false"
+         [searchable]="false"
       >
-         <mat-button-toggle class="mat-btn" value="breakfast"
-            >Breakfast</mat-button-toggle
-         >
-         <mat-button-toggle class="mat-btn" value="lunch"
-            >Lunch</mat-button-toggle
-         >
-         <mat-button-toggle class="mat-btn" value="dinner"
-            >Dinner</mat-button-toggle
-         >
-         <mat-button-toggle class="mat-btn" value="dessert"
-            >Dessert</mat-button-toggle
-         >
-      </mat-button-toggle-group>
+      </ng-select>
 
       <button
          type="submit"
-         mat-button
+         mat-stroked-button
          mat-dialog-close
          color="primary"
          class="btn-close"

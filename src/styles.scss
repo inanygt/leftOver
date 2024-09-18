@@ -1,4 +1,8 @@
 @import 'bootstrap/scss/bootstrap';
+// @import '@ng-select/ng-select/themes/material.theme.css';
+@import '@ng-select/ng-select/themes/default.theme.css';
+
+@import './app/styles/colors.scss';
 
 html,
 body {
@@ -35,3 +39,5 @@ mat-stroked-button {
 button[mat-stroked-button] {
    border-radius: 30px;
 }
+
+// colors
