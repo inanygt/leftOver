@@ -3,7 +3,6 @@ import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterLinkActive, RouterOutlet } from '@angular/router';
 import { RouterModule } from '@angular/router';
-import { NgLabelTemplateDirective, NgOptionTemplateDirective, NgSelectComponent } from '@ng-select/ng-select';
 import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
@@ -14,9 +13,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
       RouterOutlet,
       RouterModule,
       CommonModule,
-      NgLabelTemplateDirective,
-      NgOptionTemplateDirective,
-      NgSelectComponent,
       NgSelectModule
    ],
    exports: [
@@ -26,9 +22,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
       RouterOutlet,
       RouterModule,
       CommonModule,
-      NgLabelTemplateDirective,
-      NgOptionTemplateDirective,
-      NgSelectComponent,
       NgSelectModule
    ]
 })
