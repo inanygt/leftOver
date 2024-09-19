@@ -18,9 +18,6 @@ export class SearchRecipeComponent {
    ingredientInput: string;
    ingredients$: Observable<IngredientInterface[]>;
 
-   TODO // add selected diet type;
-   selectedDietType: DietType;
-
    constructor(
       private ingredientsService: IngredientsService,
       private recipesService: RecipesService,
@@ -37,7 +34,7 @@ export class SearchRecipeComponent {
       this.ingredients$.subscribe(ingredients => {
          const preparedIngredients = this.ingredientsService.prepareIngredientsForQuery(ingredients.map(ingredient => ingredient.text));
 
-         this.recipesService.searchRecipe(preparedIngredients, this.selectedDietType).subscribe((recipes) => {
+         this.recipesService.searchRecipe(preparedIngredients).subscribe((recipes) => {
             this.recipesService.recipes$.next(recipes.results)
          })
       });
@@ -49,14 +46,14 @@ export class SearchRecipeComponent {
 
    openDialog() {
       const dialogRef = this.dialog.open(PreferencesModalComponent, {
-         height: '100vh',
-         width: '100vw',
-         maxHeight: '100vh',
-         maxWidth: '100vw'
+         height: "calc(100% - 30px)",
+         width: "calc(100% - 30px)",
+         maxWidth: "100%",
+         maxHeight: "100%"
       });
 
       dialogRef.afterClosed().subscribe(result => {
-         console.log(`Dialog result: ${result}`);
+         // console.log(`Dialog result: ${result}`);
       });
    }
 

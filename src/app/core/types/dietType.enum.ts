@@ -1,8 +1,7 @@
 export enum DietType {
-   DIET = 'diet',
-   ALL = "all",
-   VEGETARIAN = 'vegetarian',
-   VEGAN = 'vegan',
-   PALEO = 'paleo',
-   KETOGENIC = 'ketogenic'
+   ALL = "All",
+   VEGETARIAN = 'Vegetarian',
+   VEGAN = 'Vegan',
+   PALEO = 'Paleo',
+   KETOGENIC = 'Ketogenic'
 }

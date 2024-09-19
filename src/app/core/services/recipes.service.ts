@@ -32,7 +32,7 @@ export class RecipesService {
       return this.http.get(`${this.baseApi}${id}/information?apiKey=f7b667c5b33b40dcbb0f44cd03ab8b67`)
    }
 
-   searchRecipe(ingredients: any, dietType: DietType): Observable<any> {
+   searchRecipe(ingredients: any, dietType: DietType = DietType.ALL): Observable<any> {
       let url = this.apiUrl + ingredients;
 
       if (dietType !== DietType.ALL) {

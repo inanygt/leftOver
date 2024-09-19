@@ -28,3 +28,17 @@ button[mat-button-toggle] {
 .btn-close {
    display: block;
 }
+
+.form-preference {
+   margin-bottom: 1rem;
+}
+
+:host {
+   display: flex;
+   flex-direction: column;
+   height: 100%;
+}
+mat-dialog-content {
+   max-height: unset !important;
+   flex: 1 0 0;
+}

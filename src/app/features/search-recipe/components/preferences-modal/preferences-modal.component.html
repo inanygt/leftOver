@@ -4,37 +4,59 @@
       <mat-icon>close</mat-icon>
    </button>
 </div>
+<mat-divider></mat-divider>
 <mat-dialog-content>
    <form [formGroup]="preferencesForm" (ngSubmit)="onSubmit()">
-      <label for="intolerances">Intolerances</label>
-      <ng-select
-         appearance="outline"
-         [multiple]="true"
-         formControlName="intoleranceType"
-         [items]="intolerances"
-         bindLabel="name"
-         bindValue="id"
-         placeholder="Select intolerance(s)"
-         labelForId="intolerances"
-         [closeOnSelect]="false"
-         [searchable]="false"
-      >
-      </ng-select>
+      <div class="form-preference">
+         <label for="mealTime">Time</label>
+         <ng-select
+            appearance="outline"
+            [multiple]="false"
+            formControlName="mealTime"
+            [items]="mealTimes"
+            bindLabel="name"
+            bindValue="name"
+            placeholder="Select Time"
+            labelForId="mealTime"
+            [closeOnSelect]="true"
+            [searchable]="false"
+         >
+         </ng-select>
+      </div>
 
-      <label for="diet">Diet</label>
-      <ng-select
-         appearance="outline"
-         [multiple]="true"
-         formControlName="dietType"
-         [items]="diets"
-         bindLabel="name"
-         bindValue="id"
-         placeholder="Select Diet(s)"
-         labelForId="diet"
-         [closeOnSelect]="false"
-         [searchable]="false"
-      >
-      </ng-select>
+      <div class="form-preference">
+         <label for="diet">Diet</label>
+         <ng-select
+            appearance="outline"
+            [multiple]="false"
+            formControlName="dietType"
+            [items]="diets"
+            bindLabel="name"
+            bindValue="name"
+            placeholder="Select Diet"
+            labelForId="diet"
+            [closeOnSelect]="true"
+            [searchable]="false"
+         >
+         </ng-select>
+      </div>
+
+      <div class="form-preference">
+         <label for="intolerances">Intolerances</label>
+         <ng-select
+            appearance="outline"
+            [multiple]="true"
+            formControlName="intoleranceType"
+            [items]="intolerances"
+            bindLabel="name"
+            bindValue="name"
+            placeholder="Select intolerance(s)"
+            labelForId="intolerances"
+            [closeOnSelect]="false"
+            [searchable]="false"
+         >
+         </ng-select>
+      </div>
 
       <button
          type="submit"

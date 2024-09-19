@@ -1,8 +1,9 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { DietType } from '../../../../core/types/dietType.enum';
 import { IntoleranceType } from '../../../../core/types/intoleranceType.enum';
+import { RecipesService } from '../../../../core/services/recipes.service';
+import { IngredientsService } from '../../services/ingredients.service';
 
 @Component({
    selector: 'app-preferences-modal',
@@ -12,31 +13,45 @@ import { IntoleranceType } from '../../../../core/types/intoleranceType.enum';
 export class PreferencesModalComponent {
 
    preferencesForm: FormGroup
-   constructor() {
+
+   constructor(
+      private recipesService: RecipesService,
+      private ingredientsService: IngredientsService
+   ) {
       this.preferencesForm = new FormGroup({
-         dietType: new FormControl([]),
-         intoleranceType: new FormControl([])
+         mealTime: new FormControl(),
+         dietType: new FormControl(),
+         intoleranceType: new FormControl([]),
       })
    }
 
-   selectedDiet: number;
-
    diets = [
-      { id: 1, name: DietType.ALL },
-      { id: 2, name: DietType.VEGETARIAN },
-      { id: 3, name: DietType.VEGAN },
-      { id: 4, name: DietType.KETOGENIC },
-      { id: 5, name: DietType.PALEO },
+      { name: DietType.ALL },
+      { name: DietType.VEGETARIAN },
+      { name: DietType.VEGAN },
+      { name: DietType.KETOGENIC },
+      { name: DietType.PALEO },
    ];
 
    intolerances = [
-      { id: 1, name: IntoleranceType.DAIRY },
-      { id: 2, name: IntoleranceType.EGG },
-      { id: 3, name: IntoleranceType.GLUTEN },
-      { id: 4, name: IntoleranceType.GRAIN },
+      { name: IntoleranceType.DAIRY },
+      { name: IntoleranceType.EGG },
+      { name: IntoleranceType.GLUTEN },
+      { name: IntoleranceType.GRAIN },
    ];
 
+   mealTimes = [
+      { name: 'Under 15 min' },
+      { name: 'Under 30 min' },
+      { name: 'Under 60 min' }
+   ]
+
    onSubmit() {
-      console.log(this.preferencesForm);
+      const dietType = this.preferencesForm.value.dietType
+      const ingredients = this.ingredientsService.preparedIngredients$.getValue();
+
+      this.recipesService.searchRecipe(ingredients, dietType).subscribe((recipes) => {
+         this.recipesService.recipes$.next(recipes.results);
+      });
    }
 }
