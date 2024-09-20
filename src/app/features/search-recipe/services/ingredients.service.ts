@@ -6,7 +6,6 @@ import { generateUniqueId } from "../../../core/helpers/utils";
 @Injectable()
 export class IngredientsService {
    ingredients$ = new BehaviorSubject<IngredientInterface[]>([]);
-   preparedIngredients$ = new BehaviorSubject('');
 
    addIngredient(ingredient: string) {
       const newIngredient: IngredientInterface = {
@@ -20,14 +19,5 @@ export class IngredientsService {
    deleteIngredient(ingredientId: string) {
       const updatedIngredients = this.ingredients$.getValue().filter(ingredient => ingredient.id !== ingredientId);
       this.ingredients$.next(updatedIngredients);
-   }
-
-   prepareIngredientsForQuery(ingredients: string[]): string {
-      let preparedIngredients = ingredients[0];
-      for (let i = 1; i < ingredients.length; i++) {
-         preparedIngredients += `,+${ingredients[i]}`;
-      }
-      this.preparedIngredients$.next(preparedIngredients);
-      return preparedIngredients;
    }
 }

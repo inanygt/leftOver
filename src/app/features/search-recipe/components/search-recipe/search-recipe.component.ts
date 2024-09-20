@@ -31,13 +31,13 @@ export class SearchRecipeComponent {
          this.ingredientsService.addIngredient(this.ingredientInput);
       }
       this.ingredientInput = "";
-      this.ingredients$.subscribe(ingredients => {
-         const preparedIngredients = this.ingredientsService.prepareIngredientsForQuery(ingredients.map(ingredient => ingredient.text));
+      this.ingredients$.subscribe((ingredients) => {
+         const preparedIngredients = ingredients.map(ingredient => ingredient.text).join(',');
 
          this.recipesService.searchRecipe(preparedIngredients).subscribe((recipes) => {
             this.recipesService.recipes$.next(recipes.results)
          })
-      });
+      })
    }
 
    deleteIngredient(ingredient: string) {

@@ -1,7 +1,8 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { DietType } from '../types/dietType.enum';
+import { IntoleranceType } from '../types/intoleranceType.enum';
 
 @Injectable({
    providedIn: 'root'
@@ -32,11 +33,15 @@ export class RecipesService {
       return this.http.get(`${this.baseApi}${id}/information?apiKey=f7b667c5b33b40dcbb0f44cd03ab8b67`)
    }
 
-   searchRecipe(ingredients: any, dietType: DietType = DietType.ALL): Observable<any> {
+   searchRecipe(ingredients: any, dietType: DietType = DietType.ALL, intolerances: IntoleranceType = null): Observable<any> {
       let url = this.apiUrl + ingredients;
 
+      if (intolerances !== null) {
+         url += `&intolerances=${intolerances}`;
+      }
+
       if (dietType !== DietType.ALL) {
-         url += `&diet=${dietType}`
+         url += `&diet=${dietType}`;
       }
 
       return this.http.get(url)

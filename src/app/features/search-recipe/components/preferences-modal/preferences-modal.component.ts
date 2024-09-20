@@ -19,7 +19,7 @@ export class PreferencesModalComponent {
       private ingredientsService: IngredientsService
    ) {
       this.preferencesForm = new FormGroup({
-         mealTime: new FormControl(),
+         // mealTime: new FormControl(),
          dietType: new FormControl(),
          intoleranceType: new FormControl([]),
       })
@@ -40,17 +40,23 @@ export class PreferencesModalComponent {
       { name: IntoleranceType.GRAIN },
    ];
 
-   mealTimes = [
-      { name: 'Under 15 min' },
-      { name: 'Under 30 min' },
-      { name: 'Under 60 min' }
-   ]
+   // mealTimes = [
+   //    { name: 'Under 15 min' },
+   //    { name: 'Under 30 min' },
+   //    { name: 'Under 60 min' }
+   // ]
 
    onSubmit() {
+      // const mealTime = this.preferencesForm.value.mealTime;
       const dietType = this.preferencesForm.value.dietType
-      const ingredients = this.ingredientsService.preparedIngredients$.getValue();
+      const intolerances = this.preferencesForm.value.intoleranceType;
+      const ingredients = this.ingredientsService.ingredients$.getValue().join(',');
 
-      this.recipesService.searchRecipe(ingredients, dietType).subscribe((recipes) => {
+      console.log(intolerances);
+      console.log(intolerances.join(','));
+      console.log(ingredients);
+
+      this.recipesService.searchRecipe(ingredients, dietType, intolerances.join(',')).subscribe((recipes) => {
          this.recipesService.recipes$.next(recipes.results);
       });
    }
