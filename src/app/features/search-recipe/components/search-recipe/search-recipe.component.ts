@@ -6,6 +6,7 @@ import { IngredientInterface } from '../../../../core/types/ingredient.interface
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { PreferencesModalComponent } from '../preferences-modal/preferences-modal.component';
+import { SortRecipeType } from '../../../../core/types/sortRecipeType.enum';
 
 @Component({
    selector: 'app-search-recipe',
@@ -16,6 +17,14 @@ export class SearchRecipeComponent {
    readonly formControl = new FormControl(['ingredients']);
    ingredientInput: string;
    ingredients$: Observable<IngredientInterface[]>;
+
+   sortRecipeType = SortRecipeType;
+   selectedSortOption: SortRecipeType;
+
+   sortOptionChange(SortOption: SortRecipeType) {
+      this.recipesService.selectedSortOption$.next(SortOption);
+      this.handleUserInput();
+   }
 
    constructor(
       private ingredientsService: IngredientsService,
@@ -30,13 +39,11 @@ export class SearchRecipeComponent {
          this.ingredientsService.addIngredient(this.ingredientInput);
       }
       this.ingredientInput = "";
-      this.ingredients$.subscribe((ingredients) => {
-         const preparedIngredients = ingredients.map(ingredient => ingredient.text).join(',');
 
-         this.recipesService.searchRecipe(preparedIngredients).subscribe((recipes) => {
-            this.recipesService.recipes$.next(recipes.results)
-         })
+      this.recipesService.searchRecipe().subscribe((recipes) => {
+         this.recipesService.recipes$.next(recipes.results)
       })
+
    }
 
    deleteIngredient(ingredient: string) {

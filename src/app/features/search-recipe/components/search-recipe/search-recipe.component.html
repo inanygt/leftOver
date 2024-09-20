@@ -25,11 +25,28 @@
       />
    </mat-form-field>
 
-   <div class="preferences-container" *ngIf="(ingredients$ | async).length">
+   <!-- <div class="preferences-container" *ngIf="(ingredients$ | async).length"> -->
+   <div class="preferences-container">
       <button [matMenuTriggerFor]="menu" class="btn-unset primary">Sort</button>
       <mat-menu #menu="matMenu">
-         <button mat-menu-item>Item 1</button>
-         <button mat-menu-item>Item 2</button>
+         <button
+            mat-menu-item
+            (click)="sortOptionChange(sortRecipeType.POPULARITY)"
+         >
+            {{ sortRecipeType.POPULARITY }}
+         </button>
+         <button
+            mat-menu-item
+            (click)="sortOptionChange(sortRecipeType.CALORIES)"
+         >
+            {{ sortRecipeType.CALORIES }}
+         </button>
+         <button
+            mat-menu-item
+            (click)="sortOptionChange(sortRecipeType.HEALTHINESS)"
+         >
+            {{ sortRecipeType.HEALTHINESS }}
+         </button>
       </mat-menu>
 
       <button (click)="openDialog()" class="btn-unset primary">

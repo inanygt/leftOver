@@ -1,6 +1,6 @@
 export enum IntoleranceType {
-   DAIRY = 'Dairy',
-   EGG = "Egg",
-   GLUTEN = 'Gluten',
-   GRAIN = 'Grain',
+   DAIRY = 'dairy',
+   EGG = "egg",
+   GLUTEN = 'gluten',
+   GRAIN = 'grain',
 }

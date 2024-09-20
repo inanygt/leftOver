@@ -50,11 +50,7 @@ export class PreferencesModalComponent {
    ];
 
    onSubmit() {
-      const dietType = this.preferencesForm.value.dietType
-      const intolerances = this.preferencesForm.value.intoleranceType.join(',');
-      const ingredients = this.ingredientsService.ingredients$.getValue().join(',');
-
-      this.recipesService.searchRecipe(ingredients, dietType, intolerances).subscribe((recipes) => {
+      this.recipesService.searchRecipe().subscribe((recipes) => {
          this.recipesService.recipes$.next(recipes.results);
       });
    }

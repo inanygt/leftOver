@@ -1,22 +1,15 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { DietType } from '../types/dietType.enum';
 import { IntoleranceType } from '../types/intoleranceType.enum';
+import { SortRecipeType } from '../types/sortRecipeType.enum';
+import { IngredientsService } from '../../features/search-recipe/services/ingredients.service';
 
 @Injectable({
    providedIn: 'root'
 })
 export class RecipesService {
-   recipes$ = new BehaviorSubject<any[]>([]);
-   recipeId$ = new BehaviorSubject<string>(null);
-   similarRecipes$ = new BehaviorSubject<any[]>([]);
-
-   selectedDiet$ = new BehaviorSubject<DietType | null>(DietType.ALL);
-   selectedIntolerances$ = new BehaviorSubject<IntoleranceType[] | []>([]);
-
-   constructor(private http: HttpClient) {
-   }
 
    apiUrl = "https://api.spoonacular.com/recipes/complexSearch?apiKey=f7b667c5b33b40dcbb0f44cd03ab8b67&addRecipeInformation=true&fillIngredients=true&includeIngredients=";
    apiKey = 'apiKey=f7b667c5b33b40dcbb0f44cd03ab8b67';
@@ -32,19 +25,47 @@ export class RecipesService {
 
    baseApi: string = "https://api.spoonacular.com/recipes/";
 
+
+
+   recipes$ = new BehaviorSubject<any[]>([]);
+   recipeId$ = new BehaviorSubject<string>(null);
+   similarRecipes$ = new BehaviorSubject<any[]>([]);
+
+   selectedDiet$ = new BehaviorSubject<DietType | null>(DietType.ALL);
+   selectedIntolerances$ = new BehaviorSubject<IntoleranceType[] | []>([]);
+
+   selectedSortOption$ = new BehaviorSubject<SortRecipeType | null>(null);
+
+   constructor(
+      private http: HttpClient,
+      private ingredientsService: IngredientsService
+   ) {
+   }
+
    getRecipeById(id: string): Observable<any> {
       return this.http.get(`${this.baseApi}${id}/information?apiKey=f7b667c5b33b40dcbb0f44cd03ab8b67`)
    }
 
-   searchRecipe(ingredients: any, dietType: DietType = DietType.ALL, intolerances: IntoleranceType = null): Observable<any> {
-      let url = this.apiUrl + ingredients;
+   searchRecipe(): Observable<any> {
 
-      if (intolerances !== null) {
+      const ingredients = this.ingredientsService.ingredients$.getValue();
+      const preparedIngredients = ingredients.map((ingredient) => ingredient.text).join(',')
+      const dietType = this.selectedDiet$.getValue();
+      const intolerances = this.selectedIntolerances$.getValue().join(',');
+      const sortOption = this.selectedSortOption$.getValue();
+
+      let url = this.apiUrl + preparedIngredients;
+
+      if (intolerances.length > 0) {
          url += `&intolerances=${intolerances}`;
       }
 
       if (dietType !== DietType.ALL) {
          url += `&diet=${dietType}`;
+      }
+
+      if (sortOption !== null) {
+         url += `&sort=${sortOption}`
       }
 
       return this.http.get(url)
