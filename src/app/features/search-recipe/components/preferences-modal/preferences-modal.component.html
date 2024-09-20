@@ -7,23 +7,6 @@
 <mat-divider></mat-divider>
 <mat-dialog-content>
    <form [formGroup]="preferencesForm" (ngSubmit)="onSubmit()">
-      <!-- <div class="form-preference">
-         <label for="mealTime">Time</label>
-         <ng-select
-            appearance="outline"
-            [multiple]="false"
-            formControlName="mealTime"
-            [items]="mealTimes"
-            bindLabel="name"
-            bindValue="name"
-            placeholder="Select Time"
-            labelForId="mealTime"
-            [closeOnSelect]="true"
-            [searchable]="false"
-         >
-         </ng-select>
-      </div> -->
-
       <div class="form-preference">
          <label for="diet">Diet</label>
          <ng-select
@@ -37,7 +20,9 @@
             labelForId="diet"
             [closeOnSelect]="true"
             [searchable]="false"
+            (change)="onDietChange($event)"
          >
+            >
          </ng-select>
       </div>
 
@@ -54,6 +39,7 @@
             labelForId="intolerances"
             [closeOnSelect]="false"
             [searchable]="false"
+            (change)="onIntolerancesChange($event)"
          >
          </ng-select>
       </div>

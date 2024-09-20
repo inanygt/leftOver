@@ -12,6 +12,9 @@ export class RecipesService {
    recipeId$ = new BehaviorSubject<string>(null);
    similarRecipes$ = new BehaviorSubject<any[]>([]);
 
+   selectedDiet$ = new BehaviorSubject<DietType | null>(DietType.ALL);
+   selectedIntolerances$ = new BehaviorSubject<IntoleranceType[] | []>([]);
+
    constructor(private http: HttpClient) {
    }
 

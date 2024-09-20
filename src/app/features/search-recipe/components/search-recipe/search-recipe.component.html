@@ -25,7 +25,7 @@
       />
    </mat-form-field>
 
-   <div class="preferences-container">
+   <div class="preferences-container" *ngIf="(ingredients$ | async).length">
       <button [matMenuTriggerFor]="menu" class="btn-unset primary">Sort</button>
       <mat-menu #menu="matMenu">
          <button mat-menu-item>Item 1</button>

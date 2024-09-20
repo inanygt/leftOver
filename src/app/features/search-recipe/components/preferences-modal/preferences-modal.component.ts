@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { DietType } from '../../../../core/types/dietType.enum';
 import { IntoleranceType } from '../../../../core/types/intoleranceType.enum';
@@ -14,14 +14,23 @@ export class PreferencesModalComponent {
 
    preferencesForm: FormGroup
 
+   onDietChange($event) {
+      this.recipesService.selectedDiet$.next($event.name);
+   }
+
+   onIntolerancesChange($event) {
+      const intolerances = $event.map((intolerance) => intolerance.name);
+      this.recipesService.selectedIntolerances$.next(intolerances);
+
+   }
+
    constructor(
       private recipesService: RecipesService,
       private ingredientsService: IngredientsService
    ) {
       this.preferencesForm = new FormGroup({
-         // mealTime: new FormControl(),
-         dietType: new FormControl(),
-         intoleranceType: new FormControl([]),
+         dietType: new FormControl(this.recipesService.selectedDiet$.getValue()),
+         intoleranceType: new FormControl(this.recipesService.selectedIntolerances$.getValue()),
       })
    }
 
@@ -40,23 +49,12 @@ export class PreferencesModalComponent {
       { name: IntoleranceType.GRAIN },
    ];
 
-   // mealTimes = [
-   //    { name: 'Under 15 min' },
-   //    { name: 'Under 30 min' },
-   //    { name: 'Under 60 min' }
-   // ]
-
    onSubmit() {
-      // const mealTime = this.preferencesForm.value.mealTime;
       const dietType = this.preferencesForm.value.dietType
-      const intolerances = this.preferencesForm.value.intoleranceType;
+      const intolerances = this.preferencesForm.value.intoleranceType.join(',');
       const ingredients = this.ingredientsService.ingredients$.getValue().join(',');
 
-      console.log(intolerances);
-      console.log(intolerances.join(','));
-      console.log(ingredients);
-
-      this.recipesService.searchRecipe(ingredients, dietType, intolerances.join(',')).subscribe((recipes) => {
+      this.recipesService.searchRecipe(ingredients, dietType, intolerances).subscribe((recipes) => {
          this.recipesService.recipes$.next(recipes.results);
       });
    }

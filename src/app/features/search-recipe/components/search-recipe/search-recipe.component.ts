@@ -1,10 +1,9 @@
 import { Component, inject, signal } from '@angular/core';
 import { RecipesService } from '../../../../core/services/recipes.service';
 import { IngredientsService } from '../../services/ingredients.service';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { IngredientInterface } from '../../../../core/types/ingredient.interface';
 import { FormControl } from '@angular/forms';
-import { DietType } from '../../../../core/types/dietType.enum';
 import { MatDialog } from '@angular/material/dialog';
 import { PreferencesModalComponent } from '../preferences-modal/preferences-modal.component';
 
