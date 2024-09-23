@@ -8,6 +8,24 @@
 <mat-dialog-content>
    <form [formGroup]="preferencesForm" (ngSubmit)="onSubmit()">
       <div class="form-preference">
+         <label for="recipeTime">Time</label>
+         <ng-select
+            appearance="outline"
+            [multiple]="false"
+            formControlName="recipeTime"
+            [items]="recipeTimes"
+            bindLabel="name"
+            bindValue="name"
+            placeholder="Select a time"
+            labelForId="recipeTime"
+            [closeOnSelect]="true"
+            [searchable]="false"
+            (change)="onRecipeTimeChange($event)"
+         >
+            >
+         </ng-select>
+      </div>
+      <div class="form-preference">
          <label for="diet">Diet</label>
          <ng-select
             appearance="outline"

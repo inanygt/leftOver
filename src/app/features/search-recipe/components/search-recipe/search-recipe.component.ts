@@ -40,10 +40,9 @@ export class SearchRecipeComponent {
       }
       this.ingredientInput = "";
 
-      this.recipesService.searchRecipe().subscribe((recipes) => {
-         this.recipesService.recipes$.next(recipes.results)
+      this.recipesService.searchRecipe().subscribe((response) => {
+         this.recipesService.recipes$.next(response.results)
       })
-
    }
 
    deleteIngredient(ingredient: string) {

@@ -4,6 +4,7 @@ import { DietType } from '../../../../core/types/dietType.enum';
 import { IntoleranceType } from '../../../../core/types/intoleranceType.enum';
 import { RecipesService } from '../../../../core/services/recipes.service';
 import { IngredientsService } from '../../services/ingredients.service';
+import { RecipeTimesType } from '../../../../core/types/recipeTimes.enum';
 
 @Component({
    selector: 'app-preferences-modal',
@@ -14,6 +15,16 @@ export class PreferencesModalComponent {
 
    preferencesForm: FormGroup
 
+   constructor(
+      private recipesService: RecipesService,
+   ) {
+      this.preferencesForm = new FormGroup({
+         dietType: new FormControl(this.recipesService.selectedDiet$.getValue()),
+         intoleranceType: new FormControl(this.recipesService.selectedIntolerances$.getValue()),
+         recipeTime: new FormControl(),
+      })
+   }
+
    onDietChange($event) {
       this.recipesService.selectedDiet$.next($event.name);
    }
@@ -21,17 +32,10 @@ export class PreferencesModalComponent {
    onIntolerancesChange($event) {
       const intolerances = $event.map((intolerance) => intolerance.name);
       this.recipesService.selectedIntolerances$.next(intolerances);
-
    }
 
-   constructor(
-      private recipesService: RecipesService,
-      private ingredientsService: IngredientsService
-   ) {
-      this.preferencesForm = new FormGroup({
-         dietType: new FormControl(this.recipesService.selectedDiet$.getValue()),
-         intoleranceType: new FormControl(this.recipesService.selectedIntolerances$.getValue()),
-      })
+   onRecipeTimeChange($event) {
+      this.recipesService.selectedTimeOption$.next($event.name);
    }
 
    diets = [
@@ -47,6 +51,12 @@ export class PreferencesModalComponent {
       { name: IntoleranceType.EGG },
       { name: IntoleranceType.GLUTEN },
       { name: IntoleranceType.GRAIN },
+   ];
+
+   recipeTimes = [
+      { name: RecipeTimesType.UNDER_15_MIN },
+      { name: RecipeTimesType.UNDER_30_MIN },
+      { name: RecipeTimesType.UNDER_60_MIN },
    ];
 
    onSubmit() {
