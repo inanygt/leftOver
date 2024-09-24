@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, EMPTY, map, Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { DietType } from '../types/dietType.enum';
-import { IntoleranceType } from '../types/intoleranceType.enum';
-import { SortRecipeType } from '../types/sortRecipeType.enum';
+import { DietType } from '../types/diet-type.enum';
+import { IntoleranceType } from '../types/intolerance.enum';
+import { SortRecipeType } from '../types/sort-recipe.enum';
 import { IngredientsService } from '../../features/search-recipe/services/ingredients.service';
 import { environment } from '../../environment/environment';
 import { Recipe, RecipeResponse } from '../types/recipe.interface';
-import { RecipeTimesType } from '../types/recipeTimes.enum';
+import { RecipeTimesType } from '../types/recipe-times.enum';
+import { RecipeFilter } from '../models/recipe-filter.model';
 
 @Injectable({
    providedIn: 'root'
@@ -15,7 +16,7 @@ import { RecipeTimesType } from '../types/recipeTimes.enum';
 export class RecipesService {
 
    complexSearch = "https://api.spoonacular.com/recipes/complexSearch";
-   baseApi: string = "https://api.spoonacular.com/recipes/";
+   detailedRecipeUrl: string = "https://api.spoonacular.com/recipes/";
 
    recipes$ = new BehaviorSubject<any[]>([]);
    recipeId$ = new BehaviorSubject<string>(null);
@@ -32,7 +33,7 @@ export class RecipesService {
    ) {
    }
 
-   searchRecipe(): Observable<RecipeResponse> {
+   searchRecipe(RecipeFilter: RecipeFilter): Observable<RecipeResponse> {
 
       const ingredients = this.ingredientsService.ingredients$.getValue();
       const preparedIngredients = ingredients.map((ingredient) => ingredient.text).join(',')
@@ -41,23 +42,7 @@ export class RecipesService {
       const sortOption = this.selectedSortOption$.getValue();
       const recipeTime = this.selectedTimeOption$.getValue();
 
-      let timeInMinutes: number;
-
-      switch (recipeTime) {
-         case RecipeTimesType.UNDER_15_MIN:
-            timeInMinutes = 15;
-            break;
-         case RecipeTimesType.UNDER_30_MIN:
-            timeInMinutes = 30;
-            break;
-         case RecipeTimesType.UNDER_60_MIN:
-            timeInMinutes = 60;
-            break;
-         default:
-            timeInMinutes = 0;
-      }
-
-      console.log(recipeTime)
+      let timeInMinutes: number = this.getMaxReadyTime(recipeTime);
 
       let params = new HttpParams()
          .set('apiKey', environment.apiKey)
@@ -72,7 +57,6 @@ export class RecipesService {
 
       if (dietType !== DietType.ALL) {
          params = params.set('diet', dietType)
-
       }
 
       if (sortOption !== null) {
@@ -87,7 +71,19 @@ export class RecipesService {
    }
 
    getRecipeById(id: string): Observable<any> {
-      return this.http.get(`${this.baseApi}${id}/information?apiKey=f7b667c5b33b40dcbb0f44cd03ab8b67`)
+      let params = new HttpParams().set('apiKey', environment.apiKey)
+      let url = `${this.detailedRecipeUrl}${id}/information`;
+
+      return this.http.get(url, { params })
+   }
+
+   private getMaxReadyTime(recipeTime: RecipeTimesType | null) {
+      switch (recipeTime) {
+         case RecipeTimesType.UNDER_15_MIN: return 15;
+         case RecipeTimesType.UNDER_30_MIN: return 30;
+         case RecipeTimesType.UNDER_60_MIN: return 60;
+         default: return null;
+      }
    }
 
    getSimilarRecipes(id: string): Observable<any> {

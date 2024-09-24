@@ -6,7 +6,7 @@ import { IngredientInterface } from '../../../../core/types/ingredient.interface
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { PreferencesModalComponent } from '../preferences-modal/preferences-modal.component';
-import { SortRecipeType } from '../../../../core/types/sortRecipeType.enum';
+import { SortRecipeType } from '../../../../core/types/sort-recipe.enum';
 
 @Component({
    selector: 'app-search-recipe',

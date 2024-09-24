@@ -1,10 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { DietType } from '../../../../core/types/dietType.enum';
-import { IntoleranceType } from '../../../../core/types/intoleranceType.enum';
+import { DietType } from '../../../../core/types/diet-type.enum';
+import { IntoleranceType } from '../../../../core/types/intolerance.enum';
 import { RecipesService } from '../../../../core/services/recipes.service';
-import { IngredientsService } from '../../services/ingredients.service';
-import { RecipeTimesType } from '../../../../core/types/recipeTimes.enum';
+import { RecipeTimesType } from '../../../../core/types/recipe-times.enum';
 
 @Component({
    selector: 'app-preferences-modal',
@@ -21,7 +20,7 @@ export class PreferencesModalComponent {
       this.preferencesForm = new FormGroup({
          dietType: new FormControl(this.recipesService.selectedDiet$.getValue()),
          intoleranceType: new FormControl(this.recipesService.selectedIntolerances$.getValue()),
-         recipeTime: new FormControl(),
+         recipeTime: new FormControl(this.recipesService.selectedTimeOption$.getValue()),
       })
    }
 
