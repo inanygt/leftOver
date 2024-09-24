@@ -18,7 +18,9 @@ export class RecipesService {
    complexSearch = "https://api.spoonacular.com/recipes/complexSearch";
    detailedRecipeUrl: string = "https://api.spoonacular.com/recipes/";
 
-   recipes$ = new BehaviorSubject<any[]>([]);
+   totalResultsRecipes$ = new BehaviorSubject<number>(null);
+
+   recipes$ = new BehaviorSubject<RecipeResponse | null>(null);
    recipeId$ = new BehaviorSubject<string>(null);
    similarRecipes$ = new BehaviorSubject<any[]>([]);
 
@@ -33,7 +35,7 @@ export class RecipesService {
    ) {
    }
 
-   searchRecipe(RecipeFilter: RecipeFilter): Observable<RecipeResponse> {
+   searchRecipe(): Observable<RecipeResponse> {
 
       const ingredients = this.ingredientsService.ingredients$.getValue();
       const preparedIngredients = ingredients.map((ingredient) => ingredient.text).join(',')

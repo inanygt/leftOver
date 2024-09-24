@@ -60,7 +60,7 @@ export class PreferencesModalComponent {
 
    onSubmit() {
       this.recipesService.searchRecipe().subscribe((recipes) => {
-         this.recipesService.recipes$.next(recipes.results);
+         this.recipesService.recipes$.next(recipes);
       });
    }
 }

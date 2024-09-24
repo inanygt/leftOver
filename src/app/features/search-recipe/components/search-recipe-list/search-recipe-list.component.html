@@ -1,5 +1,12 @@
-<div class="recipe-list-container" *ngIf="recipes.length !== 0">
-   <ng-container *ngFor="let recipe of recipes">
+<div class="total-results-container">
+   <div *ngIf="totalResult$ | async as totalResult; else waiting">
+      Total results: {{ totalResult }}
+   </div>
+
+   <ng-template #waiting>Add some ingredients! </ng-template>
+</div>
+<div class="recipe-list-container">
+   <ng-container *ngFor="let recipe of recipes$ | async">
       <app-search-recipe-card [recipe]="recipe"></app-search-recipe-card>
    </ng-container>
 </div>

@@ -41,7 +41,8 @@ export class SearchRecipeComponent {
       this.ingredientInput = "";
 
       this.recipesService.searchRecipe().subscribe((response) => {
-         this.recipesService.recipes$.next(response.results)
+         this.recipesService.totalResultsRecipes$.next(response.totalResults);
+         this.recipesService.recipes$.next(response)
       })
    }
 
