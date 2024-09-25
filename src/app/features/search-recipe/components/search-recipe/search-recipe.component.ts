@@ -13,7 +13,8 @@ import { FormControl } from '@angular/forms';
 export class SearchRecipeComponent {
    readonly formControl = new FormControl(['ingredients']);
 
-   ingredientInput: string;
+   ingredientInput = new FormControl();
+
    ingredients$: Observable<IngredientInterface[]>;
    suggestedIngredients$: Observable<any[]>;
 
@@ -30,10 +31,10 @@ export class SearchRecipeComponent {
    }
 
    handleUserInput() {
-      if (this.ingredientInput.length !== 0) {
-         this.ingredientsService.addIngredient(this.ingredientInput);
+      if (this.ingredientInput.value !== 0) {
+         this.ingredientsService.addIngredient(this.ingredientInput.value);
       }
-      this.ingredientInput = "";
+      this.ingredientInput.setValue('');
 
       this.recipesService.searchRecipe().subscribe((response) => {
          this.recipesService.totalResultsRecipes$.next(response.totalResults);
@@ -45,10 +46,8 @@ export class SearchRecipeComponent {
       this.ingredientsService.deleteIngredient(ingredient);
    }
 
-   selectSuggestedIngredient(ingredient = { name: '', image: '' }) {
-      console.log(ingredient.name)
-      this.ingredientInput = ingredient.name
+   selectSuggestedIngredient(ingredient: any) {
+      this.ingredientInput.setValue(ingredient.name);
       this.handleUserInput();
-
    }
 }

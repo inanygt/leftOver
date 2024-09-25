@@ -16,18 +16,19 @@
          }
       </mat-chip-grid>
       <input
+         type="text"
          name="currentIngredient"
          placeholder="New ingredient..."
-         [(ngModel)]="ingredientInput"
+         [formControl]="ingredientInput"
          autoFocus
          [matChipInputFor]="ingredientChipGrid"
          (matChipInputTokenEnd)="handleUserInput()"
-         (ngModelChange)="onChangeIngredient($event)"
+         (input)="onChangeIngredient(ingredientInput.value)"
       />
    </mat-form-field>
 </section>
 
-<ng-container *ngIf="ingredientInput?.length">
+<ng-container *ngIf="ingredientInput.value?.length !== 0">
    <div *ngFor="let ingredient of suggestedIngredients$ | async">
       <div (click)="selectSuggestedIngredient(ingredient)">
          {{ ingredient.name }}
