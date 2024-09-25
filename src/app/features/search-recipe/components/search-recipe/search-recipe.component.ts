@@ -1,12 +1,9 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { RecipesService } from '../../../../core/services/recipes.service';
 import { IngredientsService } from '../../services/ingredients.service';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { IngredientInterface } from '../../../../core/types/ingredient.interface';
 import { FormControl } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
-import { PreferencesModalComponent } from '../preferences-modal/preferences-modal.component';
-import { SortRecipeType } from '../../../../core/types/sort-recipe.enum';
 
 @Component({
    selector: 'app-search-recipe',
@@ -15,23 +12,21 @@ import { SortRecipeType } from '../../../../core/types/sort-recipe.enum';
 })
 export class SearchRecipeComponent {
    readonly formControl = new FormControl(['ingredients']);
+
    ingredientInput: string;
    ingredients$: Observable<IngredientInterface[]>;
-
-   sortRecipeType = SortRecipeType;
-   selectedSortOption: SortRecipeType;
-
-   sortOptionChange(SortOption: SortRecipeType) {
-      this.recipesService.selectedSortOption$.next(SortOption);
-      this.handleUserInput();
-   }
+   suggestedIngredients$: Observable<any[]>;
 
    constructor(
       private ingredientsService: IngredientsService,
       private recipesService: RecipesService,
-      private dialog: MatDialog
    ) {
       this.ingredients$ = this.ingredientsService.ingredients$;
+   }
+
+   onChangeIngredient(event: string) {
+      console.log(event);
+      this.suggestedIngredients$ = this.ingredientsService.autocompleteIngredient(event)
    }
 
    handleUserInput() {
@@ -50,17 +45,10 @@ export class SearchRecipeComponent {
       this.ingredientsService.deleteIngredient(ingredient);
    }
 
-   openDialog() {
-      const dialogRef = this.dialog.open(PreferencesModalComponent, {
-         height: "calc(100% - 30px)",
-         width: "calc(100% - 30px)",
-         maxWidth: "100%",
-         maxHeight: "100%"
-      });
+   selectSuggestedIngredient(ingredient = { name: '', image: '' }) {
+      console.log(ingredient.name)
+      this.ingredientInput = ingredient.name
+      this.handleUserInput();
 
-      dialogRef.afterClosed().subscribe(result => {
-         // console.log(`Dialog result: ${result}`);
-      });
    }
-
 }

@@ -1,55 +1,36 @@
 <section>
-   <!-- <h4>Chips inside of a Reactive form</h4> -->
-   <mat-form-field class="example-form-field">
+   <mat-form-field class="example-chip-list">
       <mat-label>Recipe ingredients</mat-label>
       <mat-chip-grid
-         #reactiveChipGrid
-         aria-label="Enter reactive form keywords"
+         #ingredientChipGrid
+         aria-label="Ingredient selection"
          [formControl]="formControl"
       >
          @for (ingredient of ingredients$ | async; track ingredient) {
          <mat-chip-row (removed)="deleteIngredient(ingredient.id)">
             {{ ingredient.text | titlecase }}
-            <button matChipRemove aria-label="'remove reactive form' + keyword">
+            <button matChipRemove [attr.aria-label]="'remove ' + ingredient">
                <mat-icon>cancel</mat-icon>
             </button>
          </mat-chip-row>
          }
       </mat-chip-grid>
       <input
-         autoFocus
+         name="currentIngredient"
          placeholder="New ingredient..."
-         [matChipInputFor]="reactiveChipGrid"
-         (matChipInputTokenEnd)="handleUserInput()"
          [(ngModel)]="ingredientInput"
+         autoFocus
+         [matChipInputFor]="ingredientChipGrid"
+         (matChipInputTokenEnd)="handleUserInput()"
+         (ngModelChange)="onChangeIngredient($event)"
       />
    </mat-form-field>
-
-   <div class="preferences-container" *ngIf="(ingredients$ | async).length">
-      <button [matMenuTriggerFor]="menu" class="btn-unset primary">Sort</button>
-      <mat-menu #menu="matMenu">
-         <button
-            mat-menu-item
-            (click)="sortOptionChange(sortRecipeType.POPULARITY)"
-         >
-            {{ sortRecipeType.POPULARITY }}
-         </button>
-         <button
-            mat-menu-item
-            (click)="sortOptionChange(sortRecipeType.CALORIES)"
-         >
-            {{ sortRecipeType.CALORIES }}
-         </button>
-         <button
-            mat-menu-item
-            (click)="sortOptionChange(sortRecipeType.HEALTHINESS)"
-         >
-            {{ sortRecipeType.HEALTHINESS }}
-         </button>
-      </mat-menu>
-
-      <button (click)="openDialog()" class="btn-unset primary">
-         Change Preferences
-      </button>
-   </div>
 </section>
+
+<ng-container *ngIf="ingredientInput?.length">
+   <div *ngFor="let ingredient of suggestedIngredients$ | async">
+      <div (click)="selectSuggestedIngredient(ingredient)">
+         {{ ingredient.name }}
+      </div>
+   </div>
+</ng-container>

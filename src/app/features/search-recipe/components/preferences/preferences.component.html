@@ -1,0 +1,24 @@
+<div class="preferences-container" *ngIf="(ingredients$ | async).length">
+   <button [matMenuTriggerFor]="menu" class="btn-unset primary">Sort</button>
+   <mat-menu #menu="matMenu">
+      <button
+         mat-menu-item
+         (click)="sortOptionChange(sortRecipeType.POPULARITY)"
+      >
+         {{ sortRecipeType.POPULARITY }}
+      </button>
+      <button mat-menu-item (click)="sortOptionChange(sortRecipeType.CALORIES)">
+         {{ sortRecipeType.CALORIES }}
+      </button>
+      <button
+         mat-menu-item
+         (click)="sortOptionChange(sortRecipeType.HEALTHINESS)"
+      >
+         {{ sortRecipeType.HEALTHINESS }}
+      </button>
+   </mat-menu>
+
+   <button (click)="openDialog()" class="btn-unset primary">
+      Change Preferences
+   </button>
+</div>
