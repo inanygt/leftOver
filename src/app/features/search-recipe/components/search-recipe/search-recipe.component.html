@@ -1,11 +1,7 @@
 <section>
    <mat-form-field class="example-chip-list">
       <mat-label>Recipe ingredients</mat-label>
-      <mat-chip-grid
-         #ingredientChipGrid
-         aria-label="Ingredient selection"
-         [formControl]="formControl"
-      >
+      <mat-chip-grid #ingredientChipGrid aria-label="Ingredient selection">
          @for (ingredient of ingredients$ | async; track ingredient) {
          <mat-chip-row (removed)="deleteIngredient(ingredient.id)">
             {{ ingredient.text | titlecase }}
@@ -19,19 +15,20 @@
          type="text"
          name="currentIngredient"
          placeholder="New ingredient..."
-         [formControl]="ingredientInput"
+         #ingredientInput
+         [formControl]="ingredientControl"
          autoFocus
          [matChipInputFor]="ingredientChipGrid"
-         (matChipInputTokenEnd)="handleUserInput()"
-         (input)="onChangeIngredient(ingredientInput.value)"
+         (matChipInputTokenEnd)="add($event)"
+         [matAutocomplete]="auto"
       />
    </mat-form-field>
+   <mat-autocomplete
+      #auto="matAutocomplete"
+      (optionSelected)="selectSuggestedIngredient($event)"
+   >
+      @for (ingredient of suggestedIngredients$ | async; track ingredient) {
+      <mat-option [value]="ingredient">{{ ingredient.name }}</mat-option>
+      }
+   </mat-autocomplete>
 </section>
-
-<ng-container *ngIf="ingredientInput.value?.length !== 0">
-   <div *ngFor="let ingredient of suggestedIngredients$ | async">
-      <div (click)="selectSuggestedIngredient(ingredient)">
-         {{ ingredient.name }}
-      </div>
-   </div>
-</ng-container>
