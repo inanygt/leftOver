@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/compat/auth";
-
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 import { catchError, from, map, Observable, throwError } from "rxjs";
 
@@ -13,12 +13,7 @@ export class AuthService {
 
    constructor(public auth: AngularFireAuth) {
       this.user$ = this.auth.authState;
-   }
 
-   isLoggedIn(): Observable<boolean> {
-      return this.auth.authState.pipe(
-         map(user => !!user)
-      )
    }
 
    getCurrentUser(): any {
@@ -40,6 +35,24 @@ export class AuthService {
 
    logout(): Observable<void> {
       return from(this.auth.signOut());
+   }
+
+   // onAuthStateChanged(): void {
+   //    this.auth.onAuthStateChanged(user => {
+   //       if (user) {
+   //          // User is logged in
+   //          console.log('User logged in:', user);
+   //       } else {
+   //          // User is logged out
+   //          console.log('User not logged in');
+   //       }
+   //    });
+   // }
+
+   isLoggedIn(): Observable<boolean> {
+      return this.auth.authState.pipe(
+         map(user => !!user)
+      );
    }
 
    recoverPassword(email: string): Observable<void> {

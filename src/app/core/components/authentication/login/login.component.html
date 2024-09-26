@@ -33,16 +33,15 @@
          <button [disabled]="form.invalid" mat-stroked-button type="submit">
             Login
          </button>
-      </form>
 
-      <!-- <div (click)="logout()">Logout</div> -->
-      <button
-         [disabled]="emailFormControl.invalid"
-         mat-stroked-button
-         (click)="recoverPassword()"
-      >
-         Recover password
-      </button>
+         <button
+            [disabled]="emailFormControl.invalid"
+            mat-stroked-button
+            (click)="recoverPassword()"
+         >
+            Recover password
+         </button>
+      </form>
    </div>
 </div>
 

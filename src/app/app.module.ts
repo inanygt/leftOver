@@ -15,10 +15,12 @@ import { environment } from './environment/environment';
 
 import { AngularFireModule } from "@angular/fire/compat";
 import { AngularFireAuthModule } from "@angular/fire/compat/auth";
+import { FavoriteComponent } from './features/favorite-recipe/components/favorite/favorite.component';
 
 @NgModule({
    declarations: [
       AppComponent,
+      FavoriteComponent,
    ],
    imports: [
       BrowserModule,

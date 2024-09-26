@@ -27,8 +27,6 @@ export class LoginComponent {
       })
    }
 
-
-
    get emailFormControl() {
       return this.form.get('email');
    }

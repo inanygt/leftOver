@@ -20,8 +20,13 @@
    </button>
 
    <mat-menu #afterMenu="matMenu" xPosition="after">
-      <button mat-menu-item routerLink="/login">Login</button>
-      <button mat-menu-item routerLink="register">Register</button>
-      <!-- <button mat-menu-item>Logout</button> -->
+      <ng-container *ngIf="isLoggedIn | async; else loggedOut">
+         <button mat-menu-item (click)="logout()">Logout</button>
+      </ng-container>
+
+      <ng-template #loggedOut>
+         <button mat-menu-item routerLink="/login">Login</button>
+         <button mat-menu-item routerLink="register">Register</button>
+      </ng-template>
    </mat-menu>
 </mat-toolbar>

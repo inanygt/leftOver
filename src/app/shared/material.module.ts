@@ -14,6 +14,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+
 
 
 @NgModule({
@@ -33,7 +35,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
       MatCardModule,
       MatChipsModule,
       MatToolbarModule,
-      MatSnackBarModule
+      MatSnackBarModule,
+      MatAutocompleteModule,
+
    ],
    exports: [
       MatMenuModule,
@@ -50,7 +54,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
       MatCardModule,
       MatChipsModule,
       MatToolbarModule,
-      MatSnackBarModule
+      MatSnackBarModule,
+      MatAutocompleteModule,
    ],
 })
 

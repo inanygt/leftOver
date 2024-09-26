@@ -8,18 +8,17 @@ import { filter } from 'rxjs';
    templateUrl: './app.component.html',
    styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
    title = 'leftOver';
    ingredients: string[] = [];
    recipes: any[] = [];
-
-   isLoggedIn: boolean = false;
 
    showHeader: boolean = true;
 
    constructor(
       private auth: AuthService,
-      private router: Router
+      private router: Router,
+      private authService: AuthService
    ) {
       this.router.events
          .pipe(filter(event => event instanceof NavigationEnd))
@@ -27,12 +26,5 @@ export class AppComponent implements OnInit {
             // Hide header for the login route
             this.showHeader = event.url !== '/login';  // Adjust '/login' if your login route has a different path
          });
-   }
-
-   ngOnInit(): void {
-      this.auth.isLoggedIn().subscribe(loggedIn => {
-         this.isLoggedIn = loggedIn;
-      })
-
    }
 }
