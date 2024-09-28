@@ -11,3 +11,9 @@ export interface RecipeResponse {
    number: number,
    totalResults: number;
 }
+
+export interface firestoreRecipe {
+   name: string,
+   id: string,
+   UID: string,
+}

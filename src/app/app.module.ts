@@ -16,6 +16,8 @@ import { environment } from './environment/environment';
 import { AngularFireModule } from "@angular/fire/compat";
 import { AngularFireAuthModule } from "@angular/fire/compat/auth";
 import { FavoriteComponent } from './features/favorite-recipe/components/favorite/favorite.component';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 
 @NgModule({
    declarations: [
@@ -33,7 +35,10 @@ import { FavoriteComponent } from './features/favorite-recipe/components/favorit
       SearchRecipeModule,
       PostRecipeModule,
       AngularFireModule.initializeApp(environment.firebaseConfig),
-      AngularFireAuthModule
+      AngularFireAuthModule,
+      AngularFirestoreModule,
+      AngularFireStorageModule
+
    ],
    providers: [
       provideAnimationsAsync(),

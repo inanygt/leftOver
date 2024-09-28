@@ -4,6 +4,10 @@
    appearance="outlined"
 >
    <img mat-card-image src="{{ recipe.image }}" alt="Photo of a Shiba Inu" />
+   <mat-icon class="icon-favorite" (click)="saveRecipe(recipe.id, recipe.title)"
+      >favorite</mat-icon
+   >
+
    <mat-card-header>
       <mat-card-title class="mat-card-title">{{ recipe.title }}</mat-card-title>
       <mat-card-subtitle
@@ -19,8 +23,4 @@
          </div>
       </mat-chip-set>
    </mat-card-footer>
-   <!-- <mat-card-actions>
-      <button mat-button>LIKE</button>
-      <button mat-button>SHARE</button>
-   </mat-card-actions> -->
 </mat-card>
