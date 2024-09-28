@@ -53,6 +53,9 @@ export class SearchRecipeComponent implements OnInit {
          chipInput: null
       };
 
+      this.ingredientControl.setValue('');
+      this.ingredientInput.nativeElement.value = '';
+
       this.add(matChipInputEvent);
    }
 

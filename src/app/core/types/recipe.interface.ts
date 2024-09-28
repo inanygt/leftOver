@@ -16,4 +16,5 @@ export interface firestoreRecipe {
    name: string,
    id: string,
    UID: string,
+   image: string
 }

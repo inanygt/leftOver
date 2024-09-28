@@ -18,15 +18,6 @@ export class FavoriteComponent implements OnInit {
       public fireStore: FirebaseStoreService
    ) { }
 
-   testSave() {
-      const testRecipe = {
-         name: 'test',
-         id: '123',
-         UID: 'p02EJ9e95VMRwwkFNuHMXNI2lMS2'
-      }
-      this.fireStore.saveRecipe(testRecipe)
-   }
-
    ngOnInit(): void {
       this.authService.user$.subscribe(user => {
          this.fireStore.getRecipesByUid(user.id)

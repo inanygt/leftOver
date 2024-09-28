@@ -40,4 +40,8 @@ button[mat-stroked-button] {
    border-radius: 30px;
 }
 
-// colors
+.root-container {
+   max-width: 600px;
+   width: calc(100% - 2rem);
+   margin: 2rem auto;
+}

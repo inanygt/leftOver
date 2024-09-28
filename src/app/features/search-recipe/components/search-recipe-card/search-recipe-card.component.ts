@@ -25,17 +25,16 @@ export class SearchRecipeCardComponent {
       this.isLoggedIn = this.authService.isLoggedIn();
    }
 
-   saveRecipe(id: string, title: string) {
-      // event.stopPropagation();
-
+   saveRecipe(id: string, title: string, image: string) {
       this.authService.isLoggedIn().subscribe({
          next: (isLoggedIn: boolean) => {
             if (isLoggedIn) {
                this.authService.user$.subscribe(user => {
                   const newRecipe: firestoreRecipe = {
-                     id: id,
+                     id: id.toString(),
                      name: title,
-                     UID: user.uid
+                     UID: user.uid,
+                     image: image
                   }
                   this.snackbar.showMessage('Recipe saved!', '🍎');
                   this.firestore.saveRecipe(newRecipe)
