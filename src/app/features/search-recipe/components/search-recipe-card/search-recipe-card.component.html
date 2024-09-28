@@ -4,7 +4,10 @@
    appearance="outlined"
 >
    <img mat-card-image src="{{ recipe.image }}" alt="Photo of a Shiba Inu" />
-   <mat-icon class="icon-favorite" (click)="saveRecipe(recipe.id, recipe.title)"
+   <mat-icon
+      class="icon-favorite"
+      click-stop-propagation
+      (click)="saveRecipe(recipe.id, recipe.title)"
       >favorite</mat-icon
    >
 

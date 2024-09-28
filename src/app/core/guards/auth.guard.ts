@@ -15,7 +15,7 @@ export const CanActive = () => {
          if (isLoggedIn) {
             return true;
          } else {
-            snackbarService.showMessage('You are not logged in', '🍽️', 3000)
+            snackbarService.showMessage('You are not logged in', '🍽️')
             return false;
          }
       })

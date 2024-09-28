@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { firestoreRecipe } from '../../../../core/types/recipe.interface';
 import { AuthService } from '../../../../core/components/authentication/service/auth.service';
 import { FirebaseStoreService } from '../../../../core/components/authentication/service/firebase-store.service';
+import { Observable } from 'rxjs';
+import { SnackBarService } from '../../../../core/components/authentication/service/snackbar.service';
 
 @Component({
    selector: 'app-search-recipe-card',
@@ -11,31 +13,42 @@ import { FirebaseStoreService } from '../../../../core/components/authentication
 })
 export class SearchRecipeCardComponent {
    @Input() recipe: any;
+   isLoggedIn: Observable<boolean>;
 
    constructor(
       private router: Router,
       private authService: AuthService,
-      private firestore: FirebaseStoreService
-   ) { }
+      private firestore: FirebaseStoreService,
+      private snackbar: SnackBarService
+
+   ) {
+      this.isLoggedIn = this.authService.isLoggedIn();
+   }
 
    saveRecipe(id: string, title: string) {
-      event.stopPropagation();
+      // event.stopPropagation();
 
+      this.authService.isLoggedIn().subscribe({
+         next: (isLoggedIn: boolean) => {
+            if (isLoggedIn) {
+               this.authService.user$.subscribe(user => {
+                  const newRecipe: firestoreRecipe = {
+                     id: id,
+                     name: title,
+                     UID: user.uid
+                  }
+                  this.snackbar.showMessage('Recipe saved!', '🍎');
+                  this.firestore.saveRecipe(newRecipe)
 
-      this.authService.user$.subscribe(user => {
-         console.log(user);
-         const newRecipe: firestoreRecipe = {
-            id: id,
-            name: title,
-            UID: user.uid
+               })
+            } else {
+               this.snackbar.showMessage('you are not logged in');
+               this.router.navigate(['/login']);
+            }
+         },
+         error: (err) => {
+            console.log(err)
          }
-         console.log(newRecipe)
-
-         this.firestore.saveRecipe(newRecipe)
-
       })
-
-
-
    }
 }
