@@ -29,14 +29,12 @@ export class FavoriteComponent implements OnInit {
 
    ngOnInit(): void {
       this.authService.user$.subscribe(user => {
-         console.log(user.uid);
          this.fireStore.getRecipesByUid(user.id)
             .subscribe(
                (recipes) => {
                   recipes.filter(recipe => {
                      recipe.UID = user.id
                      this.favoriteRecipes = recipes;
-                     console.log(recipes)
                   })
                }
             )

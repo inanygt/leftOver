@@ -29,10 +29,8 @@ export class SearchRecipeComponent implements OnInit {
 
    add(event: MatChipInputEvent) {
       const value = event.value
-      console.log(value)
       if (value) {
          this.ingredientsService.addIngredient(value);
-
       }
       this.ingredientControl.setValue('');
       this.ingredientInput.nativeElement.value = '';

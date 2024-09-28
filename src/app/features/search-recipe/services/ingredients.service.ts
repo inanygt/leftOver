@@ -24,7 +24,6 @@ export class IngredientsService {
    }
 
    addIngredient(ingredient: string) {
-      console.log('added ingredient')
       const newIngredient: IngredientInterface = {
          id: generateUniqueId(),
          text: ingredient,
