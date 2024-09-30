@@ -18,8 +18,6 @@ export class RecipesService {
    complexSearch = "https://api.spoonacular.com/recipes/complexSearch";
    detailedRecipeUrl: string = "https://api.spoonacular.com/recipes/";
 
-   totalResultsRecipes$ = new BehaviorSubject<number>(null);
-
    recipes$ = new BehaviorSubject<RecipeResponse | null>(null);
    recipeId$ = new BehaviorSubject<string>(null);
    similarRecipes$ = new BehaviorSubject<any[]>([]);
@@ -63,9 +61,9 @@ export class RecipesService {
 
       let params = new HttpParams()
          .set('apiKey', environment.apiKey)
-         .set('addRecipeInformation', 'true')
+         // .set('addRecipeInformation', 'true')
          .set('fillIngredients', 'true')
-         .set('addRecipeInstructions', 'true')
+         // .set('addRecipeInstructions', 'true')
          .set('includeIngredients', preparedIngredients)
 
       if (intolerances.length > 0) {
@@ -76,11 +74,11 @@ export class RecipesService {
          params = params.set('diet', dietType)
       }
 
-      if (sortOption !== null) {
+      if (sortOption) {
          params = params.set('sortOption', sortOption)
       }
 
-      if (recipeTime !== null) {
+      if (recipeTime) {
          params = params.set('maxReadyTime', timeInMinutes)
       }
 

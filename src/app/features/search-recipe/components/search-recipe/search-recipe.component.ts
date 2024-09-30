@@ -62,7 +62,6 @@ export class SearchRecipeComponent implements OnInit {
 
    private searchRecipe(): void {
       this.recipesService.searchRecipe().subscribe((response) => {
-         this.recipesService.totalResultsRecipes$.next(response.totalResults);
          this.recipesService.recipes$.next(response)
       })
    }
