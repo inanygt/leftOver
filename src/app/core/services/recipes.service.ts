@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, EMPTY, map, Observable } from 'rxjs';
+import { BehaviorSubject, EMPTY, map, Observable, of } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { DietType } from '../types/diet-type.enum';
 import { IntoleranceType } from '../types/intolerance.enum';
@@ -39,6 +39,21 @@ export class RecipesService {
 
       const ingredients = this.ingredientsService.ingredients$.getValue();
       const preparedIngredients = ingredients.map((ingredient) => ingredient.text).join(',')
+
+      console.log('ingredients:', ingredients)
+      console.log('preparedIngredients:', preparedIngredients)
+
+      if (ingredients.length == 0) {
+         return of(
+            {
+               results: [],
+               offset: 0,
+               number: 0,
+               totalResults: 0
+            }
+         )
+      }
+
       const dietType = this.selectedDiet$.getValue();
       const intolerances = this.selectedIntolerances$.getValue().join(',');
       const sortOption = this.selectedSortOption$.getValue();

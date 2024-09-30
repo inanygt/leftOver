@@ -1,5 +1,10 @@
 <mat-toolbar>
-   <button routerLink="/search" routerLinkActive="selected" mat-button>
+   <button
+      (click)="reload()"
+      routerLink="/search"
+      routerLinkActive="selected"
+      mat-button
+   >
       <span>Leftovers</span>
    </button>
    <span class="example-spacer"></span>

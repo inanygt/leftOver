@@ -32,8 +32,9 @@ export class IngredientsService {
       this.ingredients$.next(updatedIngredients);
    }
 
-   deleteIngredient(ingredientId: string) {
-      const updatedIngredients = this.ingredients$.getValue().filter(ingredient => ingredient.id !== ingredientId);
+   deleteIngredient(id: string) {
+      const updatedIngredients = this.ingredients$.getValue().filter(ingredient => ingredient.id !== id);
+      console.log('delete:', updatedIngredients);
       this.ingredients$.next(updatedIngredients);
    }
 }

@@ -23,4 +23,8 @@ export class HeaderComponent {
       this.snackbar.showMessage('You are logged out', '😞')
       this.authService.logout();
    }
+
+   reload() {
+      window.location.reload();
+   }
 }

@@ -38,8 +38,9 @@ export class SearchRecipeComponent implements OnInit {
       this.searchRecipe();
    }
 
-   deleteIngredient(ingredient: string) {
-      this.ingredientsService.deleteIngredient(ingredient);
+   deleteIngredient(id: string) {
+      this.ingredientsService.deleteIngredient(id);
+      this.searchRecipe();
    }
 
    selectSuggestedIngredient(event: MatAutocompleteSelectedEvent) {
