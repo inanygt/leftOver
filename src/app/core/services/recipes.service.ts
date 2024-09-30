@@ -38,9 +38,6 @@ export class RecipesService {
       const ingredients = this.ingredientsService.ingredients$.getValue();
       const preparedIngredients = ingredients.map((ingredient) => ingredient.text).join(',')
 
-      console.log('ingredients:', ingredients)
-      console.log('preparedIngredients:', preparedIngredients)
-
       if (ingredients.length == 0) {
          return of(
             {
@@ -55,6 +52,7 @@ export class RecipesService {
       const dietType = this.selectedDiet$.getValue();
       const intolerances = this.selectedIntolerances$.getValue().join(',');
       const sortOption = this.selectedSortOption$.getValue();
+      console.log('sortOption', sortOption)
       const recipeTime = this.selectedTimeOption$.getValue();
 
       let timeInMinutes: number = this.getMaxReadyTime(recipeTime);
@@ -75,7 +73,8 @@ export class RecipesService {
       }
 
       if (sortOption) {
-         params = params.set('sortOption', sortOption)
+         console.log('params:', sortOption)
+         params = params.set('sort', sortOption)
       }
 
       if (recipeTime) {

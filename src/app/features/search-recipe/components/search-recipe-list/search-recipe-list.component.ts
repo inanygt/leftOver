@@ -17,11 +17,7 @@ export class SearchRecipeListComponent {
       private recipesService: RecipesService
    ) {
       this.recipesResponse$ = this.recipesService.recipes$;
-
-      this.recipes$ = this.recipesResponse$.pipe(
-         map((response: RecipeResponse) => response?.results)
-      );
-
+      this.recipes$ = this.recipesResponse$.pipe(map(response => response?.results));
       this.totalResult$ = this.recipes$.pipe(map(response => response?.length))
    }
 }

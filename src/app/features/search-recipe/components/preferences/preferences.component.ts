@@ -28,6 +28,10 @@ export class PreferencesComponent {
 
    sortOptionChange(SortOption: SortRecipeType) {
       this.recipesService.selectedSortOption$.next(SortOption);
+      console.log('sortOptionChange:', SortOption)
+      this.recipesService.searchRecipe().subscribe((recipes) => {
+         this.recipesService.recipes$.next(recipes);
+      });
    }
 
    openDialog() {

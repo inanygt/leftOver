@@ -7,9 +7,9 @@ import { environment } from "../../../environment/environment";
 
 @Injectable()
 export class IngredientsService {
-   ingredients$ = new BehaviorSubject<IngredientInterface[]>([]);
-
    autoIngredientUrl = "https://api.spoonacular.com/food/ingredients/autocomplete"
+
+   ingredients$ = new BehaviorSubject<IngredientInterface[]>([]);
 
    constructor(
       private http: HttpClient
@@ -34,7 +34,6 @@ export class IngredientsService {
 
    deleteIngredient(id: string) {
       const updatedIngredients = this.ingredients$.getValue().filter(ingredient => ingredient.id !== id);
-      console.log('delete:', updatedIngredients);
       this.ingredients$.next(updatedIngredients);
    }
 }
