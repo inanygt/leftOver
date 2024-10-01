@@ -14,13 +14,13 @@
 
    <mat-card-header>
       <mat-card-title class="mat-card-title">{{ recipe.title }}</mat-card-title>
+   </mat-card-header>
+   <mat-card-content> </mat-card-content>
+   <mat-card-footer class="recipe-card-footer">
       <mat-card-subtitle
          >Missing ingredients:
          {{ recipe.missedIngredientCount }}</mat-card-subtitle
       >
-   </mat-card-header>
-   <mat-card-content> </mat-card-content>
-   <mat-card-footer class="recipe-card-footer">
       <mat-chip-set aria-label="Chihuahua traits">
          <div *ngFor="let missedIngredient of recipe.missedIngredients">
             <mat-chip> {{ missedIngredient.name }} </mat-chip>

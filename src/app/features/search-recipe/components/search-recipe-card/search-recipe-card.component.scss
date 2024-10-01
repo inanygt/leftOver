@@ -8,7 +8,7 @@
 }
 
 .recipe-card-footer {
-   padding: 16px;
+   padding: 4px 16px 16px 16px;
 }
 
 .recipe-header-image {
@@ -25,10 +25,16 @@
    color: #2e8b57;
 }
 
+[mat-card-title] {
+   display: flex;
+   justify-content: space-between;
+}
+
 .mat-card-title {
-   font-family: "Playfair Display", serif;
+   font-family: 'Playfair Display', serif;
    font-optical-sizing: auto;
    font-weight: 800;
    font-style: normal;
    font-size: 1.4rem;
+   padding-bottom: 0.8rem;
 }

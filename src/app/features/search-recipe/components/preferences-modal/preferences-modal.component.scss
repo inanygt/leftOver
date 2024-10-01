@@ -1,8 +1,6 @@
 .head-container {
    display: flex;
    justify-content: space-between;
-   align-items: center;
-      background-color: #2e8b57 !important;
 }
 
 button[mat-icon-button] {
@@ -18,14 +16,6 @@ button[mat-button-toggle] {
    font-size: 12px;
 }
 
-.mat-button-toggle-button {
-   background: green;
-}
-
-.active-toggle {
-   color: green;
-}
-
 .btn-close {
    display: block;
 }
@@ -39,6 +29,7 @@ button[mat-button-toggle] {
    flex-direction: column;
    height: 100%;
 }
+
 mat-dialog-content {
    max-height: unset !important;
    flex: 1 0 0;
