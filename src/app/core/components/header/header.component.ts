@@ -3,6 +3,9 @@ import { AuthService } from "../authentication/service/auth.service";
 import { Observable } from "rxjs";
 import { SnackBarService } from "../authentication/service/snackbar.service";
 import { LocalStorageService } from "../../services/local-storage";
+import { Router } from "@angular/router";
+import { IngredientsService } from "../../../features/search-recipe/services/ingredients.service";
+import { RecipesService } from "../../services/recipes.service";
 
 @Component({
   selector: "app-header",
@@ -15,7 +18,10 @@ export class HeaderComponent {
   constructor(
     public authService: AuthService,
     private snackbar: SnackBarService,
-    private localStorageService: LocalStorageService
+    private router: Router,
+    private localStorageService: LocalStorageService,
+    private ingredientsService: IngredientsService,
+    private recipesService: RecipesService
   ) {
     this.isLoggedIn = this.authService.isLoggedIn();
   }
@@ -26,7 +32,9 @@ export class HeaderComponent {
   }
 
   reload() {
-    window.location.reload();
+    this.ingredientsService.ingredients$.next([]);
+    this.recipesService.recipes$.next(null);
     this.localStorageService.clearRecipes();
+    this.router.navigate(["/"]);
   }
 }

@@ -60,7 +60,11 @@ export class RecipesService {
       .map((ingredient) => ingredient.text)
       .join(",");
 
+    console.log("searchrecipe ingredients:", ingredients);
+    console.log(ingredients.length);
+
     if (ingredients.length == 0) {
+      console.log("should return empty");
       return of({
         results: [],
         offset: 0,
@@ -93,7 +97,6 @@ export class RecipesService {
     }
 
     if (sortOption) {
-      console.log("params:", sortOption);
       params = params.set("sort", sortOption);
     }
 
