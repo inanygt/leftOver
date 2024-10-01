@@ -1,129 +1,142 @@
-import { Injectable } from '@angular/core'
+import { Injectable } from "@angular/core";
 import {
-   BehaviorSubject,
-   combineLatest,
-   EMPTY,
-   map,
-   Observable,
-   of,
-} from 'rxjs'
-import { HttpClient, HttpParams } from '@angular/common/http'
-import { DietType } from '../types/diet-type.enum'
-import { IntoleranceType } from '../types/intolerance.enum'
-import { SortRecipeType } from '../types/sort-recipe.enum'
-import { IngredientsService } from '../../features/search-recipe/services/ingredients.service'
-import { environment } from '../../environment/environment'
-import { Recipe, RecipeResponse } from '../types/recipe.interface'
-import { RecipeTimesType } from '../types/recipe-times.enum'
-import { RecipeFilter } from '../models/recipe-filter.model'
-import { IngredientInterface } from '../types/ingredient.interface'
+  BehaviorSubject,
+  combineLatest,
+  EMPTY,
+  map,
+  Observable,
+  of,
+  tap,
+} from "rxjs";
+import { HttpClient, HttpParams } from "@angular/common/http";
+import { DietType } from "../types/diet-type.enum";
+import { IntoleranceType } from "../types/intolerance.enum";
+import { SortRecipeType } from "../types/sort-recipe.enum";
+import { IngredientsService } from "../../features/search-recipe/services/ingredients.service";
+import { environment } from "../../environment/environment";
+import { Recipe, RecipeResponse } from "../types/recipe.interface";
+import { RecipeTimesType } from "../types/recipe-times.enum";
+import { RecipeFilter } from "../models/recipe-filter.model";
+import { IngredientInterface } from "../types/ingredient.interface";
+import { LocalStorageService } from "./local-storage";
 
 @Injectable({
-   providedIn: 'root',
+  providedIn: "root",
 })
 export class RecipesService {
-   complexSearch = 'https://api.spoonacular.com/recipes/complexSearch'
-   detailedRecipeUrl: string = 'https://api.spoonacular.com/recipes/'
+  complexSearch = "https://api.spoonacular.com/recipes/complexSearch";
+  detailedRecipeUrl: string = "https://api.spoonacular.com/recipes/";
 
-   recipes$ = new BehaviorSubject<RecipeResponse | null>(null)
-   recipeId$ = new BehaviorSubject<string>(null)
-   similarRecipes$ = new BehaviorSubject<any[]>([])
+  recipes$ = new BehaviorSubject<RecipeResponse | null>(null);
+  recipeId$ = new BehaviorSubject<string>(null);
+  similarRecipes$ = new BehaviorSubject<any[]>([]);
 
-   // ingredients$: Observable<IngredientInterface[]>
-   ingredients$ = this.ingredientsService.ingredients$
+  // ingredients$: Observable<IngredientInterface[]>
+  ingredients$ = this.ingredientsService.ingredients$;
 
-   selectedDiet$ = new BehaviorSubject<DietType | null>(DietType.ALL)
-   selectedIntolerances$ = new BehaviorSubject<IntoleranceType[] | []>([])
-   selectedSortOption$ = new BehaviorSubject<SortRecipeType | null>(null)
-   selectedTimeOption$ = new BehaviorSubject<RecipeTimesType | null>(null)
+  selectedDiet$ = new BehaviorSubject<DietType | null>(DietType.ALL);
+  selectedIntolerances$ = new BehaviorSubject<IntoleranceType[] | []>([]);
+  selectedSortOption$ = new BehaviorSubject<SortRecipeType | null>(null);
+  selectedTimeOption$ = new BehaviorSubject<RecipeTimesType | null>(null);
 
-   recipeFilter$ = combineLatest([
-      this.ingredients$,
-      this.selectedIntolerances$,
-      this.selectedSortOption$,
-      this.selectedTimeOption$,
-   ])
+  recipeFilter$ = combineLatest([
+    this.ingredients$,
+    this.selectedIntolerances$,
+    this.selectedSortOption$,
+    this.selectedTimeOption$,
+  ]);
 
-   constructor(
-      private http: HttpClient,
-      private ingredientsService: IngredientsService
-   ) {}
+  constructor(
+    private http: HttpClient,
+    private ingredientsService: IngredientsService,
+    public localStorageService: LocalStorageService
+  ) {}
 
-   searchRecipe(): Observable<RecipeResponse> {
-      console.log(this.ingredients$.getValue())
+  searchRecipe(): Observable<RecipeResponse> {
+    const cachedRecipes = this.localStorageService.getRecipes();
 
-      const ingredients = this.ingredientsService.ingredients$.getValue()
-      const preparedIngredients = ingredients
-         .map((ingredient) => ingredient.text)
-         .join(',')
+    if (cachedRecipes) {
+      return of(cachedRecipes);
+    }
 
-      if (ingredients.length == 0) {
-         return of({
-            results: [],
-            offset: 0,
-            number: 0,
-            totalResults: 0,
-         })
-      }
+    const ingredients = this.ingredientsService.ingredients$.getValue();
+    const preparedIngredients = ingredients
+      .map((ingredient) => ingredient.text)
+      .join(",");
 
-      const dietType = this.selectedDiet$.getValue()
-      const intolerances = this.selectedIntolerances$.getValue().join(',')
-      const sortOption = this.selectedSortOption$.getValue()
-      console.log('sortOption', sortOption)
-      const recipeTime = this.selectedTimeOption$.getValue()
+    if (ingredients.length == 0) {
+      return of({
+        results: [],
+        offset: 0,
+        number: 0,
+        totalResults: 0,
+      });
+    }
 
-      let timeInMinutes: number = this.getMaxReadyTime(recipeTime)
+    const dietType = this.selectedDiet$.getValue();
+    const intolerances = this.selectedIntolerances$.getValue().join(",");
+    const sortOption = this.selectedSortOption$.getValue();
+    console.log("sortOption", sortOption);
+    const recipeTime = this.selectedTimeOption$.getValue();
 
-      let params = new HttpParams()
-         .set('apiKey', environment.apiKey)
-         .set('addRecipeInformation', 'true')
-         .set('fillIngredients', 'true')
-         // .set('addRecipeInstructions', 'true')
-         .set('includeIngredients', preparedIngredients)
+    let timeInMinutes: number = this.getMaxReadyTime(recipeTime);
 
-      if (intolerances.length > 0) {
-         params = params.set('intolerances', intolerances)
-      }
+    let params = new HttpParams()
+      .set("apiKey", environment.apiKey)
+      .set("addRecipeInformation", "true")
+      .set("fillIngredients", "true")
+      // .set('addRecipeInstructions', 'true')
+      .set("includeIngredients", preparedIngredients);
 
-      if (dietType !== DietType.ALL) {
-         params = params.set('diet', dietType)
-      }
+    if (intolerances.length > 0) {
+      params = params.set("intolerances", intolerances);
+    }
 
-      if (sortOption) {
-         console.log('params:', sortOption)
-         params = params.set('sort', sortOption)
-      }
+    if (dietType !== DietType.ALL) {
+      params = params.set("diet", dietType);
+    }
 
-      if (recipeTime) {
-         params = params.set('maxReadyTime', timeInMinutes)
-      }
+    if (sortOption) {
+      console.log("params:", sortOption);
+      params = params.set("sort", sortOption);
+    }
 
-      return this.http.get<RecipeResponse>(this.complexSearch, { params })
-   }
+    if (recipeTime) {
+      params = params.set("maxReadyTime", timeInMinutes);
+    }
 
-   getRecipeById(id: string): Observable<any> {
-      let params = new HttpParams().set('apiKey', environment.apiKey)
-      let url = `${this.detailedRecipeUrl}${id}/information`
+    return this.http.get<RecipeResponse>(this.complexSearch, { params }).pipe(
+      tap((recipes: RecipeResponse) => {
+        if (!cachedRecipes) {
+          this.localStorageService.setRecipes(recipes);
+        }
+      })
+    );
+  }
 
-      return this.http.get(url, { params })
-   }
+  getRecipeById(id: string): Observable<any> {
+    let params = new HttpParams().set("apiKey", environment.apiKey);
+    let url = `${this.detailedRecipeUrl}${id}/information`;
 
-   private getMaxReadyTime(recipeTime: RecipeTimesType | null) {
-      switch (recipeTime) {
-         case RecipeTimesType.UNDER_15_MIN:
-            return 15
-         case RecipeTimesType.UNDER_30_MIN:
-            return 30
-         case RecipeTimesType.UNDER_60_MIN:
-            return 60
-         default:
-            return null
-      }
-   }
+    return this.http.get(url, { params });
+  }
 
-   getSimilarRecipes(id: string): Observable<any> {
-      // return this.http.get(`${this.baseApi}${id}/similar?${this.apiKey}`)
-      // TODO
-      return EMPTY
-   }
+  private getMaxReadyTime(recipeTime: RecipeTimesType | null) {
+    switch (recipeTime) {
+      case RecipeTimesType.UNDER_15_MIN:
+        return 15;
+      case RecipeTimesType.UNDER_30_MIN:
+        return 30;
+      case RecipeTimesType.UNDER_60_MIN:
+        return 60;
+      default:
+        return null;
+    }
+  }
+
+  getSimilarRecipes(id: string): Observable<any> {
+    // return this.http.get(`${this.baseApi}${id}/similar?${this.apiKey}`)
+    // TODO
+    return EMPTY;
+  }
 }
