@@ -1,37 +1,38 @@
 <mat-toolbar class="header">
-   <button
-      (click)="reload()"
-      routerLink="/search"
-      routerLinkActive="selected"
-      mat-button
-   >
-      <span id="logo">Leftovers</span>
-   </button>
-   <span class="example-spacer"></span>
-   <button
-      routerLink="/favorite"
-      routerLinkActive="selected"
-      mat-icon-button
-      class="example-icon favorite-icon"
-      aria-label="Example icon-button with heart icon"
-   >
-      <mat-icon>favorite</mat-icon>
-   </button>
-   <button routerLink="/post" routerLinkActive="selected" mat-icon-button>
-      <mat-icon>add_circle</mat-icon>
-   </button>
-   <button [matMenuTriggerFor]="afterMenu" mat-icon-button>
-      <mat-icon>account_circle</mat-icon>
-   </button>
+  <button
+    (click)="reload()"
+    routerLink="/search"
+    routerLinkActive="selected"
+    mat-button
+  >
+    <mat-icon id="logo">spa</mat-icon>
+    <span id="logo-text">Leftovers</span>
+  </button>
+  <span class="example-spacer"></span>
+  <button
+    routerLink="/favorite"
+    routerLinkActive="selected"
+    mat-icon-button
+    class="example-icon favorite-icon"
+    aria-label="Example icon-button with heart icon"
+  >
+    <mat-icon>favorite</mat-icon>
+  </button>
+  <button routerLink="/post" routerLinkActive="selected" mat-icon-button>
+    <mat-icon>add_circle</mat-icon>
+  </button>
+  <button [matMenuTriggerFor]="afterMenu" mat-icon-button>
+    <mat-icon>account_circle</mat-icon>
+  </button>
 
-   <mat-menu #afterMenu="matMenu" xPosition="after">
-      <ng-container *ngIf="isLoggedIn | async; else loggedOut">
-         <button mat-menu-item (click)="logout()">Logout</button>
-      </ng-container>
+  <mat-menu #afterMenu="matMenu" xPosition="after">
+    <ng-container *ngIf="isLoggedIn | async; else loggedOut">
+      <button mat-menu-item (click)="logout()">Logout</button>
+    </ng-container>
 
-      <ng-template #loggedOut>
-         <button mat-menu-item routerLink="/login">Login</button>
-         <button mat-menu-item routerLink="register">Register</button>
-      </ng-template>
-   </mat-menu>
+    <ng-template #loggedOut>
+      <button mat-menu-item routerLink="/login">Login</button>
+      <button mat-menu-item routerLink="register">Register</button>
+    </ng-template>
+  </mat-menu>
 </mat-toolbar>

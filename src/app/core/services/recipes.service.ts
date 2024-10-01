@@ -3,7 +3,6 @@ import {
   BehaviorSubject,
   combineLatest,
   EMPTY,
-  map,
   Observable,
   of,
   tap,
@@ -14,10 +13,8 @@ import { IntoleranceType } from "../types/intolerance.enum";
 import { SortRecipeType } from "../types/sort-recipe.enum";
 import { IngredientsService } from "../../features/search-recipe/services/ingredients.service";
 import { environment } from "../../environment/environment";
-import { Recipe, RecipeResponse } from "../types/recipe.interface";
+import { RecipeResponse } from "../types/recipe.interface";
 import { RecipeTimesType } from "../types/recipe-times.enum";
-import { RecipeFilter } from "../models/recipe-filter.model";
-import { IngredientInterface } from "../types/ingredient.interface";
 import { LocalStorageService } from "./local-storage";
 
 @Injectable({
@@ -31,7 +28,6 @@ export class RecipesService {
   recipeId$ = new BehaviorSubject<string>(null);
   similarRecipes$ = new BehaviorSubject<any[]>([]);
 
-  // ingredients$: Observable<IngredientInterface[]>
   ingredients$ = this.ingredientsService.ingredients$;
 
   selectedDiet$ = new BehaviorSubject<DietType | null>(DietType.ALL);

@@ -1,30 +1,40 @@
 <mat-card
-   class="recipe-card"
-   [routerLink]="['/recipes', recipe.id]"
-   appearance="outlined"
+  class="recipe-card"
+  [routerLink]="['/recipes', recipe.id]"
+  appearance="outlined"
 >
-   <img mat-card-image src="{{ recipe.image }}" alt="Photo of a Shiba Inu" />
-   <mat-icon
-      class="icon-favorite"
-      click-stop-propagation
-      (click)="saveRecipe(recipe.id, recipe.title, recipe.image)"
-      (click)="$event.stopPropagation()"
-      >favorite</mat-icon
-   >
+  <img mat-card-image src="{{ recipe.image }}" alt="Photo of a Shiba Inu" />
+  <mat-icon
+    class="icon-favorite"
+    click-stop-propagation
+    (click)="saveRecipe(recipe.id, recipe.title, recipe.image)"
+    (click)="$event.stopPropagation()"
+    >favorite</mat-icon
+  >
 
-   <mat-card-header>
-      <mat-card-title class="mat-card-title">{{ recipe.title }}</mat-card-title>
-   </mat-card-header>
-   <mat-card-content> </mat-card-content>
-   <mat-card-footer class="recipe-card-footer">
-      <mat-card-subtitle
-         >Missing ingredients:
-         {{ recipe.missedIngredientCount }}</mat-card-subtitle
-      >
-      <mat-chip-set aria-label="Chihuahua traits">
-         <div *ngFor="let missedIngredient of recipe.missedIngredients">
-            <mat-chip> {{ missedIngredient.name }} </mat-chip>
-         </div>
-      </mat-chip-set>
-   </mat-card-footer>
+  <mat-card-header>
+    <mat-card-title class="mat-card-title">{{ recipe.title }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="icon-time-container">
+      <mat-icon>schedule</mat-icon>
+      <span> {{ recipe.readyInMinutes }} min</span>
+    </div>
+    <div class="icon-health-container">
+      <mat-icon>spa</mat-icon>
+      <span> {{ recipe.healthScore }}/100</span>
+    </div>
+  </mat-card-content>
+  <mat-card-footer class="recipe-card-footer">
+    <mat-card-subtitle
+      >Missing ingredients:
+      {{ recipe.missedIngredientCount }}</mat-card-subtitle
+    >
+
+    <mat-chip-set aria-label="Chihuahua traits">
+      <div *ngFor="let missedIngredient of recipe.missedIngredients">
+        <mat-chip> {{ missedIngredient.name }} </mat-chip>
+      </div>
+    </mat-chip-set>
+  </mat-card-footer>
 </mat-card>
