@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, EMPTY, map, Observable, of } from 'rxjs';
+import { BehaviorSubject, combineLatest, EMPTY, map, Observable, of } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { DietType } from '../types/diet-type.enum';
 import { IntoleranceType } from '../types/intolerance.enum';
@@ -9,6 +9,7 @@ import { environment } from '../../environment/environment';
 import { Recipe, RecipeResponse } from '../types/recipe.interface';
 import { RecipeTimesType } from '../types/recipe-times.enum';
 import { RecipeFilter } from '../models/recipe-filter.model';
+import { IngredientInterface } from '../types/ingredient.interface';
 
 @Injectable({
    providedIn: 'root'
@@ -22,10 +23,20 @@ export class RecipesService {
    recipeId$ = new BehaviorSubject<string>(null);
    similarRecipes$ = new BehaviorSubject<any[]>([]);
 
+   // ingredients$: Observable<IngredientInterface[]>
+   ingredients$ = this.ingredientsService.ingredients$;
+
    selectedDiet$ = new BehaviorSubject<DietType | null>(DietType.ALL);
    selectedIntolerances$ = new BehaviorSubject<IntoleranceType[] | []>([]);
    selectedSortOption$ = new BehaviorSubject<SortRecipeType | null>(null);
    selectedTimeOption$ = new BehaviorSubject<RecipeTimesType | null>(null);
+
+   recipeFilter$ = combineLatest([
+      this.ingredients$,
+      this.selectedIntolerances$,
+      this.selectedSortOption$,
+      this.selectedTimeOption$
+   ])
 
    constructor(
       private http: HttpClient,
@@ -34,6 +45,8 @@ export class RecipesService {
    }
 
    searchRecipe(): Observable<RecipeResponse> {
+
+      console.log(this.ingredients$.getValue());
 
       const ingredients = this.ingredientsService.ingredients$.getValue();
       const preparedIngredients = ingredients.map((ingredient) => ingredient.text).join(',')
