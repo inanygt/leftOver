@@ -1,49 +1,39 @@
-import { Component, OnInit, signal } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { RecipesService } from '../../../../core/services/recipes.service';
-import { Location } from '@angular/common';
-
+import { Component, OnInit, signal } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { RecipesService } from "../../../../core/services/recipes.service";
 
 @Component({
-   selector: 'app-recipe-details',
-   templateUrl: './recipe-details.component.html',
-   styleUrl: './recipe-details.component.scss'
+  selector: "app-recipe-details",
+  templateUrl: "./recipe-details.component.html",
+  styleUrl: "./recipe-details.component.scss",
 })
 export class RecipeDetailsComponent implements OnInit {
-   recipe: any;
+  recipe: any;
 
-   readonly panelOpenState = signal(false);
+  readonly panelOpenState = signal(false);
 
-   constructor(
-      private route: ActivatedRoute,
-      private recipeService: RecipesService,
-      private location: Location,
-   ) { }
+  constructor(
+    private route: ActivatedRoute,
+    private recipeService: RecipesService
+  ) {}
 
-   ngOnInit(): void {
-      const recipeId = this.route.snapshot.paramMap.get('recipeId');
-      this.recipeService.recipeId$.next(recipeId);
-      this.recipeService.getSimilarRecipes(recipeId).subscribe((recipes) => {
-         this.recipeService.similarRecipes$.next(recipes)
-      })
+  ngOnInit(): void {
+    const recipeId = this.route.snapshot.paramMap.get("recipeId");
+    this.recipeService.recipeId$.next(recipeId);
+    this.recipeService.getSimilarRecipes(recipeId).subscribe((recipes) => {
+      this.recipeService.similarRecipes$.next(recipes);
+    });
 
-
-      if (recipeId) {
-         this.recipe = this.recipeService.getRecipeById(recipeId).subscribe({
-            next: (res) => {
-               this.recipe = res;
-            },
-            error: (error) => {
-               console.log(error);
-            },
-            complete: () => {
-
-            }
-         });
-      }
-   }
-
-   goBack() {
-      this.location.back();
-   }
+    if (recipeId) {
+      this.recipe = this.recipeService.getRecipeById(recipeId).subscribe({
+        next: (res) => {
+          this.recipe = res;
+        },
+        error: (error) => {
+          console.log(error);
+        },
+        complete: () => {},
+      });
+    }
+  }
 }

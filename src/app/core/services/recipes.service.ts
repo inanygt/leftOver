@@ -51,6 +51,8 @@ export class RecipesService {
   searchRecipe(): Observable<RecipeResponse> {
     const cachedRecipes = this.localStorageService.getRecipes();
 
+    // TODO
+
     if (cachedRecipes) {
       return of(cachedRecipes);
     }
@@ -60,11 +62,7 @@ export class RecipesService {
       .map((ingredient) => ingredient.text)
       .join(",");
 
-    console.log("searchrecipe ingredients:", ingredients);
-    console.log(ingredients.length);
-
     if (ingredients.length == 0) {
-      console.log("should return empty");
       return of({
         results: [],
         offset: 0,
@@ -76,7 +74,6 @@ export class RecipesService {
     const dietType = this.selectedDiet$.getValue();
     const intolerances = this.selectedIntolerances$.getValue().join(",");
     const sortOption = this.selectedSortOption$.getValue();
-    console.log("sortOption", sortOption);
     const recipeTime = this.selectedTimeOption$.getValue();
 
     let timeInMinutes: number = this.getMaxReadyTime(recipeTime);
