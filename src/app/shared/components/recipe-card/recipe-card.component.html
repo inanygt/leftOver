@@ -1,0 +1,11 @@
+<mat-card
+  class="recipe-card"
+  [routerLink]="['/recipes', recipe.id]"
+  appearance="outlined"
+>
+  <ng-content select=".card-image"></ng-content>
+  <ng-content select=".card-icon"></ng-content>
+  <ng-content select=".card-header"></ng-content>
+  <ng-content select=".card-content"></ng-content>
+  <ng-content select=".card-footer"></ng-content>
+</mat-card>
