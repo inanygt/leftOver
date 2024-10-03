@@ -4,7 +4,7 @@
 </div>
 <div class="root-container">
   <h1>Favorite recipes</h1>
-  <div *ngFor="let recipe of favoriteRecipes">
+  <div *ngFor="let recipe of favoriteRecipes$ | async">
     <app-recipe-card recipe="recipe">
       <img
         mat-card-image
@@ -13,9 +13,9 @@
         alt="Photo of a {{ recipe.name }}"
       />
       <mat-icon
+        color="warn"
         class="card-icon"
-        click-stop-propagation
-        (click)="deleteRecipe(recipe.name)"
+        (click)="deleteRecipe(recipe.id)"
         (click)="$event.stopPropagation()"
         >cancel</mat-icon
       >

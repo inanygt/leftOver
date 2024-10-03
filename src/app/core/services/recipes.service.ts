@@ -51,8 +51,7 @@ export class RecipesService {
   searchRecipe(): Observable<RecipeResponse> {
     const cachedRecipes = this.localStorageService.getRecipes();
 
-    // TODO
-
+    // for development purposes to not exceed the 150 api call limit
     if (cachedRecipes) {
       return of(cachedRecipes);
     }

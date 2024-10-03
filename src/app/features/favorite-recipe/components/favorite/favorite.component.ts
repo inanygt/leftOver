@@ -1,6 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { AuthService } from "../../../../core/components/authentication/service/auth.service";
 import { FirebaseStoreService } from "../../../../core/components/authentication/service/firebase-store.service";
+import { map, Observable, switchMap } from "rxjs";
 import { firestoreRecipe } from "../../../../core/types/recipe.interface";
 
 @Component({
@@ -8,27 +9,21 @@ import { firestoreRecipe } from "../../../../core/types/recipe.interface";
   templateUrl: "./favorite.component.html",
   styleUrl: "./favorite.component.scss",
 })
-export class FavoriteComponent implements OnInit {
-  currentUserUid: string;
-  favoriteRecipes: firestoreRecipe[];
+export class FavoriteComponent {
+  currentUserUid$: Observable<string>;
+  favoriteRecipes$: Observable<firestoreRecipe[]>;
 
   constructor(
     public authService: AuthService,
     public fireStore: FirebaseStoreService
-  ) {}
-
-  deleteRecipe(name: string) {
-    this.fireStore.onDeleteRecipe(name);
+  ) {
+    this.currentUserUid$ = this.authService.user$.pipe(map((user) => user.uid));
+    this.favoriteRecipes$ = this.currentUserUid$.pipe(
+      switchMap((uid) => this.fireStore.getRecipesByUid(uid))
+    );
   }
 
-  ngOnInit(): void {
-    this.authService.user$.subscribe((user) => {
-      this.fireStore.getRecipesByUid(user.id).subscribe((recipes) => {
-        recipes.filter((recipe) => {
-          recipe.UID = user.id;
-          this.favoriteRecipes = recipes;
-        });
-      });
-    });
+  deleteRecipe(id: string) {
+    this.fireStore.onDeleteRecipe(id);
   }
 }

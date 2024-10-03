@@ -46,3 +46,15 @@ button[mat-stroked-button] {
 /// Colors
 /// offwhite #f5f5f5
 /// green #2e8b57
+///
+
+.mat-icon.mat-primary {
+  color: #2e8b57;
+}
+
+.mat-icon.mat-warn {
+  // color: #e43847;
+  // color: #f44336;
+  color: black;
+  fill: white;
+}

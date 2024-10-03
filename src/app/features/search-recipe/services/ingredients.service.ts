@@ -20,12 +20,10 @@ export class IngredientsService {
     //   .set("number", "10")
     //   .set("apiKey", environment.apiKey);
     // return this.http.get<any[]>(this.autoIngredientUrl, { params });
+
+    // for development purposes to not exceed the 150 api call limit
     return of([]);
   }
-
-  // getAllIngredients(): Observable<IngredientInterface[]> {
-  //    return this.ingredients$;
-  // }
 
   addIngredient(ingredient: string) {
     const newIngredient: IngredientInterface = {

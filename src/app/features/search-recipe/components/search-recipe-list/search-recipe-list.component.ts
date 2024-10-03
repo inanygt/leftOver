@@ -57,7 +57,6 @@ export class SearchRecipeListComponent {
               time: time,
               healthScore: healthScore,
             };
-            this.snackbar.showMessage("Recipe saved!", "🍎");
             this.firestore.saveRecipe(newRecipe);
           });
         } else {
