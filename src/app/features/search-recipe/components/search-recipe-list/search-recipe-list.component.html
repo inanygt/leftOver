@@ -19,7 +19,15 @@
       <mat-icon
         class="card-icon"
         click-stop-propagation
-        (click)="saveRecipe(recipe.id, recipe.title, recipe.image)"
+        (click)="
+          saveRecipe(
+            recipe.id,
+            recipe.title,
+            recipe.image,
+            recipe.readyInMinutes,
+            recipe.healthScore
+          )
+        "
         (click)="$event.stopPropagation()"
         >favorite</mat-icon
       >

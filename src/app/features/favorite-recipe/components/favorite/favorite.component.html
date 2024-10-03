@@ -1,15 +1,16 @@
 <div class="root-container">
   <app-go-back></app-go-back>
   <mat-divider></mat-divider>
-
+</div>
+<div class="root-container">
   <h1>Favorite recipes</h1>
   <div *ngFor="let recipe of favoriteRecipes">
-    <app-recipe-card>
+    <app-recipe-card recipe="recipe">
       <img
         mat-card-image
         class="card-image"
         src="{{ recipe.image }}"
-        alt="Photo of a Shiba Inu"
+        alt="Photo of a {{ recipe.name }}"
       />
       <mat-icon
         class="card-icon"
@@ -23,6 +24,16 @@
           recipe.name
         }}</mat-card-title>
       </mat-card-header>
+      <mat-card-content class="card-content">
+        <div class="icon-time-container">
+          <mat-icon>schedule</mat-icon>
+          <span> {{ recipe.time }} min</span>
+        </div>
+        <div class="icon-health-container">
+          <mat-icon matBadge="healthScore">spa</mat-icon>
+          <span> {{ recipe.healthScore }}% Healthscore</span>
+        </div>
+      </mat-card-content>
     </app-recipe-card>
   </div>
 </div>

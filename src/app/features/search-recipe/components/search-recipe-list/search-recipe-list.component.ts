@@ -38,7 +38,13 @@ export class SearchRecipeListComponent {
     this.isLoggedIn = this.authService.isLoggedIn();
   }
 
-  saveRecipe(id: string, title: string, image: string) {
+  saveRecipe(
+    id: string,
+    title: string,
+    image: string,
+    time: string,
+    healthScore: string
+  ) {
     this.authService.isLoggedIn().subscribe({
       next: (isLoggedIn: boolean) => {
         if (isLoggedIn) {
@@ -48,6 +54,8 @@ export class SearchRecipeListComponent {
               name: title,
               UID: user.uid,
               image: image,
+              time: time,
+              healthScore: healthScore,
             };
             this.snackbar.showMessage("Recipe saved!", "🍎");
             this.firestore.saveRecipe(newRecipe);
