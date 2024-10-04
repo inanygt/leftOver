@@ -16,6 +16,7 @@ import { environment } from "../../environment/environment";
 import { RecipeResponse } from "../types/recipe.interface";
 import { RecipeTimesType } from "../types/recipe-times.enum";
 import { LocalStorageService } from "./local-storage";
+import { LoadingService } from "../../shared/services/loading.service";
 
 @Injectable({
   providedIn: "root",
@@ -45,14 +46,17 @@ export class RecipesService {
   constructor(
     private http: HttpClient,
     private ingredientsService: IngredientsService,
-    public localStorageService: LocalStorageService
+    public localStorageService: LocalStorageService,
+    public loadingService: LoadingService
   ) {}
 
   searchRecipe(): Observable<RecipeResponse> {
     const cachedRecipes = this.localStorageService.getRecipes();
+    this.loadingService.isLoading$.next(true);
 
     // for development purposes to not exceed the 150 api call limit
     if (cachedRecipes) {
+      this.loadingService.isLoading$.next(false);
       return of(cachedRecipes);
     }
 
@@ -105,7 +109,8 @@ export class RecipesService {
         if (!cachedRecipes) {
           this.localStorageService.setRecipes(recipes);
         }
-      })
+      }),
+      tap(() => this.loadingService.isLoading$.next(false))
     );
   }
 

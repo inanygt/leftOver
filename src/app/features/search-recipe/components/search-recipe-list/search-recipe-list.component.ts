@@ -1,21 +1,23 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { RecipesService } from "../../../../core/services/recipes.service";
 import {
   firestoreRecipe,
   RecipeResponse,
 } from "../../../../core/types/recipe.interface";
-import { map, Observable } from "rxjs";
+import { BehaviorSubject, finalize, map, Observable, tap } from "rxjs";
 import { AuthService } from "../../../../core/components/authentication/service/auth.service";
 import { SnackBarService } from "../../../../core/components/authentication/service/snackbar.service";
 import { FirebaseStoreService } from "../../../../core/components/authentication/service/firebase-store.service";
 import { Router } from "@angular/router";
+import { LoadingService } from "../../../../shared/services/loading.service";
 
 @Component({
   selector: "app-search-recipe-list",
   templateUrl: "./search-recipe-list.component.html",
   styleUrl: "./search-recipe-list.component.scss",
 })
-export class SearchRecipeListComponent {
+export class SearchRecipeListComponent implements OnInit {
+  isLoading$: Observable<boolean>;
   recipesResponse$: Observable<RecipeResponse>;
   recipes$: Observable<any>;
   totalResult$: Observable<number>;
@@ -28,8 +30,10 @@ export class SearchRecipeListComponent {
     private authService: AuthService,
     private snackbar: SnackBarService,
     private firestore: FirebaseStoreService,
-    private router: Router
+    private router: Router,
+    public loadingService: LoadingService
   ) {
+    this.isLoading$ = this.loadingService.isLoading$;
     this.recipesResponse$ = this.recipesService.recipes$;
     this.recipes$ = this.recipesResponse$.pipe(
       map((response) => response?.results)
@@ -69,4 +73,6 @@ export class SearchRecipeListComponent {
       },
     });
   }
+
+  ngOnInit(): void {}
 }

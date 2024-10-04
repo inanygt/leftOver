@@ -65,10 +65,11 @@ export class FirebaseStoreService {
     this.recipesCollection
       .doc(id)
       .delete()
-      .then(() => {})
+      .then(() => {
+        this.snackbar.showMessage("Deleted recipe", "🍽️");
+      })
       .catch((err) => {
         console.log(err);
       });
-    this.getRecipesByUid(id);
   }
 }
