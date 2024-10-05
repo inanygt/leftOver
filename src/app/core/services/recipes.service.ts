@@ -51,14 +51,14 @@ export class RecipesService {
   ) {}
 
   searchRecipe(): Observable<RecipeResponse> {
-    const cachedRecipes = this.localStorageService.getRecipes();
+    // const cachedRecipes = this.localStorageService.getRecipes();
     this.loadingService.isLoading$.next(true);
 
     // for development purposes to not exceed the 150 api call limit
-    if (cachedRecipes) {
-      this.loadingService.isLoading$.next(false);
-      return of(cachedRecipes);
-    }
+    // if (cachedRecipes) {
+    //   this.loadingService.isLoading$.next(false);
+    //   return of(cachedRecipes);
+    // }
 
     const ingredients = this.ingredientsService.ingredients$.getValue();
     const preparedIngredients = ingredients

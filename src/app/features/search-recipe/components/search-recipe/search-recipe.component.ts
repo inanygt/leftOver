@@ -29,7 +29,7 @@ export class SearchRecipeComponent implements OnInit {
     this.ingredients$ = this.ingredientsService.ingredients$;
   }
 
-  add(event: MatChipInputEvent) {
+  add(event: any) {
     const value = event.value;
     if (value) {
       this.ingredientsService.addIngredient(value);
@@ -47,21 +47,13 @@ export class SearchRecipeComponent implements OnInit {
     this.searchRecipe();
   }
 
-  selectSuggestedIngredient(event: MatAutocompleteSelectedEvent) {
-    const value = event.option.value.name;
-
-    const formattedValue = value.replace(/\s+/g, "-");
-
-    const matChipInputEvent: MatChipInputEvent = {
-      input: this.ingredientInput.nativeElement,
-      value: formattedValue,
-      chipInput: null,
-    };
+  selectSuggestedIngredient(ingredient: string) {
+    this.ingredientsService.addIngredient(ingredient);
 
     this.ingredientControl.setValue("");
     this.ingredientInput.nativeElement.value = "";
 
-    this.add(matChipInputEvent);
+    this.searchRecipe();
   }
 
   private searchRecipe(): void {

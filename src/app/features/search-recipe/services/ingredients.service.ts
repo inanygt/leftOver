@@ -15,14 +15,14 @@ export class IngredientsService {
   constructor(private http: HttpClient) {}
 
   autocompleteIngredient(ingredient: string): Observable<any[]> {
-    // let params = new HttpParams()
-    //   .set("query", ingredient)
-    //   .set("number", "10")
-    //   .set("apiKey", environment.apiKey);
-    // return this.http.get<any[]>(this.autoIngredientUrl, { params });
+    let params = new HttpParams()
+      .set("query", ingredient)
+      .set("number", "10")
+      .set("apiKey", environment.apiKey);
+    return this.http.get<any[]>(this.autoIngredientUrl, { params });
 
     // for development purposes to not exceed the 150 api call limit
-    return of([]);
+    // return of([]);
   }
 
   addIngredient(ingredient: string) {
