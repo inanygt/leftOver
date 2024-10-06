@@ -32,6 +32,7 @@ export class IngredientsService {
     this.ingredients$.next(updatedIngredients);
   }
 
+  // Costs too much api calls for now
   getIngredientInformation(id: string) {
     let params = new HttpParams()
       .set("apiKey", environment.apiKey)

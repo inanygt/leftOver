@@ -1,13 +1,6 @@
-import {
-  Component,
-  EventEmitter,
-  forwardRef,
-  OnInit,
-  Output,
-  output,
-} from "@angular/core";
+import { Component, EventEmitter, Output } from "@angular/core";
 import { IngredientsService } from "../../services/ingredients.service";
-import { map, Observable, switchMap, tap } from "rxjs";
+import { Observable, switchMap } from "rxjs";
 import { RecipesService } from "../../../../core/services/recipes.service";
 
 @Component({
@@ -15,13 +8,12 @@ import { RecipesService } from "../../../../core/services/recipes.service";
   templateUrl: "./suggested-ingredients.component.html",
   styleUrl: "./suggested-ingredients.component.scss",
 })
-export class SuggestedIngredientsComponent implements OnInit {
+export class SuggestedIngredientsComponent {
   @Output() ingredientControl: EventEmitter<string> =
     new EventEmitter<string>();
 
   suggestingIngredient$: Observable<string>;
   suggestedIngredients$: Observable<any[]>;
-  detailedIngredients = [];
 
   constructor(
     private ingredientsService: IngredientsService,
@@ -35,25 +27,27 @@ export class SuggestedIngredientsComponent implements OnInit {
       );
   }
 
-  // This method is called when the user selects a suggested ingredient
+  getAisle(aisle: string): string {
+    let value = aisle.toLocaleLowerCase();
+    if (value.includes("meat")) {
+      return "🍖";
+    } else if (value.includes("produce")) {
+      return "🍎";
+    } else if (value.includes("alcoholic")) {
+      return "🍺";
+    } else if (value.includes("cheese")) {
+      return "🧀";
+    } else if (value.includes("bread") || value.includes("bakery")) {
+      return "🥖";
+    }
+    return "🧑‍🍳";
+  }
+
   selectSuggestedIngredient(ingredient: string): void {
     this.ingredientControl.emit("");
     this.ingredientsService.addIngredient(ingredient);
     this.recipesService.searchRecipe().subscribe((response) => {
       this.recipesService.recipes$.next(response);
-    });
-  }
-
-  ngOnInit(): void {
-    this.suggestedIngredients$.subscribe((ingredients) => {
-      ingredients.map((ingredient) => {
-        this.ingredientsService
-          .getIngredientInformation(ingredient.id)
-          .subscribe((ingredient) => {
-            this.detailedIngredients.push(ingredient);
-            console.log(this.detailedIngredients);
-          });
-      });
     });
   }
 }
