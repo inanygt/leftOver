@@ -2,12 +2,12 @@ import {
   Component,
   EventEmitter,
   forwardRef,
+  OnInit,
   Output,
   output,
 } from "@angular/core";
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { IngredientsService } from "../../services/ingredients.service";
-import { Observable, switchMap } from "rxjs";
+import { map, Observable, switchMap, tap } from "rxjs";
 import { RecipesService } from "../../../../core/services/recipes.service";
 
 @Component({
@@ -15,12 +15,13 @@ import { RecipesService } from "../../../../core/services/recipes.service";
   templateUrl: "./suggested-ingredients.component.html",
   styleUrl: "./suggested-ingredients.component.scss",
 })
-export class SuggestedIngredientsComponent {
+export class SuggestedIngredientsComponent implements OnInit {
   @Output() ingredientControl: EventEmitter<string> =
     new EventEmitter<string>();
 
   suggestingIngredient$: Observable<string>;
   suggestedIngredients$: Observable<any[]>;
+  detailedIngredients = [];
 
   constructor(
     private ingredientsService: IngredientsService,
@@ -40,6 +41,19 @@ export class SuggestedIngredientsComponent {
     this.ingredientsService.addIngredient(ingredient);
     this.recipesService.searchRecipe().subscribe((response) => {
       this.recipesService.recipes$.next(response);
+    });
+  }
+
+  ngOnInit(): void {
+    this.suggestedIngredients$.subscribe((ingredients) => {
+      ingredients.map((ingredient) => {
+        this.ingredientsService
+          .getIngredientInformation(ingredient.id)
+          .subscribe((ingredient) => {
+            this.detailedIngredients.push(ingredient);
+            console.log(this.detailedIngredients);
+          });
+      });
     });
   }
 }

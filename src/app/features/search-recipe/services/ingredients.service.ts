@@ -9,6 +9,7 @@ import { environment } from "../../../environment/environment";
 export class IngredientsService {
   autoIngredientUrl =
     "https://api.spoonacular.com/food/ingredients/autocomplete";
+  ingredientInfo = "https://api.spoonacular.com/food/ingredients/";
 
   ingredients$ = new BehaviorSubject<IngredientInterface[]>([]);
   suggestingIngredient$ = new BehaviorSubject<string>("");
@@ -31,10 +32,20 @@ export class IngredientsService {
     this.ingredients$.next(updatedIngredients);
   }
 
+  getIngredientInformation(id: string) {
+    let params = new HttpParams()
+      .set("apiKey", environment.apiKey)
+      .set("amount", "1");
+    let url = `${this.ingredientInfo + id}/information`;
+
+    return this.http.get<any>(url, { params });
+  }
+
   autocompleteIngredient(ingredient: string): Observable<any[]> {
     let params = new HttpParams()
       .set("query", ingredient)
       .set("number", "10")
+      .set("metaInformation", true)
       .set("apiKey", environment.apiKey);
     return this.http.get<any[]>(this.autoIngredientUrl, { params });
 
