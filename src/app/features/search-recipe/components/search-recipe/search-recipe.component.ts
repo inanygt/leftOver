@@ -4,8 +4,6 @@ import { IngredientsService } from "../../services/ingredients.service";
 import { Observable } from "rxjs";
 import { IngredientInterface } from "../../../../core/types/ingredient.interface";
 import { FormControl } from "@angular/forms";
-import { MatChipInputEvent } from "@angular/material/chips";
-import { MatAutocompleteSelectedEvent } from "@angular/material/autocomplete";
 import { LocalStorageService } from "../../../../core/services/local-storage";
 
 @Component({
@@ -17,7 +15,6 @@ export class SearchRecipeComponent implements OnInit {
   ingredientControl = new FormControl("");
 
   ingredients$: Observable<IngredientInterface[]>;
-  suggestedIngredients$: Observable<any[]>;
 
   @ViewChild("ingredientInput") ingredientInput: ElementRef<HTMLInputElement>;
 
@@ -47,25 +44,20 @@ export class SearchRecipeComponent implements OnInit {
     this.searchRecipe();
   }
 
-  selectSuggestedIngredient(ingredient: string) {
-    this.ingredientsService.addIngredient(ingredient);
-
-    this.ingredientControl.setValue("");
-    this.ingredientInput.nativeElement.value = "";
-
-    this.searchRecipe();
-  }
-
   private searchRecipe(): void {
     this.recipesService.searchRecipe().subscribe((response) => {
       this.recipesService.recipes$.next(response);
     });
   }
 
+  receiveIngredientControl() {
+    this.ingredientControl.setValue("");
+    this.ingredientInput.nativeElement.value = "";
+  }
+
   ngOnInit(): void {
     this.ingredientControl.valueChanges.subscribe((value) => {
-      this.suggestedIngredients$ =
-        this.ingredientsService.autocompleteIngredient(value);
+      this.ingredientsService.suggestingIngredient$.next(value);
     });
   }
 }

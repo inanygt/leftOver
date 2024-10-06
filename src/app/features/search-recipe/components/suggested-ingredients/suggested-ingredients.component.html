@@ -1,0 +1,16 @@
+<div class="suggested-ingredients-container">
+  <div
+    class="ingredient-container"
+    *ngFor="let ingredient of suggestedIngredients$ | async"
+  >
+    <div class="ingredient">
+      <div class="ingredient-title">{{ ingredient.name }}</div>
+      <div>100cal</div>
+    </div>
+    <mat-icon
+      class="mat-primary"
+      (click)="selectSuggestedIngredient(ingredient.name)"
+      >add_circle</mat-icon
+    >
+  </div>
+</div>

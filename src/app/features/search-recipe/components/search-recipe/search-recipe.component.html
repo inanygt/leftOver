@@ -1,48 +1,27 @@
-<section>
-  <mat-form-field class="example-chip-list">
-    <mat-label>Recipe ingredients</mat-label>
-    <mat-chip-grid #ingredientChipGrid aria-label="Ingredient selection">
-      @for (ingredient of ingredients$ | async; track ingredient) {
-      <mat-chip-row (removed)="deleteIngredient(ingredient.id)">
-        {{ ingredient.text | titlecase }}
-        <button matChipRemove [attr.aria-label]="'remove ' + ingredient">
-          <mat-icon>cancel</mat-icon>
-        </button>
-      </mat-chip-row>
-      }
-    </mat-chip-grid>
-    <input
-      type="text"
-      name="currentIngredient"
-      placeholder="New ingredient..."
-      #ingredientInput
-      [formControl]="ingredientControl"
-      autoFocus
-      [matChipInputFor]="ingredientChipGrid"
-      (matChipInputTokenEnd)="add($event)"
-    />
-  </mat-form-field>
-</section>
-<!-- <mat-autocomplete
-  #auto="matAutocomplete"
-  (optionSelected)="selectSuggestedIngredient($event)"
->
-  @for (ingredient of suggestedIngredients$ | async; track ingredient) {
-  <mat-option [value]="ingredient">{{ ingredient.name }}</mat-option>
-  }
-</mat-autocomplete> -->
+<mat-form-field class="example-chip-list">
+  <mat-label>Recipe ingredients</mat-label>
+  <mat-chip-grid #ingredientChipGrid aria-label="Ingredient selection">
+    @for (ingredient of ingredients$ | async; track ingredient) {
+    <mat-chip-row (removed)="deleteIngredient(ingredient.id)">
+      {{ ingredient.text | titlecase }}
+      <button matChipRemove [attr.aria-label]="'remove ' + ingredient">
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </mat-chip-row>
+    }
+  </mat-chip-grid>
+  <input
+    type="text"
+    name="currentIngredient"
+    placeholder="New ingredient..."
+    #ingredientInput
+    [formControl]="ingredientControl"
+    autoFocus
+    [matChipInputFor]="ingredientChipGrid"
+    (matChipInputTokenEnd)="add($event)"
+  />
+</mat-form-field>
 
-<div class="suggested-ingredients-container">
-  <div
-    class="ingredient-container"
-    *ngFor="let ingredient of suggestedIngredients$ | async"
-  >
-    <div class="ingredient">
-      <div class="ingredient-title">{{ ingredient.name }}</div>
-      <div>100cal</div>
-    </div>
-    <mat-icon (click)="selectSuggestedIngredient(ingredient.name)"
-      >add_circle</mat-icon
-    >
-  </div>
-</div>
+<app-suggested-ingredients
+  (ingredientControl)="receiveIngredientControl()"
+></app-suggested-ingredients>
