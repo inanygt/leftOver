@@ -10,6 +10,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { IngredientsService } from "./services/ingredients.service";
 import { SimilarRecipesComponent } from "./components/similar-recipes/similar-recipes.component";
 import { PreferencesComponent } from "./components/preferences/preferences.component";
+import { SuggestedIngredientsComponent } from './components/suggested-ingredients/suggested-ingredients.component';
 
 const routes: Routes = [{ path: "", component: SearchComponent }];
 
@@ -22,6 +23,7 @@ const routes: Routes = [{ path: "", component: SearchComponent }];
     SearchRecipeListComponent,
     SimilarRecipesComponent,
     PreferencesComponent,
+    SuggestedIngredientsComponent,
   ],
   imports: [MaterialModule, SharedModule, RouterModule.forChild(routes)],
   providers: [IngredientsService],
