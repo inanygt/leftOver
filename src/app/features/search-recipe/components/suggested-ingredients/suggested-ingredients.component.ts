@@ -12,6 +12,8 @@ export class SuggestedIngredientsComponent {
   @Output() ingredientControl: EventEmitter<string> =
     new EventEmitter<string>();
 
+  isLoading: boolean = false;
+
   suggestingIngredient$: Observable<string>;
   suggestedIngredients$: Observable<any[]>;
 
@@ -29,6 +31,7 @@ export class SuggestedIngredientsComponent {
 
   getAisle(aisle: string): string {
     let value = aisle.toLocaleLowerCase();
+
     if (value.includes("meat")) {
       return "🍖";
     } else if (value.includes("produce")) {
@@ -43,11 +46,23 @@ export class SuggestedIngredientsComponent {
     return "🧑‍🍳";
   }
 
+  // getName(name: string): string {
+  //   if (name.includes('banana')) {
+  //     return '🍌'
+  //   }
+  //   return '';
+  // }
+
   selectSuggestedIngredient(ingredient: string): void {
-    this.ingredientControl.emit("");
-    this.ingredientsService.addIngredient(ingredient);
-    this.recipesService.searchRecipe().subscribe((response) => {
-      this.recipesService.recipes$.next(response);
-    });
+    this.isLoading = true;
+    setTimeout(() => {
+      this.isLoading = false;
+      this.ingredientControl.emit("");
+      this.ingredientsService.addIngredient(ingredient);
+
+      this.recipesService.searchRecipe().subscribe((response) => {
+        this.recipesService.recipes$.next(response);
+      });
+    }, 500);
   }
 }
