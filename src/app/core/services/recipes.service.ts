@@ -85,7 +85,7 @@ export class RecipesService {
       .set("apiKey", environment.apiKey)
       .set("addRecipeInformation", "true")
       .set("fillIngredients", "true")
-      // .set('addRecipeInstructions', 'true')
+      .set("addRecipeInstructions", "true")
       .set("includeIngredients", preparedIngredients);
 
     if (intolerances.length > 0) {
