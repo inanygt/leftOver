@@ -50,6 +50,7 @@ export class RecipesService {
     public loadingService: LoadingService
   ) {}
 
+  // todo: refactor using solid principle
   searchRecipe(): Observable<RecipeResponse> {
     const cachedRecipes = this.localStorageService.getRecipes();
     this.loadingService.isLoading$.next(true);
@@ -136,7 +137,7 @@ export class RecipesService {
 
   getSimilarRecipes(id: string): Observable<any> {
     // return this.http.get(`${this.baseApi}${id}/similar?${this.apiKey}`)
-    // TODO
+    // todo
     return EMPTY;
   }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable, of, tap } from "rxjs";
 import { IngredientInterface } from "../../../core/types/ingredient.interface";
-import { generateUniqueId } from "../../../core/helpers/utils";
+import { UtilsService } from "../../../core/helpers/utils";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { environment } from "../../../environment/environment";
 
@@ -14,11 +14,11 @@ export class IngredientsService {
   ingredients$ = new BehaviorSubject<IngredientInterface[]>([]);
   suggestingIngredient$ = new BehaviorSubject<string>("");
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private utilsService: UtilsService) {}
 
   addIngredient(ingredient: string) {
     const newIngredient: IngredientInterface = {
-      id: generateUniqueId(),
+      id: this.utilsService.generateUniqueId(),
       text: ingredient,
     };
     const updatedIngredients = [...this.ingredients$.getValue(), newIngredient];

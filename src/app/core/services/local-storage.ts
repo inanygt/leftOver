@@ -4,8 +4,6 @@ import { Injectable } from "@angular/core";
   providedIn: "root",
 })
 export class LocalStorageService {
-  constructor() {}
-
   getRecipes() {
     const recipes = localStorage.getItem("recipes");
     return recipes ? JSON.parse(recipes) : null;

@@ -5,6 +5,7 @@
 <div class="root-container">
   <h1>Favorite recipes</h1>
   <div *ngFor="let recipe of favoriteRecipes$ | async">
+    {{ recipe.id }}
     <app-recipe-card recipe="recipe">
       <img
         mat-card-image
