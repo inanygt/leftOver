@@ -1,6 +1,5 @@
 import { TestBed } from "@angular/core/testing";
 import { IngredientsService } from "./ingredients.service";
-
 import {
   HttpClientTestingModule,
   HttpTestingController,
@@ -19,7 +18,7 @@ describe("ingredients service", () => {
       imports: [HttpClientTestingModule],
       providers: [
         IngredientsService,
-        //* use mockservice in stead of real service
+
         {
           provide: UtilsService,
           useValue: utilsServiceMock,
@@ -32,9 +31,6 @@ describe("ingredients service", () => {
   });
 
   afterEach(() => {
-    /**
-     *
-     */
     httpTestingController.verify();
   });
 
@@ -52,5 +48,55 @@ describe("ingredients service", () => {
         text: "ingredient",
       },
     ]);
+  });
+
+  it("should delete an ingredient", () => {
+    ingredientsService.ingredients$.next([
+      {
+        id: "1",
+        text: "test",
+      },
+    ]);
+
+    ingredientsService.deleteIngredient("1");
+    expect(ingredientsService.ingredients$.getValue()).toEqual([]);
+  });
+
+  it("should not delete any ingredient if id doesn't exist", () => {
+    ingredientsService.ingredients$.next([
+      {
+        id: "1",
+        text: "test",
+      },
+    ]);
+    ingredientsService.deleteIngredient("2");
+    expect(ingredientsService.ingredients$.getValue()).toEqual([
+      {
+        id: "1",
+        text: "test",
+      },
+    ]);
+  });
+
+  describe("get ingredient information", () => {
+    it("should return ingredient information", () => {
+      let ingredient: any;
+      ingredientsService.getIngredientInformation("1").subscribe((response) => {
+        ingredient = response;
+      });
+      const req = httpTestingController.expectOne(
+        "https://api.spoonacular.com/food/ingredients/1/information?apiKey=f7b667c5b33b40dcbb0f44cd03ab8b67&amount=1"
+      );
+
+      req.flush({
+        id: "1",
+        text: "test",
+      });
+
+      expect(ingredient).toEqual({
+        id: "1",
+        text: "test",
+      });
+    });
   });
 });
