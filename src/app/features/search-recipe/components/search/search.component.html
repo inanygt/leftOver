@@ -6,5 +6,7 @@
 </div>
 
 <div class="root-container">
-  <app-search-recipe-list></app-search-recipe-list>
+  <app-search-recipe-list
+    *ngIf="!(inputLength$ | async)"
+  ></app-search-recipe-list>
 </div>

@@ -1,4 +1,6 @@
 import { Component } from "@angular/core";
+import { map, Observable } from "rxjs";
+import { IngredientsService } from "../../services/ingredients.service";
 
 @Component({
   selector: "app-search",
@@ -6,5 +8,10 @@ import { Component } from "@angular/core";
   styleUrl: "./search.component.scss",
 })
 export class SearchComponent {
-  constructor() {}
+  inputLength$: Observable<number>;
+  constructor(private ingredientsService: IngredientsService) {
+    this.inputLength$ = this.ingredientsService.inputValue$.pipe(
+      map((inputValue) => inputValue.length)
+    );
+  }
 }

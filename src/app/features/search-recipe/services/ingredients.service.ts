@@ -13,6 +13,7 @@ export class IngredientsService {
 
   ingredients$ = new BehaviorSubject<IngredientInterface[]>([]);
   suggestingIngredient$ = new BehaviorSubject<string>("");
+  inputValue$ = new BehaviorSubject<string>("");
 
   constructor(private http: HttpClient, private utilsService: UtilsService) {}
 

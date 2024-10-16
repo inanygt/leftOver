@@ -57,6 +57,7 @@ export class SearchRecipeComponent implements OnInit {
 
   ngOnInit(): void {
     this.ingredientControl.valueChanges.subscribe((value) => {
+      this.ingredientsService.inputValue$.next(value);
       this.ingredientsService.suggestingIngredient$.next(value);
     });
   }
