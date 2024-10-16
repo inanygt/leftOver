@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Output } from "@angular/core";
+import { Component, EventEmitter, OnInit, Output } from "@angular/core";
 import { IngredientsService } from "../../services/ingredients.service";
 import { Observable, switchMap } from "rxjs";
 import { RecipesService } from "../../../../core/services/recipes.service";
+import { SuggestedIngredient } from "../../../../core/types/ingredient.interface";
 
 @Component({
   selector: "app-suggested-ingredients",
@@ -53,16 +54,16 @@ export class SuggestedIngredientsComponent {
   //   return '';
   // }
 
-  selectSuggestedIngredient(ingredient: string): void {
-    this.isLoading = true;
+  selectSuggestedIngredient(ingredient: SuggestedIngredient): void {
+    ingredient.isLoading = true;
     setTimeout(() => {
-      this.isLoading = false;
       this.ingredientControl.emit("");
-      this.ingredientsService.addIngredient(ingredient);
+      this.ingredientsService.addIngredient(ingredient.name);
 
       this.recipesService.searchRecipe().subscribe((response) => {
         this.recipesService.recipes$.next(response);
+        ingredient.isLoading = false;
       });
-    }, 500);
+    }, 1000);
   }
 }
