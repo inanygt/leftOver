@@ -1,12 +1,14 @@
 <div class="search-outer-container">
   <div class="search-inner-container">
     <app-search-recipe></app-search-recipe>
-    <app-preferences></app-preferences>
+    <app-preferences
+      *ngIf="!(inputLength$ | async) as inputLength"
+    ></app-preferences>
   </div>
 </div>
 
 <div class="root-container">
   <app-search-recipe-list
-    *ngIf="!(inputLength$ | async)"
+    *ngIf="!(inputLength$ | async) as inputLength"
   ></app-search-recipe-list>
 </div>

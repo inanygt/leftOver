@@ -64,6 +64,6 @@ export class SuggestedIngredientsComponent {
         this.recipesService.recipes$.next(response);
         ingredient.isLoading = false;
       });
-    }, 1000);
+    }, 300);
   }
 }
