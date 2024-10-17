@@ -12,8 +12,10 @@ import { NgSelectModule } from "@ng-select/ng-select";
 import { GoBackComponent } from "./components/go-back/go-back.component";
 import { MaterialModule } from "./material.module";
 import { RecipeCardComponent } from "./components/recipe-card/recipe-card.component";
+import { TruncatePipe } from "./pipes/truncate.pipe";
 
 @NgModule({
+  declarations: [GoBackComponent, RecipeCardComponent, TruncatePipe],
   imports: [
     FormsModule,
     ReactiveFormsModule,
@@ -41,7 +43,7 @@ import { RecipeCardComponent } from "./components/recipe-card/recipe-card.compon
     NgSwitch,
     NgSwitchCase,
     NgSwitchDefault,
+    TruncatePipe,
   ],
-  declarations: [GoBackComponent, RecipeCardComponent],
 })
 export class SharedModule {}
