@@ -7,7 +7,7 @@
   <div class="img-container">
     <img [src]="recipe.image" alt="{{ recipe.title }}" />
     <div class="recipe-summary" *ngIf="recipe?.summary">
-      {{ recipe?.summary | truncate : 150 }}
+      {{ cleanText(recipe?.summary) | truncate : 180 }}
     </div>
   </div>
   <mat-divider></mat-divider>

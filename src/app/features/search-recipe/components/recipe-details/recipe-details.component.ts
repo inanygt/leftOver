@@ -27,6 +27,13 @@ glass_cup
     return "";
   }
 
+  // Method to remove HTML tags and truncate
+  cleanText(summary: string): string {
+    if (!summary) return "";
+    const cleanText = summary.replace(/<[^>]*>/g, ""); // Remove HTML tags
+    return cleanText;
+  }
+
   ngOnInit(): void {
     const recipeId = this.route.snapshot.paramMap.get("recipeId");
     this.recipeService.recipeId$.next(recipeId);
