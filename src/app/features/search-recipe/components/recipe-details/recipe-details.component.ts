@@ -9,6 +9,17 @@ import { RecipesService } from "../../../../core/services/recipes.service";
 })
 export class RecipeDetailsComponent implements OnInit {
   recipe: any;
+  servingsCounter: number = 1;
+
+  addServingCounter() {
+    this.servingsCounter += 1;
+  }
+
+  decreaseServingCounter() {
+    if (this.servingsCounter !== 1) {
+      this.servingsCounter -= 1;
+    }
+  }
 
   readonly panelOpenState = signal(false);
 
@@ -16,16 +27,6 @@ export class RecipeDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private recipeService: RecipesService
   ) {}
-
-  getIngredientUnit(unit: string) {
-    if (unit === "cup") {
-      return `
-      <span class="material-symbols-outlined">
-glass_cup
-</span>`;
-    }
-    return "";
-  }
 
   cleanText(summary: string): string {
     if (!summary) return "";

@@ -1,11 +1,19 @@
 h2 {
   margin-bottom: 8px;
 }
+
 .recipe-details-container {
   margin: auto;
   max-width: 600px;
   width: calc(100% - 2rem);
   margin-bottom: 2rem;
+}
+
+.empty {
+  display: inline-block;
+  // background-color: red;
+  width: 15px;
+  aspect-ratio: 1;
 }
 
 .recipe-title {
@@ -78,9 +86,18 @@ mat-accordion > mat-expansion-panel:nth-child(3) {
 }
 
 .ingredient {
+  display: flex;
   margin-bottom: 0.7rem;
   font-size: 1rem;
   line-height: 1.6rem;
+  gap: 5px;
+
+  .ingredient-unit {
+    flex-basis: 1.6rem;
+  }
+
+  .ingredient-name {
+  }
 
   span {
     margin-right: 0.4rem;
