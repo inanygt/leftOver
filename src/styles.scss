@@ -32,6 +32,7 @@ button[mat-stroked-button] {
   max-width: 600px;
   width: calc(100% - 2rem);
   margin: 0rem auto;
+  margin-bottom: 5rem;
 }
 
 /// Colors
@@ -48,4 +49,12 @@ button[mat-stroked-button] {
   // color: #f44336;
   color: black;
   fill: white;
+}
+
+.title {
+  font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
+  font-size: 1.4rem;
 }

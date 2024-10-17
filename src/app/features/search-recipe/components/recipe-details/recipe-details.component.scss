@@ -5,6 +5,11 @@
   margin-bottom: 2rem;
 }
 
+.recipe-title {
+  padding-block: 2rem 1rem;
+  text-align: center;
+}
+
 .img-container {
   background-size: cover;
 }
@@ -29,4 +34,41 @@ img {
   border-radius: 2rem;
   width: 100%;
   padding-bottom: 1rem;
+}
+
+mat-panel-title {
+  font-weight: 600;
+  font-style: normal;
+  font-size: 1.2rem;
+}
+
+mat-accordion > mat-expansion-panel:first-child {
+  border-top-left-radius: 1rem !important;
+  border-top-right-radius: 1rem !important;
+  background-color: #e4e7e0;
+}
+
+mat-accordion > mat-expansion-panel:nth-child(2) {
+  background-color: #bfcfbc;
+}
+
+mat-accordion > mat-expansion-panel:nth-child(3) {
+  background-color: #7a8b74;
+}
+
+.mat-expansion-panel-spacing {
+  margin: 0;
+}
+
+.ingredient {
+  margin-bottom: 0.7rem;
+
+  .mat-body-strong {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+}
+
+.recipe-summary {
+  font-size: 1rem;
 }

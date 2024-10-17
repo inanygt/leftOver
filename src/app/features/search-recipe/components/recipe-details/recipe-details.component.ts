@@ -17,6 +17,16 @@ export class RecipeDetailsComponent implements OnInit {
     private recipeService: RecipesService
   ) {}
 
+  getIngredientUnit(unit: string) {
+    if (unit === "cup") {
+      return `
+      <span class="material-symbols-outlined">
+glass_cup
+</span>`;
+    }
+    return "";
+  }
+
   ngOnInit(): void {
     const recipeId = this.route.snapshot.paramMap.get("recipeId");
     this.recipeService.recipeId$.next(recipeId);
@@ -28,6 +38,7 @@ export class RecipeDetailsComponent implements OnInit {
       this.recipe = this.recipeService.getRecipeById(recipeId).subscribe({
         next: (res) => {
           this.recipe = res;
+          console.log(res);
         },
         error: (error) => {
           console.log(error);

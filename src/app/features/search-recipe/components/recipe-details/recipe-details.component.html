@@ -1,10 +1,14 @@
 <div class="root-container">
   <app-go-back></app-go-back>
+
   <mat-divider></mat-divider>
 
-  <h1 class="h1">{{ recipe.title }}</h1>
+  <div class="title recipe-title">{{ recipe.title }}</div>
   <div class="img-container">
     <img [src]="recipe.image" alt="{{ recipe.title }}" />
+    <div class="recipe-summary">
+      {{ recipe.summary }}
+    </div>
   </div>
   <mat-divider></mat-divider>
 
@@ -28,31 +32,49 @@
   <mat-accordion>
     <mat-expansion-panel>
       <mat-expansion-panel-header>
+        <mat-panel-title>Ingredients</mat-panel-title>
+      </mat-expansion-panel-header>
+      <div *ngFor="let ingredient of recipe.extendedIngredients">
+        <div class="ingredient">
+          <div class="mat-body-strong">
+            {{ ingredient.name | titlecase }}
+          </div>
+          <div [ngSwitch]="ingredient.unit">
+            <span *ngSwitchCase="'cup'">
+              <i class="fa-solid fa-glass-water"></i>
+            </span>
+            <span *ngSwitchCase="'cups'">
+              <i class="fa-solid fa-glass-water"></i>
+            </span>
+            <span *ngSwitchCase="'tablespoon'">
+              <i class="fa-solid fa-spoon fa-lg"></i>
+            </span>
+            <span *ngSwitchCase="'tablespoons'">
+              <i class="fa-solid fa-spoon fa-lg"></i>
+            </span>
+            <span *ngSwitchCase="'teaspoon'">
+              <i class="fa-solid fa-spoon fa-rotate-90"></i>
+            </span>
+            <span *ngSwitchCase="'teaspoons'">
+              <i class="fa-solid fa-spoon fa-rotate-90"></i>
+            </span>
+
+            {{ ingredient.original }}
+          </div>
+        </div>
+      </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
         <mat-panel-title> Summary</mat-panel-title>
-        <!-- <mat-panel-description>
-               This is a summary of the content
-            </mat-panel-description> -->
       </mat-expansion-panel-header>
       <div class="recipe-summary" [innerHTML]="recipe.summary"></div>
     </mat-expansion-panel>
-    <mat-expansion-panel
-      (opened)="panelOpenState.set(true)"
-      (closed)="panelOpenState.set(false)"
-    >
-      <mat-expansion-panel-header>
-        <mat-panel-title> Ingredients </mat-panel-title>
-        <!-- <mat-panel-description>
-               Currently I am {{ panelOpenState() ? 'open' : 'closed' }}
-            </mat-panel-description> -->
-      </mat-expansion-panel-header>
-      <p></p>
-    </mat-expansion-panel>
+
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title> Instructions</mat-panel-title>
-        <!-- <mat-panel-description>
-               This is a summary of the content
-            </mat-panel-description> -->
       </mat-expansion-panel-header>
       <p>{{ recipe.instructions }}</p>
     </mat-expansion-panel>

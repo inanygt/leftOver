@@ -1,4 +1,9 @@
-import { CommonModule } from "@angular/common";
+import {
+  CommonModule,
+  NgSwitch,
+  NgSwitchCase,
+  NgSwitchDefault,
+} from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterLinkActive, RouterOutlet } from "@angular/router";
@@ -18,6 +23,9 @@ import { RecipeCardComponent } from "./components/recipe-card/recipe-card.compon
     CommonModule,
     NgSelectModule,
     MaterialModule,
+    NgSwitch,
+    NgSwitchCase,
+    NgSwitchDefault,
   ],
   exports: [
     FormsModule,
@@ -30,6 +38,9 @@ import { RecipeCardComponent } from "./components/recipe-card/recipe-card.compon
     MaterialModule,
     GoBackComponent,
     RecipeCardComponent,
+    NgSwitch,
+    NgSwitchCase,
+    NgSwitchDefault,
   ],
   declarations: [GoBackComponent, RecipeCardComponent],
 })
