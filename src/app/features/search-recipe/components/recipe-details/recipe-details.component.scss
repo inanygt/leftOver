@@ -1,3 +1,6 @@
+h2 {
+  margin-bottom: 8px;
+}
 .recipe-details-container {
   margin: auto;
   max-width: 600px;
@@ -6,8 +9,10 @@
 }
 
 .recipe-title {
-  padding-block: 2rem 1rem;
+  padding: 1rem 2rem;
+
   text-align: center;
+  line-height: 1.8rem;
 }
 
 .img-container {
@@ -23,7 +28,19 @@
   display: flex;
   justify-content: space-around;
 
-  .servings,
+  .servings {
+    .servings-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      button[mat-mini-fab] {
+        height: 1.6rem;
+        width: 1.6rem;
+      }
+    }
+  }
+
   .preparation,
   .cook {
     text-align: center;

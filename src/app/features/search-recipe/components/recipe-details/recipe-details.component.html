@@ -15,7 +15,17 @@
   <div class="recipe-preparation-details-container">
     <div class="servings">
       <h2>Servings</h2>
-      <div>1</div>
+
+      <div class="servings-container">
+        <button mat-mini-fab aria-label="minus serving button">
+          <mat-icon>remove</mat-icon>
+        </button>
+        <div>1</div>
+
+        <button mat-mini-fab aria-label="add serving button">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
     </div>
     <div class="preparation">
       <h2>Preparation</h2>
@@ -36,9 +46,6 @@
       </mat-expansion-panel-header>
       <div *ngFor="let ingredient of recipe.extendedIngredients">
         <div class="ingredient">
-          <!-- <div class="mat-body-strong">
-            {{ ingredient.name | titlecase }}
-          </div> -->
           <div [ngSwitch]="ingredient.unit">
             <span *ngSwitchCase="'cup'">
               <i class="fa-solid fa-glass-water"></i>
