@@ -71,7 +71,8 @@
       </mat-expansion-panel-header>
       <div *ngFor="let instruction of recipe.analyzedInstructions">
         <div class="step" *ngFor="let step of instruction.steps; index as i">
-          <span class="step-number">{{ i + 1 }}</span> {{ step.step }}
+          <div class="step-number">{{ i + 1 }}.</div>
+          <div class="step-description">{{ step.step }}</div>
         </div>
       </div>
     </mat-expansion-panel>
@@ -80,7 +81,9 @@
       <mat-expansion-panel-header>
         <mat-panel-title> Summary</mat-panel-title>
       </mat-expansion-panel-header>
-      <div class="recipe-summary" [innerHTML]="recipe.summary"></div>
+      <div class="recipe-summary">
+        {{ cleanText(recipe.summary) }}
+      </div>
     </mat-expansion-panel>
   </mat-accordion>
 

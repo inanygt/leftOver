@@ -74,13 +74,14 @@ mat-accordion > mat-expansion-panel:nth-child(3) {
 }
 
 .step {
-  padding-bottom: 1rem;
+  padding-bottom: 1.2rem;
+  display: flex;
+  align-items: flex-start;
 
   .step-number {
-    font-family: "Playfair Display", serif;
     font-optical-sizing: auto;
     font-weight: 800;
-    font-size: 1.5rem;
-    padding-right: 0.4rem;
+    font-size: 1.2rem;
+    padding-right: 0.6rem;
   }
 }

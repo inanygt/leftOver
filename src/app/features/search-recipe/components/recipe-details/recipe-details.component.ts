@@ -27,7 +27,6 @@ glass_cup
     return "";
   }
 
-  // Method to remove HTML tags and truncate
   cleanText(summary: string): string {
     if (!summary) return "";
     const cleanText = summary.replace(/<[^>]*>/g, ""); // Remove HTML tags
