@@ -19,7 +19,7 @@
 }
 
 .recipe-preparation-details-container {
-  margin-block: 2rem;
+  margin-block: 1rem;
   display: flex;
   justify-content: space-around;
 
@@ -62,6 +62,12 @@ mat-accordion > mat-expansion-panel:nth-child(3) {
 
 .ingredient {
   margin-bottom: 0.7rem;
+  font-size: 1rem;
+  line-height: 1.6rem;
+
+  span {
+    margin-right: 0.4rem;
+  }
 
   .mat-body-strong {
     font-size: 1rem;
@@ -71,9 +77,12 @@ mat-accordion > mat-expansion-panel:nth-child(3) {
 
 .recipe-summary {
   font-size: 1rem;
+  line-height: 1.6rem;
 }
 
 .step {
+  font-size: 1rem;
+  line-height: 1.6rem;
   padding-bottom: 1.2rem;
   display: flex;
   align-items: flex-start;

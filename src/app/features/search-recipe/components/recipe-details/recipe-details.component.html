@@ -36,9 +36,9 @@
       </mat-expansion-panel-header>
       <div *ngFor="let ingredient of recipe.extendedIngredients">
         <div class="ingredient">
-          <div class="mat-body-strong">
+          <!-- <div class="mat-body-strong">
             {{ ingredient.name | titlecase }}
-          </div>
+          </div> -->
           <div [ngSwitch]="ingredient.unit">
             <span *ngSwitchCase="'cup'">
               <i class="fa-solid fa-glass-water"></i>
