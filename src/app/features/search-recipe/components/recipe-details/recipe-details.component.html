@@ -67,16 +67,20 @@
 
     <mat-expansion-panel>
       <mat-expansion-panel-header>
-        <mat-panel-title> Summary</mat-panel-title>
+        <mat-panel-title> Instructions</mat-panel-title>
       </mat-expansion-panel-header>
-      <div class="recipe-summary" [innerHTML]="recipe.summary"></div>
+      <div *ngFor="let instruction of recipe.analyzedInstructions">
+        <div class="step" *ngFor="let step of instruction.steps; index as i">
+          <span class="step-number">{{ i + 1 }}</span> {{ step.step }}
+        </div>
+      </div>
     </mat-expansion-panel>
 
     <mat-expansion-panel>
       <mat-expansion-panel-header>
-        <mat-panel-title> Instructions</mat-panel-title>
+        <mat-panel-title> Summary</mat-panel-title>
       </mat-expansion-panel-header>
-      <p>{{ recipe.instructions }}</p>
+      <div class="recipe-summary" [innerHTML]="recipe.summary"></div>
     </mat-expansion-panel>
   </mat-accordion>
 
