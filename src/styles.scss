@@ -15,6 +15,11 @@ body {
   box-sizing: border-box;
 }
 
+h2,
+.h2 {
+  margin-bottom: 0px !important;
+}
+
 .fa-solid.fa-x {
   font-size: 13px;
   padding-left: 0.3rem;
@@ -32,7 +37,6 @@ button[mat-stroked-button] {
   max-width: 600px;
   width: calc(100% - 2rem);
   margin: 0rem auto;
-  margin-bottom: 5rem;
 }
 
 /// Colors
@@ -45,8 +49,6 @@ button[mat-stroked-button] {
 }
 
 .mat-icon.mat-warn {
-  // color: #e43847;
-  // color: #f44336;
   color: black;
   fill: white;
 }

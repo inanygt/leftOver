@@ -19,6 +19,7 @@ import { FavoriteComponent } from "./features/favorite-recipe/components/favorit
 import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
 import { AngularFireStorageModule } from "@angular/fire/compat/storage";
 import { FavoriteRecipeModule } from "./features/favorite-recipe/favorite-recipe.module";
+import { ShoppingCartModule } from "./features/shopping-cart/shopping-cart.module";
 
 @NgModule({
   declarations: [AppComponent, FavoriteComponent],
@@ -32,6 +33,7 @@ import { FavoriteRecipeModule } from "./features/favorite-recipe/favorite-recipe
     MaterialModule,
     SearchRecipeModule,
     FavoriteRecipeModule,
+    ShoppingCartModule,
     PostRecipeModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,

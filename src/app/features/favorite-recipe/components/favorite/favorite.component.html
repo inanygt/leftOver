@@ -1,9 +1,8 @@
 <div class="root-container">
-  <app-go-back></app-go-back>
+  <app-go-back>
+    <h2>Favorite recipes</h2>
+  </app-go-back>
   <mat-divider></mat-divider>
-</div>
-<div class="root-container">
-  <h1>Favorite recipes</h1>
   <div *ngFor="let recipe of favoriteRecipes$ | async">
     <app-recipe-card recipe="recipe">
       <img

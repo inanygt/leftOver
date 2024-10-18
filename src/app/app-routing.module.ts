@@ -7,6 +7,7 @@ import { RegisterComponent } from "./core/components/authentication/register/reg
 import { CanActive } from "./core/guards/auth.guard";
 import { FavoriteComponent } from "./features/favorite-recipe/components/favorite/favorite.component";
 import { SearchComponent } from "./features/search-recipe/components/search/search.component";
+import { ShoppingCartComponent } from "./features/shopping-cart/components/shopping-cart/shopping-cart.component";
 
 const routes: Routes = [
   { path: "", component: SearchComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: "favorite", component: FavoriteComponent, canActivate: [CanActive] },
   { path: "post", component: PostComponent, canActivate: [CanActive] },
   { path: "recipes/:recipeId", component: RecipeDetailsComponent },
+  { path: "shopping-cart", component: ShoppingCartComponent },
   { path: "**", redirectTo: "" },
 ];
 
