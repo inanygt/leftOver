@@ -48,7 +48,7 @@
           <span> {{ recipe.readyInMinutes }} min</span>
         </div>
         <div class="icon-health-container">
-          <mat-icon matBadge="healthScore">spa</mat-icon>
+          <mat-icon>spa</mat-icon>
           <span> {{ recipe.healthScore }}% Healthscore</span>
         </div>
       </mat-card-content>
@@ -59,7 +59,12 @@
         >
         <mat-chip-set aria-label="Chihuahua traits">
           <div *ngFor="let missedIngredient of recipe.missedIngredients">
-            <mat-chip> {{ missedIngredient.name }} </mat-chip>
+            <mat-chip
+              (click)="$event.stopPropagation()"
+              (click)="addToShoppingCart(missedIngredient)"
+            >
+              {{ missedIngredient.name }}
+            </mat-chip>
           </div>
         </mat-chip-set>
       </mat-card-footer>

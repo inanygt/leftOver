@@ -10,6 +10,8 @@ import { SnackBarService } from "../../../../core/components/authentication/serv
 import { FirebaseStoreService } from "../../../../core/components/authentication/service/firebase-store.service";
 import { Router } from "@angular/router";
 import { LoadingService } from "../../../../shared/services/loading.service";
+import { ShoppingCartService } from "../../../shopping-cart/services/shopping-cart.service";
+import { ShoppingListItem } from "../../../shopping-cart/models/shoppingListItem.interface";
 
 @Component({
   selector: "app-search-recipe-list",
@@ -31,7 +33,8 @@ export class SearchRecipeListComponent implements OnInit {
     private snackbar: SnackBarService,
     private firestore: FirebaseStoreService,
     private router: Router,
-    public loadingService: LoadingService
+    public loadingService: LoadingService,
+    public shopping: ShoppingCartService
   ) {
     this.isLoading$ = this.loadingService.isLoading$;
     this.recipesResponse$ = this.recipesService.recipes$;
@@ -72,6 +75,16 @@ export class SearchRecipeListComponent implements OnInit {
         console.log(err);
       },
     });
+  }
+
+  addToShoppingCart(ingredient: any) {
+    const newIngredient: ShoppingListItem = {
+      item: ingredient.name,
+      aisle: ingredient.aisle,
+      parse: false,
+    };
+    console.log(newIngredient);
+    this.shopping.saveToShoppingCart(newIngredient);
   }
 
   ngOnInit(): void {}

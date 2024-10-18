@@ -2,4 +2,8 @@
   <app-go-back>
     <h2>shopping cart</h2>
   </app-go-back>
+
+  <div *ngFor="let item of shoppingCartItems$ | async">
+    {{ item.item }}
+  </div>
 </div>
