@@ -10,5 +10,5 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 4. CD project_name in terminal
 5. Run `npm install`
 6. run `ng serve`
-7. open your browser and go to [browser](localhost:4200)
+7. open your browser and go to localhost:4200
 
